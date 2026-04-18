@@ -1,1 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EL MARINI APP — Premium Mobile App Studio</title>
+  <meta name="description" content="EL MARINI APP builds premium mobile applications with refined design, strong performance, and product-focused execution." />
+  <style>
+    :root {
+      --bg: #04070f;
+      --bg-soft: #08101f;
+      --panel: rgba(10, 17, 31, 0.78);
+      --panel-strong: rgba(8, 12, 24, 0.92);
+      --panel-border: rgba(148, 163, 184, 0.14);
+      --text: #f6f8fb;
+      --muted: #a8b3c7;
+      --soft: #d8e0ee;
+      --accent: #71a7ff;
+      --accent-2: #8d7dff;
+      --accent-3: #3dd1ff;
+      --success: #89f0c8;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --max: 1280px;
+    }
 
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(113, 167, 255, 0.16), transparent 24%),
+        radial-gradient(circle at 85% 16%, rgba(141, 125, 255, 0.13), transparent 26%),
+        radial-gradient(circle at 52% 60%, rgba(61, 209, 255, 0.07), transparent 30%),
+        linear-gradient(180deg, #03060d 0%, #060a12 35%, #04070f 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      width: 540px;
+      height: 540px;
+      pointer-events: none;
+      filter: blur(90px);
+      opacity: 0.34;
+      z-index: 0;
+    }
+
+    body::before {
+      top: -120px;
+      left: -160px;
+      background: rgba(113, 167, 255, 0.14);
+    }
+
+    body::after {
+      right: -160px;
+      bottom: -180px;
+      background: rgba(141, 125, 255, 0.12);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .lang-toggle {
+      position: sticky;
+      top: 18px;
+      z-index: 20;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 18px;
+    }
+
+    .lang-shell {
+      display: inline-flex;
+      gap: 8px;
+      padding: 8px;
+      background: rgba(6, 10, 20, 0.75);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.28);
+    }
+
+    .lang-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .lang-btn.active {
+      color: var(--text);
+      background: linear-gradient(135deg, rgba(113,167,255,0.2), rgba(141,125,255,0.24));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .hero {
+      padding: 32px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(10,17,31,0.84), rgba(5,9,17,0.92));
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 35%, transparent 65%, rgba(255,255,255,0.03));
+      pointer-events: none;
+    }
+
+    .hero-main {
+      padding: 44px;
+      min-height: 660px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--soft);
+      font-size: 0.83rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 14px rgba(113,167,255,0.75);
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(2.9rem, 6vw, 5.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      max-width: 10ch;
+    }
+
+    .lead {
+      color: var(--soft);
+      font-size: 1.14rem;
+      line-height: 1.78;
+      max-width: 720px;
+      margin: 0 0 26px;
+    }
+
+    .hero-copy {
+      max-width: 780px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 0 20px;
+      border-radius: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(113,167,255,0.22), rgba(141,125,255,0.24));
+      border: 1px solid rgba(160,190,255,0.28);
+      box-shadow: 0 18px 40px rgba(40, 72, 150, 0.25);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--soft);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .hero-side {
+      padding: 30px;
+      min-height: 660px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+    }
+
+    .brand-mark {
+      height: 240px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(113,167,255,0.28), transparent 28%),
+        radial-gradient(circle at 70% 70%, rgba(141,125,255,0.24), transparent 30%),
+        linear-gradient(160deg, rgba(11,16,31,0.96), rgba(4,8,18,0.98));
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .em-symbol {
+      font-size: 4.6rem;
+      font-weight: 900;
+      letter-spacing: -0.12em;
+      line-height: 1;
+      background: linear-gradient(135deg, #f7fbff 0%, #90c2ff 38%, #b09cff 72%, #eaf3ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 26px rgba(113, 167, 255, 0.18);
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-desc {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .brand-desc p {
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.82;
+      font-size: 1rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+      min-height: 140px;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.02rem;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 18px 0;
+    }
+
+    .section-shell {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .section-lead {
+      margin: 12px 0 0;
+      max-width: 940px;
+      color: var(--soft);
+      line-height: 1.82;
+      font-size: 1.06rem;
+    }
+
+    .headline-panel {
+      padding: 34px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .product-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-height: 520px;
+    }
+
+    .product-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .product-badge {
+      display: inline-flex;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--soft);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .product-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, rgba(113,167,255,0.18), rgba(141,125,255,0.18));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .product-card h3 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .product-summary {
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.82;
+      font-size: 1rem;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 12px;
+      align-items: start;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .feature-item::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(113,167,255,0.28);
+    }
+
+    .quote {
+      margin-top: auto;
+      padding: 18px 18px 18px 20px;
+      border-left: 2px solid rgba(113,167,255,0.45);
+      background: rgba(255,255,255,0.025);
+      border-radius: 16px;
+      color: var(--soft);
+      line-height: 1.78;
+      font-size: 0.98rem;
+    }
+
+    .services-grid,
+    .pillars-grid,
+    .why-grid,
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-card,
+    .pillar-card,
+    .why-card,
+    .contact-card {
+      padding: 26px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(10,17,31,0.82), rgba(5,9,17,0.9));
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: var(--shadow);
+    }
+
+    .service-card h3,
+    .pillar-card h3,
+    .why-card h3,
+    .contact-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+    }
+
+    .service-card p,
+    .pillar-card p,
+    .why-card p,
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .pillars-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .why-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .why-card.large {
+      padding: 34px;
+    }
+
+    .why-card.large p + p {
+      margin-top: 14px;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+      margin-bottom: 44px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      color: var(--soft);
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .footer {
+      padding: 14px 0 44px;
+      color: rgba(216,224,238,0.68);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    .lang {
+      display: none;
+    }
+
+    body[data-lang="en"] .lang.en,
+    body[data-lang="fr"] .lang.fr {
+      display: block;
+    }
+
+    body[data-lang="en"] .lang.en.inline,
+    body[data-lang="fr"] .lang.fr.inline {
+      display: inline;
+    }
+
+    .inline {
+      display: none;
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .products-grid,
+      .services-grid,
+      .pillars-grid,
+      .why-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .hero-side,
+      .product-card {
+        min-height: unset;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-main,
+      .hero-side,
+      .headline-panel,
+      .product-card,
+      .service-card,
+      .pillar-card,
+      .why-card,
+      .contact-card {
+        padding: 22px;
+      }
+
+      .hero-stats,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body data-lang="en">
+  <div class="page">
+    <div class="container lang-toggle">
+      <div class="lang-shell" aria-label="Language switcher">
+        <button class="lang-btn active" data-lang-btn="en">EN</button>
+        <button class="lang-btn" data-lang-btn="fr">FR</button>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="container hero-grid">
+        <section class="panel hero-main">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              <span class="lang en inline">Premium mobile app studio</span>
+              <span class="lang fr inline">Studio d’applications mobiles premium</span>
+            </div>
+
+            <h1>
+              <span class="lang en">Designing mobile products with precision, depth, and intent.</span>
+              <span class="lang fr">Concevoir des produits mobiles avec précision, profondeur et exigence.</span>
+            </h1>
+
+            <p class="lead">
+              <span class="lang en">EL MARINI APP creates premium mobile applications with a strong focus on product clarity, visual refinement, performance, and real-world usefulness. The goal is never to fill the market with generic software, but to craft polished, durable, high-quality mobile experiences that feel thoughtful from the first screen to the final interaction.</span>
+              <span class="lang fr">EL MARINI APP conçoit des applications mobiles premium avec une attention forte portée à la clarté produit, au raffinement visuel, à la performance et à l’utilité concrète. L’objectif n’est jamais de produire des logiciels génériques, mais de créer des expériences mobiles soignées, durables et qualitatives, pensées dans le détail du premier écran jusqu’à la dernière interaction.</span>
+            </p>
+
+            <div class="hero-actions">
+              <a class="button primary" href="#contact">
+                <span class="lang en inline">Discuss your project</span>
+                <span class="lang fr inline">Discuter de votre projet</span>
+              </a>
+              <a class="button secondary" href="#products">
+                <span class="lang en inline">Explore selected products</span>
+                <span class="lang fr inline">Découvrir les produits</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>
+                <span class="lang en inline">Premium-first</span>
+                <span class="lang fr inline">Premium-first</span>
+              </strong>
+              <span>
+                <span class="lang en">Every project is approached with a product mindset, not a template mindset.</span>
+                <span class="lang fr">Chaque projet est abordé avec une logique produit, pas avec une logique de template.</span>
+              </span>
+            </div>
+            <div class="stat">
+              <strong>
+                <span class="lang en inline">Mobile focused</span>
+                <span class="lang fr inline">Mobile centré</span>
+              </strong>
+              <span>
+                <span class="lang en">Built for real usage, smooth interactions, readable interfaces, and strong usability.</span>
+                <span class="lang fr">Pensé pour un usage réel, des interactions fluides, des interfaces lisibles et une forte utilisabilité.</span>
+              </span>
+            </div>
+            <div class="stat">
+              <strong>
+                <span class="lang en inline">Detail driven</span>
+                <span class="lang fr inline">Exigence du détail</span>
+              </strong>
+              <span>
+                <span class="lang en">From hierarchy to copy to visual rhythm, nothing important is treated as secondary.</span>
+                <span class="lang fr">De la hiérarchie à la rédaction jusqu’au rythme visuel, rien d’important n’est traité comme secondaire.</span>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel hero-side">
+          <div class="brand-mark" aria-hidden="true">
+            <div class="em-symbol">EM</div>
+          </div>
+
+          <div class="brand-desc">
+            <p>
+              <span class="lang en">This studio is built around a simple idea: mobile applications should not only work well, they should feel composed, credible, and genuinely valuable. EL MARINI APP brings together design sensitivity, development discipline, and product thinking to create experiences that feel premium, cohesive, and intentional.</span>
+              <span class="lang fr">Ce studio repose sur une idée simple : une application mobile ne doit pas seulement bien fonctionner, elle doit aussi paraître maîtrisée, crédible et réellement utile. EL MARINI APP associe sens du design, rigueur de développement et vision produit pour créer des expériences premium, cohérentes et intentionnelles.</span>
+            </p>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <h3>
+                <span class="lang en inline">Built products</span>
+                <span class="lang fr inline">Produits créés</span>
+              </h3>
+              <p>
+                <span class="lang en">From consumer-facing utility to pro-grade field workflow, the studio is already backed by concrete mobile products.</span>
+                <span class="lang fr">Du produit grand public utile à l’outil métier terrain, le studio est déjà soutenu par des produits mobiles concrets.</span>
+              </p>
+            </div>
+            <div class="mini-card">
+              <h3>
+                <span class="lang en inline">Custom approach</span>
+                <span class="lang fr inline">Approche sur mesure</span>
+              </h3>
+              <p>
+                <span class="lang en">Every mobile product deserves its own tone, structure, flow, and strategic execution.</span>
+                <span class="lang fr">Chaque produit mobile mérite son propre ton, sa propre structure, son propre flux et sa propre exécution stratégique.</span>
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="container section-shell">
+          <div class="panel headline-panel">
+            <h2 class="section-title">
+              <span class="lang en">A product-minded mobile studio built for quality over noise.</span>
+              <span class="lang fr">Un studio mobile orienté produit, construit pour la qualité plutôt que pour le bruit.</span>
+            </h2>
+            <p class="section-lead">
+              <span class="lang en">EL MARINI APP is not positioned as a generic development service that delivers interchangeable interfaces and forgettable launches. The studio focuses on mobile applications that need clarity, polish, reliability, and a strong sense of purpose. That means balancing design and engineering, thinking deeply about how a product will be used in real life, and paying close attention to the details that separate a basic app from a truly credible one.</span>
+              <span class="lang fr">EL MARINI APP n’est pas positionné comme un simple service de développement générique qui livre des interfaces interchangeables et des lancements oubliables. Le studio se concentre sur des applications mobiles qui exigent clarté, finition, fiabilité et véritable raison d’être. Cela signifie trouver l’équilibre entre design et ingénierie, réfléchir en profondeur à l’usage réel du produit, et accorder une attention particulière aux détails qui distinguent une application basique d’un produit réellement crédible.</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="products">
+        <div class="container section-shell">
+          <div class="panel headline-panel">
+            <h2 class="section-title">
+              <span class="lang en">Selected mobile products</span>
+              <span class="lang fr">Produits mobiles sélectionnés</span>
+            </h2>
+            <p class="section-lead">
+              <span class="lang en">The current product work already reflects two different but complementary capabilities: creating refined mobile experiences for everyday users, and building structured tools for professional workflows where clarity and trust matter. Together, they show a studio capable of handling both emotion and utility, both aesthetic direction and practical execution.</span>
+              <span class="lang fr">Le travail produit actuel reflète déjà deux capacités différentes mais complémentaires : créer des expériences mobiles raffinées pour des usages du quotidien, et concevoir des outils structurés pour des workflows professionnels où la clarté et la confiance comptent. Ensemble, ces produits montrent un studio capable de gérer à la fois l’émotion et l’utilité, la direction esthétique et l’exécution pratique.</span>
+            </p>
+          </div>
+
+          <div class="products-grid">
+            <article class="panel product-card">
+              <div class="product-top">
+                <span class="product-badge">
+                  <span class="lang en inline">Consumer product</span>
+                  <span class="lang fr inline">Produit grand public</span>
+                </span>
+                <div class="product-icon">MA</div>
+              </div>
+
+              <div>
+                <h3>Muslim App</h3>
+                <p class="product-summary">
+                  <span class="lang en">Muslim App is a mobile experience designed around usefulness, clarity, and calm interaction. The product is built to support daily needs through an interface that stays readable, respectful, and carefully structured, with strong attention to usability, visual rhythm, and overall quality of experience.</span>
+                  <span class="lang fr">Muslim App est une expérience mobile conçue autour de l’utilité, de la clarté et d’une interaction apaisée. Le produit est pensé pour accompagner des besoins quotidiens grâce à une interface qui reste lisible, respectueuse et soigneusement structurée, avec une attention forte portée à l’utilisabilité, au rythme visuel et à la qualité globale d’expérience.</span>
+                </p>
+              </div>
+
+              <div class="feature-list">
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A clear and polished mobile experience where content hierarchy, readability, and flow are treated as core product components.</span>
+                    <span class="lang fr">Une expérience mobile claire et soignée où la hiérarchie du contenu, la lisibilité et le flux sont traités comme des composants centraux du produit.</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">An app approach centered on trust, elegance, and consistency rather than visual excess or superficial complexity.</span>
+                    <span class="lang fr">Une approche applicative centrée sur la confiance, l’élégance et la cohérence plutôt que sur l’excès visuel ou la complexité superficielle.</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A product that demonstrates the ability to design for recurring use, comfort, and long-term user value.</span>
+                    <span class="lang fr">Un produit qui démontre la capacité à concevoir pour un usage récurrent, le confort et la valeur utilisateur sur le long terme.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quote">
+                <span class="lang en">Muslim App represents the studio’s ability to create a refined user-facing mobile product where clarity, sensitivity, and quality of execution matter at every level.</span>
+                <span class="lang fr">Muslim App représente la capacité du studio à créer un produit mobile raffiné orienté utilisateur, où la clarté, la sensibilité et la qualité d’exécution comptent à chaque niveau.</span>
+              </div>
+            </article>
+
+            <article class="panel product-card">
+              <div class="product-top">
+                <span class="product-badge">
+                  <span class="lang en inline">Professional product</span>
+                  <span class="lang fr inline">Produit professionnel</span>
+                </span>
+                <div class="product-icon">SS</div>
+              </div>
+
+              <div>
+                <h3>StampSight</h3>
+                <p class="product-summary">
+                  <span class="lang en">StampSight is a pro-oriented mobile product designed to transform field capture into structured, credible, and actionable documentation. It reflects a more technical and operational side of the studio, where mobile execution must support real workflows, stronger context, and professional-grade clarity.</span>
+                  <span class="lang fr">StampSight est un produit mobile orienté professionnel, conçu pour transformer une capture terrain en documentation structurée, crédible et exploitable. Il reflète une facette plus technique et opérationnelle du studio, où l’exécution mobile doit soutenir des workflows réels, davantage de contexte et une clarté de niveau professionnel.</span>
+                </p>
+              </div>
+
+              <div class="feature-list">
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A product built around proof, context, and organization, turning simple captures into clearer operational records.</span>
+                    <span class="lang fr">Un produit construit autour de la preuve, du contexte et de l’organisation, transformant de simples captures en enregistrements opérationnels plus clairs.</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A more advanced mobile workflow mindset, where reliability, structure, and output quality have direct practical value.</span>
+                    <span class="lang fr">Une logique mobile plus avancée de workflow, où la fiabilité, la structure et la qualité de sortie ont une valeur pratique directe.</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A strong example of how design and engineering can support a serious professional use case without losing visual quality.</span>
+                    <span class="lang fr">Un exemple fort de la manière dont design et ingénierie peuvent soutenir un usage professionnel sérieux sans perdre la qualité visuelle.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quote">
+                <span class="lang en">StampSight shows the studio’s ability to build focused mobile tools that go beyond appearance and solve concrete operational problems with precision.</span>
+                <span class="lang fr">StampSight montre la capacité du studio à concevoir des outils mobiles ciblés qui vont au-delà de l’apparence et résolvent des problèmes opérationnels concrets avec précision.</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="container section-shell">
+          <div class="panel headline-panel">
+            <h2 class="section-title">
+              <span class="lang en">Custom mobile app development</span>
+              <span class="lang fr">Développement d’applications mobiles sur mesure</span>
+            </h2>
+            <p class="section-lead">
+              <span class="lang en">Beyond its own products, EL MARINI APP is able to design and build custom mobile applications with a premium product standard. Whether the need is a new concept, a sharper MVP, a more ambitious mobile redesign, or a focused business tool, the objective remains the same: create something coherent, elegant, efficient, and strong enough to feel like a real product, not a temporary prototype.</span>
+              <span class="lang fr">Au-delà de ses propres produits, EL MARINI APP est capable de concevoir et développer des applications mobiles sur mesure avec un standard premium. Qu’il s’agisse d’un nouveau concept, d’un MVP plus soigné, d’une refonte mobile plus ambitieuse ou d’un outil métier ciblé, l’objectif reste le même : créer quelque chose de cohérent, élégant, efficace et suffisamment solide pour ressembler à un vrai produit, pas à un prototype temporaire.</span>
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <div class="service-card">
+              <h3>
+                <span class="lang en inline">From idea to product</span>
+                <span class="lang fr inline">De l’idée au produit</span>
+              </h3>
+              <p>
+                <span class="lang en">New mobile concepts can be shaped into usable, visually strong, and strategically structured products with a clear sense of direction from the start.</span>
+                <span class="lang fr">De nouveaux concepts mobiles peuvent être transformés en produits utilisables, visuellement solides et stratégiquement structurés, avec une direction claire dès le départ.</span>
+              </p>
+            </div>
+            <div class="service-card">
+              <h3>
+                <span class="lang en inline">Premium MVP execution</span>
+                <span class="lang fr inline">Exécution MVP premium</span>
+              </h3>
+              <p>
+                <span class="lang en">An MVP does not need to feel unfinished. It can still communicate seriousness, product discipline, and a stronger first impression.</span>
+                <span class="lang fr">Un MVP n’a pas besoin de paraître inachevé. Il peut déjà transmettre sérieux, discipline produit et une première impression plus forte.</span>
+              </p>
+            </div>
+            <div class="service-card">
+              <h3>
+                <span class="lang en inline">Business and field tools</span>
+                <span class="lang fr inline">Outils métier et terrain</span>
+              </h3>
+              <p>
+                <span class="lang en">Operational mobile apps can be designed with more clarity, more control, and a much better balance between function and user experience.</span>
+                <span class="lang fr">Les applications mobiles opérationnelles peuvent être conçues avec plus de clarté, plus de contrôle et un bien meilleur équilibre entre fonction et expérience utilisateur.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container section-shell">
+          <div class="panel headline-panel">
+            <h2 class="section-title">
+              <span class="lang en">What EL MARINI APP focuses on</span>
+              <span class="lang fr">Ce sur quoi EL MARINI APP se concentre</span>
+            </h2>
+            <p class="section-lead">
+              <span class="lang en">A premium app is never the result of visuals alone. It is the result of design judgment, disciplined execution, product hierarchy, and the ability to make many small decisions feel unified. This studio is built around those principles.</span>
+              <span class="lang fr">Une application premium n’est jamais le résultat des seuls visuels. Elle naît du jugement design, d’une exécution disciplinée, d’une hiérarchie produit maîtrisée et de la capacité à faire converger de nombreuses petites décisions en un ensemble cohérent. Ce studio est construit autour de ces principes.</span>
+            </p>
+          </div>
+
+          <div class="pillars-grid">
+            <div class="pillar-card">
+              <h3>
+                <span class="lang en inline">Refined mobile design</span>
+                <span class="lang fr inline">Design mobile raffiné</span>
+              </h3>
+              <p>
+                <span class="lang en">Clean hierarchy, stronger readability, premium visual balance, and an interface language designed to feel composed rather than noisy.</span>
+                <span class="lang fr">Hiérarchie claire, lisibilité renforcée, équilibre visuel premium et langage d’interface pensé pour paraître maîtrisé plutôt que bruyant.</span>
+              </p>
+            </div>
+            <div class="pillar-card">
+              <h3>
+                <span class="lang en inline">Performance and clarity</span>
+                <span class="lang fr inline">Performance et clarté</span>
+              </h3>
+              <p>
+                <span class="lang en">Fast, practical, readable experiences matter. Good mobile products respect both attention and time.</span>
+                <span class="lang fr">Des expériences rapides, pratiques et lisibles comptent. Les bons produits mobiles respectent à la fois l’attention et le temps de l’utilisateur.</span>
+              </p>
+            </div>
+            <div class="pillar-card">
+              <h3>
+                <span class="lang en inline">Product seriousness</span>
+                <span class="lang fr inline">Sérieux produit</span>
+              </h3>
+              <p>
+                <span class="lang en">The objective is to build products that feel deliberate, useful, and sustainable, not disposable or visually inflated.</span>
+                <span class="lang fr">L’objectif est de construire des produits qui paraissent intentionnels, utiles et durables, pas jetables ni artificiellement gonflés visuellement.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container section-shell">
+          <div class="why-grid">
+            <div class="why-card large">
+              <h2 class="section-title" style="font-size: clamp(2rem, 3vw, 2.8rem); margin-bottom: 16px;">
+                <span class="lang en">Why this studio approach matters</span>
+                <span class="lang fr">Pourquoi cette approche studio compte</span>
+              </h2>
+              <p>
+                <span class="lang en">There are many ways to ship an app. Far fewer ways to make one feel coherent, credible, and genuinely well considered. EL MARINI APP aims for that second category. The work is guided by the belief that strong mobile products are built through thoughtful structure, restrained visual decisions, careful product wording, and respect for the user’s real experience.</span>
+                <span class="lang fr">Il existe de nombreuses façons de livrer une application. Il en existe beaucoup moins pour lui donner une impression de cohérence, de crédibilité et de réelle réflexion. EL MARINI APP vise cette seconde catégorie. Le travail est guidé par la conviction que les bons produits mobiles se construisent par une structure pensée, des décisions visuelles maîtrisées, une rédaction produit soignée et un respect profond de l’expérience réelle de l’utilisateur.</span>
+              </p>
+              <p>
+                <span class="lang en">That is why the studio prioritizes quality over volume, depth over noise, and durable product value over quick visual shortcuts. Whether the application is public-facing or professionally focused, the goal remains the same: create a mobile product that feels sharper, better balanced, and more intentional than the average market standard.</span>
+                <span class="lang fr">C’est pour cela que le studio privilégie la qualité plutôt que le volume, la profondeur plutôt que le bruit, et la valeur produit durable plutôt que les raccourcis visuels rapides. Que l’application soit orientée grand public ou usage professionnel, l’objectif reste le même : créer un produit mobile plus net, mieux équilibré et plus intentionnel que le standard moyen du marché.</span>
+              </p>
+            </div>
+
+            <div class="why-card">
+              <h3>
+                <span class="lang en inline">Core positioning</span>
+                <span class="lang fr inline">Positionnement clé</span>
+              </h3>
+              <p>
+                <span class="lang en">Independent mobile app studio focused on premium product execution, elegant interfaces, practical usability, and long-term credibility.</span>
+                <span class="lang fr">Studio indépendant d’applications mobiles centré sur l’exécution produit premium, les interfaces élégantes, l’utilisabilité concrète et la crédibilité à long terme.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container section-shell">
+          <div class="panel headline-panel">
+            <h2 class="section-title">
+              <span class="lang en">Let’s build something meaningful</span>
+              <span class="lang fr">Construisons quelque chose de réellement utile</span>
+            </h2>
+            <p class="section-lead">
+              <span class="lang en">If you are looking for a mobile product with stronger design quality, better structure, and a more serious execution standard, EL MARINI APP is open to thoughtful discussions. Whether you already have a project in mind or you need help shaping one into a clearer product direction, the conversation can start here.</span>
+              <span class="lang fr">Si vous recherchez un produit mobile avec une meilleure qualité design, une structure plus solide et un niveau d’exécution plus sérieux, EL MARINI APP est ouvert aux échanges pertinents. Que vous ayez déjà un projet en tête ou que vous ayez besoin d’aide pour le transformer en direction produit plus claire, la discussion peut commencer ici.</span>
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-card">
+              <h3>
+                <span class="lang en inline">Email</span>
+                <span class="lang fr inline">Email</span>
+              </h3>
+              <p>
+                <span class="lang en">Direct contact for business inquiries, product discussions, and custom mobile app opportunities.</span>
+                <span class="lang fr">Contact direct pour les demandes professionnelles, les discussions produit et les opportunités d’applications mobiles sur mesure.</span>
+              </p>
+              <a class="contact-link" href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>
+            </div>
+
+            <div class="contact-card">
+              <h3>GitHub</h3>
+              <p>
+                <span class="lang en">Use this card for your public GitHub profile or repository showcase once the final URL is ready.</span>
+                <span class="lang fr">Utilise cette carte pour ton profil GitHub public ou ta vitrine de dépôts dès que l’URL finale est prête.</span>
+              </p>
+              <a class="contact-link" href="#">github.com/your-profile</a>
+            </div>
+
+            <div class="contact-card">
+              <h3>
+                <span class="lang en inline">Google Play</span>
+                <span class="lang fr inline">Google Play</span>
+              </h3>
+              <p>
+                <span class="lang en">Use this card to point visitors to your published apps and developer presence on Google Play.</span>
+                <span class="lang fr">Utilise cette carte pour renvoyer les visiteurs vers tes applications publiées et ta présence développeur sur Google Play.</span>
+              </p>
+              <a class="contact-link" href="#">play.google.com/store/apps/dev?id=YOUR_ID</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="container footer">
+      <span class="lang en">EL MARINI APP — Premium mobile products, crafted with intent.</span>
+      <span class="lang fr">EL MARINI APP — Des produits mobiles premium, conçus avec exigence.</span>
+    </div>
+  </div>
+
+  <script>
+    const body = document.body;
+    const buttons = document.querySelectorAll('[data-lang-btn]');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const lang = button.getAttribute('data-lang-btn');
+        body.setAttribute('data-lang', lang);
+        buttons.forEach((btn) => btn.classList.toggle('active', btn === button));
+        document.documentElement.setAttribute('lang', lang);
+      });
+    });
+  </script>
+</body>
+</html>
