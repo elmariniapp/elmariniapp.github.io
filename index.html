@@ -4,20 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EL MARINI APP — Premium Mobile App Studio</title>
-  <meta name="description" content="EL MARINI APP builds premium mobile applications with refined design, strong performance, and product-focused execution." />
+  <meta name="description" content="EL MARINI APP builds premium mobile applications including Scaneris, Muslim App and StampSight, with refined design, strong performance, and product-focused execution." />
   <style>
     :root {
       --bg: #01030a;
       --bg-soft: #07101d;
       --panel: rgba(10, 16, 30, 0.72);
       --panel-strong: rgba(6, 10, 22, 0.9);
-      --panel-border: rgba(255, 255, 255, 0.07);
+      --panel-border: rgba(255, 255, 255, 0.075);
       --text: #f7f9fd;
       --muted: #96a4bb;
       --soft: #dde6f4;
       --accent: #8bb8ff;
       --accent-2: #a392ff;
       --accent-3: #67dbff;
+      --scaneris: #3478ff;
       --shadow: 0 34px 110px rgba(0, 0, 0, 0.46);
       --shadow-soft: 0 18px 46px rgba(0, 0, 0, 0.24);
       --radius-xl: 34px;
@@ -28,6 +29,7 @@
     }
 
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -68,8 +70,15 @@
       background: rgba(163, 146, 255, 0.1);
     }
 
-    a { color: inherit; text-decoration: none; }
-    .page { position: relative; z-index: 1; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
 
     .container {
       width: min(calc(100% - 32px), var(--max));
@@ -103,7 +112,7 @@
       padding: 10px 16px;
       background: transparent;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.04em;
       cursor: pointer;
       transition: 0.25s ease;
@@ -115,7 +124,9 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
     }
 
-    .hero { padding: 38px 0 30px; }
+    .hero {
+      padding: 38px 0 30px;
+    }
 
     .hero-grid {
       display: grid;
@@ -154,6 +165,11 @@
       pointer-events: none;
     }
 
+    .panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
     .hero-main {
       padding: 56px 52px;
       min-height: 760px;
@@ -190,7 +206,7 @@
       font-size: clamp(3.2rem, 6vw, 6.6rem);
       line-height: 0.91;
       letter-spacing: -0.065em;
-      max-width: 9ch;
+      max-width: 10ch;
       text-wrap: balance;
     }
 
@@ -198,11 +214,13 @@
       color: var(--soft);
       font-size: 1.12rem;
       line-height: 1.92;
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 0 30px;
     }
 
-    .hero-copy { max-width: 760px; }
+    .hero-copy {
+      max-width: 760px;
+    }
 
     .hero-actions {
       display: flex;
@@ -219,12 +237,14 @@
       min-height: 56px;
       padding: 0 22px;
       border-radius: 18px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: -0.015em;
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
     }
 
-    .button:hover { transform: translateY(-2px); }
+    .button:hover {
+      transform: translateY(-2px);
+    }
 
     .button.primary {
       background: linear-gradient(135deg, rgba(139,184,255,0.16), rgba(163,146,255,0.22));
@@ -238,7 +258,9 @@
       color: var(--soft);
     }
 
-    .button.secondary:hover { background: rgba(255,255,255,0.04); }
+    .button.secondary:hover {
+      background: rgba(255,255,255,0.04);
+    }
 
     .hero-stats {
       display: grid;
@@ -313,7 +335,7 @@
 
     .em-symbol {
       font-size: 5.1rem;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: -0.13em;
       line-height: 1;
       background: linear-gradient(135deg, #ffffff 0%, #b1d1ff 34%, #c0b2ff 68%, #edf4ff 100%);
@@ -366,8 +388,14 @@
       font-size: 0.95rem;
     }
 
-    section { padding: 18px 0; }
-    .section-shell { display: grid; gap: 20px; }
+    section {
+      padding: 18px 0;
+    }
+
+    .section-shell {
+      display: grid;
+      gap: 20px;
+    }
 
     .section-title {
       margin: 0;
@@ -392,16 +420,24 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
+      align-items: stretch;
     }
 
     .product-card {
-      padding: 34px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
       gap: 22px;
-      min-height: 570px;
+      min-height: 620px;
+    }
+
+    .product-card.featured {
+      background:
+        radial-gradient(circle at 22% 0%, rgba(52,120,255,0.17), transparent 28%),
+        linear-gradient(180deg, rgba(9,15,28,0.82), rgba(5,9,18,0.92));
+      border-color: rgba(139,184,255,0.16);
     }
 
     .product-top {
@@ -421,6 +457,7 @@
       font-size: 0.76rem;
       text-transform: uppercase;
       letter-spacing: 0.13em;
+      white-space: nowrap;
     }
 
     .product-icon {
@@ -429,12 +466,21 @@
       border-radius: 20px;
       display: grid;
       place-items: center;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: -0.05em;
       font-size: 1.08rem;
       background: linear-gradient(135deg, rgba(139,184,255,0.14), rgba(163,146,255,0.16));
       border: 1px solid rgba(255,255,255,0.07);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .product-icon.scaneris {
+      background:
+        radial-gradient(circle at 32% 24%, rgba(255,255,255,0.35), transparent 18%),
+        linear-gradient(135deg, rgba(52,120,255,0.86), rgba(103,219,255,0.45));
+      border-color: rgba(139,184,255,0.32);
+      color: white;
+      box-shadow: 0 18px 38px rgba(52,120,255,0.22), inset 0 1px 0 rgba(255,255,255,0.14);
     }
 
     .product-card h3 {
@@ -450,7 +496,10 @@
       font-size: 1rem;
     }
 
-    .feature-list { display: grid; gap: 12px; }
+    .feature-list {
+      display: grid;
+      gap: 12px;
+    }
 
     .feature-item {
       display: grid;
@@ -469,6 +518,11 @@
       margin-top: 8px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       box-shadow: 0 0 16px rgba(139,184,255,0.2);
+    }
+
+    .product-card.featured .feature-item::before {
+      background: linear-gradient(135deg, var(--scaneris), var(--accent-3));
+      box-shadow: 0 0 18px rgba(52,120,255,0.26);
     }
 
     .quote {
@@ -491,7 +545,9 @@
     }
 
     .services-grid,
-    .pillars-grid { grid-template-columns: repeat(3, 1fr); }
+    .pillars-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     .service-card,
     .pillar-card,
@@ -517,6 +573,14 @@
       pointer-events: none;
     }
 
+    .service-card > *,
+    .pillar-card > *,
+    .why-card > *,
+    .contact-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
     .service-card h3,
     .pillar-card h3,
     .why-card h3,
@@ -540,8 +604,13 @@
       align-items: stretch;
     }
 
-    .why-card.large { padding: 40px; }
-    .why-card.large p + p { margin-top: 14px; }
+    .why-card.large {
+      padding: 40px;
+    }
+
+    .why-card.large p + p {
+      margin-top: 14px;
+    }
 
     .contact-grid {
       grid-template-columns: 1.15fr 1fr;
@@ -554,7 +623,7 @@
       gap: 10px;
       margin-top: 16px;
       color: var(--soft);
-      font-weight: 700;
+      font-weight: 800;
       word-break: break-all;
     }
 
@@ -565,16 +634,36 @@
       text-align: center;
     }
 
-    .lang { display: none; }
+    .lang {
+      display: none;
+    }
+
     body[data-lang="en"] .lang.en,
-    body[data-lang="fr"] .lang.fr { display: block; }
+    body[data-lang="fr"] .lang.fr {
+      display: block;
+    }
+
     body[data-lang="en"] .lang.en.inline,
-    body[data-lang="fr"] .lang.fr.inline { display: inline; }
-    .inline { display: none; }
+    body[data-lang="fr"] .lang.fr.inline {
+      display: inline;
+    }
+
+    .inline {
+      display: none;
+    }
+
+    @media (max-width: 1180px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card {
+        min-height: unset;
+      }
+    }
 
     @media (max-width: 1120px) {
       .hero-grid,
-      .products-grid,
       .services-grid,
       .pillars-grid,
       .why-grid,
@@ -583,11 +672,20 @@
       }
 
       .hero-main,
-      .hero-side,
-      .product-card { min-height: unset; }
+      .hero-side {
+        min-height: unset;
+      }
     }
 
     @media (max-width: 720px) {
+      .container {
+        width: min(calc(100% - 24px), var(--max));
+      }
+
+      .hero {
+        padding-top: 24px;
+      }
+
       .hero-main,
       .hero-side,
       .headline-panel,
@@ -600,12 +698,29 @@
       }
 
       .hero-stats,
-      .mini-grid { grid-template-columns: 1fr; }
-      h1 { max-width: none; }
-      .button { width: 100%; }
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .product-top {
+        align-items: center;
+      }
+
+      .product-badge {
+        white-space: normal;
+      }
     }
   </style>
 </head>
+
 <body data-lang="en">
   <div class="page">
     <div class="container lang-toggle">
@@ -631,8 +746,8 @@
             </h1>
 
             <p class="lead">
-              <span class="lang en">EL MARINI APP creates premium mobile applications with a strong focus on product clarity, visual refinement, performance, and real-world usefulness. The goal is never to fill the market with generic software, but to craft polished, durable, high-quality mobile experiences that feel thoughtful from the first screen to the final interaction.</span>
-              <span class="lang fr">EL MARINI APP conçoit des applications mobiles premium avec une attention forte portée à la clarté produit, au raffinement visuel, à la performance et à l’utilité concrète. L’objectif n’est jamais de produire des logiciels génériques, mais de créer des expériences mobiles soignées, durables et qualitatives, pensées dans le détail du premier écran jusqu’à la dernière interaction.</span>
+              <span class="lang en">EL MARINI APP creates premium mobile applications with a strong focus on product clarity, visual refinement, performance, privacy, and real-world usefulness. The goal is never to fill the market with generic software, but to craft polished, durable, high-quality mobile experiences that feel thoughtful from the first screen to the final interaction.</span>
+              <span class="lang fr">EL MARINI APP conçoit des applications mobiles premium avec une attention forte portée à la clarté produit, au raffinement visuel, à la performance, à la confidentialité et à l’utilité concrète. L’objectif n’est jamais de produire des logiciels génériques, mais de créer des expériences mobiles soignées, durables et qualitatives, pensées dans le détail du premier écran jusqu’à la dernière interaction.</span>
             </p>
 
             <div class="hero-actions">
@@ -658,6 +773,7 @@
                 <span class="lang fr">Chaque projet est abordé avec une logique produit, pas avec une logique de template.</span>
               </span>
             </div>
+
             <div class="stat">
               <strong>
                 <span class="lang en inline">Mobile focused</span>
@@ -668,6 +784,7 @@
                 <span class="lang fr">Pensé pour un usage réel, des interactions fluides, des interfaces lisibles et une forte utilisabilité.</span>
               </span>
             </div>
+
             <div class="stat">
               <strong>
                 <span class="lang en inline">Detail driven</span>
@@ -700,10 +817,11 @@
                 <span class="lang fr inline">Produits créés</span>
               </h3>
               <p>
-                <span class="lang en">From consumer-facing utility to pro-grade field workflow, the studio is already backed by concrete mobile products.</span>
-                <span class="lang fr">Du produit grand public utile à l’outil métier terrain, le studio est déjà soutenu par des produits mobiles concrets.</span>
+                <span class="lang en">From consumer utility to local-first productivity and pro-grade field workflow, the studio is backed by concrete mobile products.</span>
+                <span class="lang fr">Du produit grand public utile à la productivité locale-first et à l’outil métier terrain, le studio est soutenu par des produits mobiles concrets.</span>
               </p>
             </div>
+
             <div class="mini-card">
               <h3>
                 <span class="lang en inline">Custom approach</span>
@@ -728,8 +846,8 @@
               <span class="lang fr">Un studio mobile orienté produit, construit pour la qualité plutôt que pour le bruit.</span>
             </h2>
             <p class="section-lead">
-              <span class="lang en">EL MARINI APP is not positioned as a generic development service that delivers interchangeable interfaces and forgettable launches. The studio focuses on mobile applications that need clarity, polish, reliability, and a strong sense of purpose. That means balancing design and engineering, thinking deeply about how a product will be used in real life, and paying close attention to the details that separate a basic app from a truly credible one.</span>
-              <span class="lang fr">EL MARINI APP n’est pas positionné comme un simple service de développement générique qui livre des interfaces interchangeables et des lancements oubliables. Le studio se concentre sur des applications mobiles qui exigent clarté, finition, fiabilité et véritable raison d’être. Cela signifie trouver l’équilibre entre design et ingénierie, réfléchir en profondeur à l’usage réel du produit, et accorder une attention particulière aux détails qui distinguent une application basique d’un produit réellement crédible.</span>
+              <span class="lang en">EL MARINI APP is not positioned as a generic development service that delivers interchangeable interfaces and forgettable launches. The studio focuses on mobile applications that need clarity, polish, reliability, privacy, and a strong sense of purpose. That means balancing design and engineering, thinking deeply about how a product will be used in real life, and paying close attention to the details that separate a basic app from a truly credible one.</span>
+              <span class="lang fr">EL MARINI APP n’est pas positionné comme un simple service de développement générique qui livre des interfaces interchangeables et des lancements oubliables. Le studio se concentre sur des applications mobiles qui exigent clarté, finition, fiabilité, confidentialité et véritable raison d’être. Cela signifie trouver l’équilibre entre design et ingénierie, réfléchir en profondeur à l’usage réel du produit, et accorder une attention particulière aux détails qui distinguent une application basique d’un produit réellement crédible.</span>
             </p>
           </div>
         </div>
@@ -743,12 +861,56 @@
               <span class="lang fr">Produits mobiles sélectionnés</span>
             </h2>
             <p class="section-lead">
-              <span class="lang en">The current product work already reflects two different but complementary capabilities: creating refined mobile experiences for everyday users, and building structured tools for professional workflows where clarity and trust matter. Together, they show a studio capable of handling both emotion and utility, both aesthetic direction and practical execution.</span>
-              <span class="lang fr">Le travail produit actuel reflète déjà deux capacités différentes mais complémentaires : créer des expériences mobiles raffinées pour des usages du quotidien, et concevoir des outils structurés pour des workflows professionnels où la clarté et la confiance comptent. Ensemble, ces produits montrent un studio capable de gérer à la fois l’émotion et l’utilité, la direction esthétique et l’exécution pratique.</span>
+              <span class="lang en">The current product work reflects three complementary capabilities: building elegant daily-use mobile experiences, creating local-first productivity tools, and designing structured products for professional workflows where clarity and trust matter.</span>
+              <span class="lang fr">Le travail produit actuel reflète trois capacités complémentaires : créer des expériences mobiles élégantes pour l’usage quotidien, concevoir des outils de productivité local-first et construire des produits structurés pour des workflows professionnels où la clarté et la confiance comptent.</span>
             </p>
           </div>
 
           <div class="products-grid">
+            <article class="panel product-card featured">
+              <div class="product-top">
+                <span class="product-badge">
+                  <span class="lang en inline">Local-first productivity</span>
+                  <span class="lang fr inline">Productivité local-first</span>
+                </span>
+                <div class="product-icon scaneris">SC</div>
+              </div>
+
+              <div>
+                <h3>Scaneris</h3>
+                <p class="product-summary">
+                  <span class="lang en">Scaneris is a premium document scanning app designed around speed, clarity, privacy, and practical productivity. It helps users scan, organize, export, sign, protect, and transform documents directly on their device, with a local-first approach and a refined mobile experience.</span>
+                  <span class="lang fr">Scaneris est une application premium de numérisation de documents pensée autour de la rapidité, de la clarté, de la confidentialité et de la productivité concrète. Elle permet de scanner, organiser, exporter, signer, protéger et transformer des documents directement sur l’appareil, avec une approche local-first et une expérience mobile raffinée.</span>
+                </p>
+              </div>
+
+              <div class="feature-list">
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A local-first document workflow where scans, folders, OCR, PDF tools, signatures, and exports are designed to feel simple, fast, and trustworthy.</span>
+                    <span class="lang fr">Un workflow documentaire local-first où scans, dossiers, OCR, outils PDF, signatures et exports sont pensés pour rester simples, rapides et fiables.</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A refined Apple-like interface with strong visual hierarchy, clean settings, premium onboarding, and a clear Scaneris Pro upgrade path.</span>
+                    <span class="lang fr">Une interface raffinée d’inspiration Apple, avec une hiérarchie visuelle forte, des réglages clairs, un onboarding premium et une trajectoire Scaneris Pro lisible.</span>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div>
+                    <span class="lang en">A product built for everyday usefulness: capture documents, organize them into folders, share PDFs, extract text, and keep sensitive files under local control.</span>
+                    <span class="lang fr">Un produit conçu pour l’utilité quotidienne : capturer des documents, les organiser en dossiers, partager des PDF, extraire du texte et garder les fichiers sensibles sous contrôle local.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quote">
+                <span class="lang en">Scaneris represents the studio’s focus on premium utility: a practical product that combines polished design, privacy-minded execution, and document workflows that feel clear instead of heavy.</span>
+                <span class="lang fr">Scaneris représente l’approche premium utile du studio : un produit concret qui associe design soigné, exécution attentive à la confidentialité et workflows documentaires clairs plutôt que lourds.</span>
+              </div>
+            </article>
+
             <article class="panel product-card">
               <div class="product-top">
                 <span class="product-badge">
@@ -864,6 +1026,7 @@
                 <span class="lang fr">De nouveaux concepts mobiles peuvent être transformés en produits utilisables, visuellement solides et stratégiquement structurés, avec une direction claire dès le départ.</span>
               </p>
             </div>
+
             <div class="service-card">
               <h3>
                 <span class="lang en inline">Premium MVP execution</span>
@@ -874,6 +1037,7 @@
                 <span class="lang fr">Un MVP n’a pas besoin de paraître inachevé. Il peut déjà transmettre sérieux, discipline produit et une première impression plus forte.</span>
               </p>
             </div>
+
             <div class="service-card">
               <h3>
                 <span class="lang en inline">Business and field tools</span>
@@ -896,8 +1060,8 @@
               <span class="lang fr">Ce sur quoi EL MARINI APP se concentre</span>
             </h2>
             <p class="section-lead">
-              <span class="lang en">A premium app is never the result of visuals alone. It is the result of design judgment, disciplined execution, product hierarchy, and the ability to make many small decisions feel unified. This studio is built around those principles.</span>
-              <span class="lang fr">Une application premium n’est jamais le résultat des seuls visuels. Elle naît du jugement design, d’une exécution disciplinée, d’une hiérarchie produit maîtrisée et de la capacité à faire converger de nombreuses petites décisions en un ensemble cohérent. Ce studio est construit autour de ces principes.</span>
+              <span class="lang en">A premium app is never the result of visuals alone. It is the result of design judgment, disciplined execution, product hierarchy, privacy awareness, and the ability to make many small decisions feel unified. This studio is built around those principles.</span>
+              <span class="lang fr">Une application premium n’est jamais le résultat des seuls visuels. Elle naît du jugement design, d’une exécution disciplinée, d’une hiérarchie produit maîtrisée, d’une attention à la confidentialité et de la capacité à faire converger de nombreuses petites décisions en un ensemble cohérent. Ce studio est construit autour de ces principes.</span>
             </p>
           </div>
 
@@ -912,6 +1076,7 @@
                 <span class="lang fr">Hiérarchie claire, lisibilité renforcée, équilibre visuel premium et langage d’interface pensé pour paraître maîtrisé plutôt que bruyant.</span>
               </p>
             </div>
+
             <div class="pillar-card">
               <h3>
                 <span class="lang en inline">Performance and clarity</span>
@@ -922,6 +1087,7 @@
                 <span class="lang fr">Des expériences rapides, pratiques et lisibles comptent. Les bons produits mobiles respectent à la fois l’attention et le temps de l’utilisateur.</span>
               </p>
             </div>
+
             <div class="pillar-card">
               <h3>
                 <span class="lang en inline">Product seriousness</span>
@@ -944,13 +1110,15 @@
                 <span class="lang en">Why this studio approach matters</span>
                 <span class="lang fr">Pourquoi cette approche studio compte</span>
               </h2>
+
               <p>
                 <span class="lang en">There are many ways to ship an app. Far fewer ways to make one feel coherent, credible, and genuinely well considered. EL MARINI APP aims for that second category. The work is guided by the belief that strong mobile products are built through thoughtful structure, restrained visual decisions, careful product wording, and respect for the user’s real experience.</span>
                 <span class="lang fr">Il existe de nombreuses façons de livrer une application. Il en existe beaucoup moins pour lui donner une impression de cohérence, de crédibilité et de réelle réflexion. EL MARINI APP vise cette seconde catégorie. Le travail est guidé par la conviction que les bons produits mobiles se construisent par une structure pensée, des décisions visuelles maîtrisées, une rédaction produit soignée et un respect profond de l’expérience réelle de l’utilisateur.</span>
               </p>
+
               <p>
-                <span class="lang en">That is why the studio prioritizes quality over volume, depth over noise, and durable product value over quick visual shortcuts. Whether the application is public-facing or professionally focused, the goal remains the same: create a mobile product that feels sharper, better balanced, and more intentional than the average market standard.</span>
-                <span class="lang fr">C’est pour cela que le studio privilégie la qualité plutôt que le volume, la profondeur plutôt que le bruit, et la valeur produit durable plutôt que les raccourcis visuels rapides. Que l’application soit orientée grand public ou usage professionnel, l’objectif reste le même : créer un produit mobile plus net, mieux équilibré et plus intentionnel que le standard moyen du marché.</span>
+                <span class="lang en">That is why the studio prioritizes quality over volume, depth over noise, and durable product value over quick visual shortcuts. Whether the application is public-facing, productivity-focused, or professionally oriented, the goal remains the same: create a mobile product that feels sharper, better balanced, and more intentional than the average market standard.</span>
+                <span class="lang fr">C’est pour cela que le studio privilégie la qualité plutôt que le volume, la profondeur plutôt que le bruit, et la valeur produit durable plutôt que les raccourcis visuels rapides. Que l’application soit orientée grand public, productivité ou usage professionnel, l’objectif reste le même : créer un produit mobile plus net, mieux équilibré et plus intentionnel que le standard moyen du marché.</span>
               </p>
             </div>
 
@@ -960,8 +1128,8 @@
                 <span class="lang fr inline">Positionnement clé</span>
               </h3>
               <p>
-                <span class="lang en">Independent mobile app studio focused on premium product execution, elegant interfaces, practical usability, and long-term credibility.</span>
-                <span class="lang fr">Studio indépendant d’applications mobiles centré sur l’exécution produit premium, les interfaces élégantes, l’utilisabilité concrète et la crédibilité à long terme.</span>
+                <span class="lang en">Independent mobile app studio focused on premium product execution, elegant interfaces, practical usability, privacy-aware workflows, and long-term credibility.</span>
+                <span class="lang fr">Studio indépendant d’applications mobiles centré sur l’exécution produit premium, les interfaces élégantes, l’utilisabilité concrète, les workflows respectueux de la confidentialité et la crédibilité à long terme.</span>
               </p>
             </div>
           </div>
@@ -981,7 +1149,7 @@
             </p>
           </div>
 
-          <div class="contact-grid" style="grid-template-columns: 1.15fr 1fr;">
+          <div class="contact-grid">
             <div class="contact-card">
               <h3>
                 <span class="lang en inline">Email</span>
