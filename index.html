@@ -271,6 +271,51 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
   .project-points li{font-size:12px}
 }
 
+
+/* Navigation + FR/EN — enriched without changing the visual system */
+.lang-switch{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:900;letter-spacing:.09em}
+.lang-switch button{appearance:none;border:0;background:transparent;color:inherit;padding:4px 1px;cursor:pointer;font:inherit;opacity:.45;transition:opacity .25s var(--ease)}
+.lang-switch button.active{opacity:1}
+.lang-switch button:focus-visible,.menu-btn:focus-visible,.menu-close:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.menu{overflow:hidden}
+.menu-main{min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding-right:clamp(28px,4vw,72px)}
+.menu-kicker{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.13em}
+.menu-main nav{margin:clamp(34px,6vh,74px) 0}
+.menu-signature{font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.menu-signature span{opacity:.45;margin:0 8px}
+.menu-side{width:min(100%,560px);justify-self:end;display:grid;grid-template-rows:auto 1fr auto;gap:clamp(24px,4vh,42px);border-left:1px solid rgba(0,0,0,.28);padding-left:clamp(28px,4vw,64px)}
+.menu-status{border-top:1px solid rgba(0,0,0,.28);padding-top:14px}
+.menu-status-line{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:16px;line-height:1.2;letter-spacing:-.02em}
+.status-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:0 0 auto}
+.menu-status p{max-width:430px;margin:12px 0 0;font-size:12px;line-height:1.5}
+.menu-projects{align-self:center;border-top:1px solid rgba(0,0,0,.28)}
+.menu-projects>.menu-kicker{padding:14px 0 10px}
+.menu-project-link{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:baseline;gap:12px;padding:14px 0;border-top:1px solid rgba(0,0,0,.16);transition:transform .3s var(--ease)}
+.menu-project-link:hover{transform:translateX(8px)}
+.menu-project-link>span{font-size:9px;font-weight:900}
+.menu-project-link strong{font-size:clamp(20px,2.1vw,30px);line-height:1;letter-spacing:-.045em;text-transform:uppercase}
+.menu-project-link em{font-size:9px;font-style:normal;font-weight:900;text-transform:uppercase;letter-spacing:.08em;text-align:right}
+.menu-bottom{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;border-top:1px solid rgba(0,0,0,.28);padding-top:14px}
+.menu-lang-switch{margin-top:8px;font-size:12px}
+.menu-meta{font-size:10px;line-height:1.6}
+@media(max-width:680px){
+  .header-right{gap:12px}
+  .header-right .lang-switch{font-size:9px;gap:5px}
+  .header-right .lang-switch span{display:none}
+  .menu{grid-template-columns:1fr;grid-template-rows:auto auto;gap:24px;padding:82px 16px 22px;overflow-y:auto;overscroll-behavior:contain}
+  .menu-main{padding-right:0;min-height:380px}
+  .menu-main nav{margin:24px 0}
+  .menu nav a{font-size:clamp(44px,14vw,66px)}
+  .menu-side{width:100%;max-width:none;justify-self:stretch;border-left:0;border-top:1px solid rgba(0,0,0,.28);padding:20px 0 0;gap:20px}
+  .menu-status{border-top:0;padding-top:0}
+  .menu-status-line{font-size:14px}
+  .menu-projects{align-self:auto}
+  .menu-project-link{padding:11px 0;grid-template-columns:28px minmax(0,1fr) auto}
+  .menu-project-link strong{font-size:20px}
+  .menu-project-link em{font-size:8px}
+  .menu-bottom{padding-bottom:4px}
+}
+
 </style>
 </head>
 <body>
@@ -280,52 +325,96 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
   <div class="header-inner">
     <a class="logo" href="#top"><i></i> EL MARINI APP</a>
     <div class="header-right">
-      <a href="mailto:support@elmariniapp.com">Let's talk</a>
-      <button class="menu-btn" type="button">Menu</button>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
+        <span aria-hidden="true">/</span>
+        <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="mailto:support@elmariniapp.com" data-i18n="talk">Let's talk</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="siteMenu" data-i18n="menu">Menu</button>
     </div>
   </div>
 </header>
 
-<div class="menu" aria-hidden="true">
-  <button class="menu-close" type="button">Close</button>
-  <nav><a href="#top">Home</a><a href="#work">Work</a><a href="#services">Services</a><a href="#contact">Contact</a></nav>
-  <div class="menu-meta"><div>Flutter · Android · QA</div><div>support@elmariniapp.com</div><div>France</div></div>
+<div class="menu" id="siteMenu" aria-hidden="true">
+  <button class="menu-close" type="button" data-i18n="close">Close</button>
+
+  <div class="menu-main">
+    <div class="menu-kicker" data-i18n="navigation">Navigation</div>
+    <nav aria-label="Primary">
+      <a href="#top" data-i18n="navHome">Home</a>
+      <a href="#work" data-i18n="navWork">Work</a>
+      <a href="#services" data-i18n="navServices">Services</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+    </nav>
+    <div class="menu-signature">EL MARINI APP <span>—</span> FLUTTER / ANDROID</div>
+  </div>
+
+  <aside class="menu-side" aria-label="Portfolio overview">
+    <div class="menu-status">
+      <div class="menu-kicker" data-i18n="availabilityLabel">Availability</div>
+      <div class="menu-status-line"><span class="status-dot" aria-hidden="true"></span><strong data-i18n="availability">Available for focused mobile work</strong></div>
+      <p data-i18n="availabilityCopy">Audits, bug fixing, responsive hardening and release support for existing mobile products.</p>
+    </div>
+
+    <div class="menu-projects">
+      <div class="menu-kicker" data-i18n="selectedWork">Selected work</div>
+      <a class="menu-project-link" href="#scaneris"><span>01</span><strong>Scaneris</strong><em>PDF · OCR · QA</em></a>
+      <a class="menu-project-link" href="#muslim-app"><span>02</span><strong>Muslim App</strong><em>Quran · Prayer · RTL</em></a>
+      <a class="menu-project-link" href="#stampsight"><span>03</span><strong>StampSight</strong><em>Proof · Reports · QR</em></a>
+    </div>
+
+    <div class="menu-bottom">
+      <div>
+        <div class="menu-kicker" data-i18n="languageLabel">Language</div>
+        <div class="lang-switch menu-lang-switch" role="group" aria-label="Language">
+          <button class="lang-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <span aria-hidden="true">/</span>
+          <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
+        </div>
+      </div>
+      <div class="menu-meta">
+        <div>support@elmariniapp.com</div>
+        <div>France</div>
+      </div>
+    </div>
+  </aside>
 </div>
 
 <main id="top">
 <section class="hero">
   <canvas id="heroCanvas" aria-hidden="true"></canvas><div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-copy">
-    <div class="hero-topline"><span>Independent Flutter & Android studio</span><span>Debug · QA · Release</span></div>
-    <h1 class="hero-title">Fix the<br><span class="outline">hard parts.</span></h1>
+    <div class="hero-topline"><span data-i18n="heroTopLeft">Independent Flutter & Android studio</span><span data-i18n="heroTopRight">Debug · QA · Release</span></div>
+    <h1 class="hero-title" data-i18n="heroTitle">Fix the<br><span class="outline">hard parts.</span></h1>
     <div class="hero-bottom">
-      <p>I audit, debug and harden existing Flutter & Android apps: responsive UI, build and Play Console blockers, billing, PDF workflows, localization, performance, testing and release readiness.</p>
-      <div class="scroll-tag">Scroll<br>to explore</div>
+      <p data-i18n="heroBody">I audit, debug and harden existing Flutter & Android apps: responsive UI, build and Play Console blockers, billing, PDF workflows, localization, performance, testing and release readiness.</p>
+      <div class="scroll-tag" data-i18n="scroll">Scroll<br>to explore</div>
     </div>
   </div>
 </section>
 
 <section class="manifesto">
   <div class="manifesto-inner">
-    <div class="micro">Bold engineering, brought to production</div>
-    <div class="statement">A mobile product is only as strong as <span class="muted">the details nobody should have to notice.</span></div>
+    <div class="micro" data-i18n="manifestoKicker">Bold engineering, brought to production</div>
+    <div class="statement" data-i18n="manifestoTitle">A mobile product is only as strong as <span class="muted">the details nobody should have to notice.</span></div>
     <div class="manifesto-foot">
-      <p>I work on the parts that tend to become expensive late in a project: responsive behavior, fragile flows, platform integration, release blockers and regressions.</p>
-      <p class="right">The goal is simple: understand the real cause, fix the correct layer, verify the result, and leave the product stronger than before.</p>
+      <p data-i18n="manifestoLeft">I work on the parts that tend to become expensive late in a project: responsive behavior, fragile flows, platform integration, release blockers and regressions.</p>
+      <p class="right" data-i18n="manifestoRight">The goal is simple: understand the real cause, fix the correct layer, verify the result, and leave the product stronger than before.</p>
     </div>
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Flutter ✦ Android ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ PDF Workflows ✦ Billing ✦ Localization ✦ Release Engineering ✦</span><span>Flutter ✦ Android ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ PDF Workflows ✦ Billing ✦ Localization ✦ Release Engineering ✦</span></div></div>
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span data-i18n="ticker">Flutter ✦ Android ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ PDF Workflows ✦ Billing ✦ Localization ✦ Release Engineering ✦</span><span data-i18n="ticker">Flutter ✦ Android ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ PDF Workflows ✦ Billing ✦ Localization ✦ Release Engineering ✦</span></div></div>
 
 <section class="work" id="work">
   <div class="work-inner">
     <div class="section-top">
-      <h2>Featured<br>work</h2>
-      <p>Three substantial mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.</p>
+      <h2 data-i18n="workTitle">Featured<br>work</h2>
+      <p data-i18n="workIntro">Three substantial mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.</p>
     </div>
 
-    <article class="project project-case">
+    <article class="project project-case" id="scaneris">
       <div class="project-index">01 / Scaneris</div>
       <div class="project-main">
         <div class="project-case-grid">
@@ -333,18 +422,18 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
             <div class="project-visual scan">
               <img src="assets/scaneris-feature.avif" alt="Scaneris PDF scanner, OCR, signature and local-first document workflow" loading="lazy" decoding="async">
             </div>
-            <figcaption class="project-caption"><span>Local-first document workflow</span><span>Flutter / Android</span></figcaption>
+            <figcaption class="project-caption"><span data-i18n="scanCaption">Local-first document workflow</span><span>Flutter / Android</span></figcaption>
           </figure>
           <div class="project-copy">
-            <div class="project-tags">PDF · OCR · Billing · Responsive<br>Backup · Localization · Security</div>
+            <div class="project-tags" data-i18n="scanTags">PDF · OCR · Billing · Responsive<br>Backup · Localization · Security</div>
             <h3>Scaneris</h3>
-            <p class="project-positioning">Local-first document scanning, OCR and signature workflow.</p>
-            <p class="project-description">Scaneris is a privacy-first productivity app focused on fast document capture, local OCR, signature workflows and secure export. I worked on responsive hardening, import reliability, billing robustness, Play Console readiness and regression safety across a large feature surface.</p>
+            <p class="project-positioning" data-i18n="scanPositioning">Local-first document scanning, OCR and signature workflow.</p>
+            <p class="project-description" data-i18n="scanDescription">Scaneris is a privacy-first productivity app focused on fast document capture, local OCR, signature workflows and secure export. I worked on responsive hardening, import reliability, billing robustness, Play Console readiness and regression safety across a large feature surface.</p>
             <ul class="project-points">
-              <li>Smart scan, OCR and PDF export</li>
-              <li>Signature and local-first workflows</li>
-              <li>Billing and release hardening</li>
-              <li>Responsive and regression-safe architecture</li>
+              <li data-i18n="scanPoint1">Smart scan, OCR and PDF export</li>
+              <li data-i18n="scanPoint2">Signature and local-first workflows</li>
+              <li data-i18n="scanPoint3">Billing and release hardening</li>
+              <li data-i18n="scanPoint4">Responsive and regression-safe architecture</li>
             </ul>
             <div class="project-meta">Flutter · Android · OCR · PDF · Billing · QA</div>
           </div>
@@ -352,7 +441,7 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
       </div>
     </article>
 
-    <article class="project project-case">
+    <article class="project project-case" id="muslim-app">
       <div class="project-index">02 / Muslim App</div>
       <div class="project-main">
         <div class="project-case-grid">
@@ -360,18 +449,18 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
             <div class="project-visual muslim">
               <img src="assets/muslim-app-feature.avif" alt="Muslim App prayer times, Quran, Qibla, duas and daily essentials interface" loading="lazy" decoding="async">
             </div>
-            <figcaption class="project-caption"><span>Daily-use spiritual product</span><span>3,600+ automated tests</span></figcaption>
+            <figcaption class="project-caption"><span data-i18n="muslimCaption">Daily-use spiritual product</span><span data-i18n="muslimTests">3,600+ automated tests</span></figcaption>
           </figure>
           <div class="project-copy">
-            <div class="project-tags">Quran · Prayer times · Widgets<br>RTL · Premium · Accessibility</div>
+            <div class="project-tags" data-i18n="muslimTags">Quran · Prayer times · Widgets<br>RTL · Premium · Accessibility</div>
             <h3>Muslim App</h3>
-            <p class="project-positioning">A daily Islamic companion built for clarity, accessibility and consistency.</p>
-            <p class="project-description">Muslim App brings together prayer times, Quran, Qibla, duas and spiritual routines in one experience. I worked on accessibility, premium flows, responsive behavior, onboarding quality, UI consistency and large-scale automated testing.</p>
+            <p class="project-positioning" data-i18n="muslimPositioning">A daily Islamic companion built for clarity, accessibility and consistency.</p>
+            <p class="project-description" data-i18n="muslimDescription">Muslim App brings together prayer times, Quran, Qibla, duas and spiritual routines in one experience. I worked on accessibility, premium flows, responsive behavior, onboarding quality, UI consistency and large-scale automated testing.</p>
             <ul class="project-points">
-              <li>Prayer times, Quran, Qibla, duas</li>
-              <li>Accessibility and responsive UI</li>
-              <li>Premium gateway and polished UX</li>
-              <li>3,600+ automated tests</li>
+              <li data-i18n="muslimPoint1">Prayer times, Quran, Qibla, duas</li>
+              <li data-i18n="muslimPoint2">Accessibility and responsive UI</li>
+              <li data-i18n="muslimPoint3">Premium gateway and polished UX</li>
+              <li data-i18n="muslimPoint4">3,600+ automated tests</li>
             </ul>
             <div class="project-meta">Flutter · Android · RTL · Accessibility · Premium</div>
           </div>
@@ -379,7 +468,7 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
       </div>
     </article>
 
-    <article class="project project-case">
+    <article class="project project-case" id="stampsight">
       <div class="project-index">03 / StampSight</div>
       <div class="project-main">
         <div class="project-case-grid">
@@ -387,18 +476,18 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
             <div class="project-visual stamp">
               <img src="assets/stampsight-feature.avif" alt="StampSight field photo proof, QR verification and structured report workflow" loading="lazy" decoding="async">
             </div>
-            <figcaption class="project-caption"><span>Field photo proof & reports</span><span>Android / iPhone</span></figcaption>
+            <figcaption class="project-caption"><span data-i18n="stampCaption">Field photo proof & reports</span><span>Android / iPhone</span></figcaption>
           </figure>
           <div class="project-copy">
-            <div class="project-tags">Photo proof · PDF reports · Geolocation<br>QR traceability · Local-first · Android + iPhone</div>
+            <div class="project-tags" data-i18n="stampTags">Photo proof · PDF reports · Geolocation<br>QR traceability · Local-first · Android + iPhone</div>
             <h3>StampSight</h3>
-            <p class="project-positioning">Traceable field-photo proof with verification and structured reporting.</p>
-            <p class="project-description">StampSight turns field captures into verifiable proof with contextual metadata, QR verification and clean reporting. The project focuses on trust, traceability and a clear workflow from capture to proof delivery.</p>
+            <p class="project-positioning" data-i18n="stampPositioning">Traceable field-photo proof with verification and structured reporting.</p>
+            <p class="project-description" data-i18n="stampDescription">StampSight turns field captures into verifiable proof with contextual metadata, QR verification and clean reporting. The project focuses on trust, traceability and a clear workflow from capture to proof delivery.</p>
             <ul class="project-points">
-              <li>Field photo proof</li>
-              <li>QR verification and metadata</li>
-              <li>Structured report generation</li>
-              <li>Android + iPhone product direction</li>
+              <li data-i18n="stampPoint1">Field photo proof</li>
+              <li data-i18n="stampPoint2">QR verification and metadata</li>
+              <li data-i18n="stampPoint3">Structured report generation</li>
+              <li data-i18n="stampPoint4">Android + iPhone product direction</li>
             </ul>
             <div class="project-meta">Proof workflow · Reporting · Verification · Mobile product</div>
           </div>
@@ -410,54 +499,115 @@ footer{background:#101011;color:#777;border-top:1px solid rgba(255,255,255,.12);
 
 <section class="services" id="services">
   <div class="services-inner">
-    <div class="services-head"><h2>Focused<br>services</h2><p>Best for a defined problem in an existing Android/Flutter product: something broken, fragile, slow, inconsistent or blocking release.</p></div>
-    <div class="service-row"><span class="n">01</span><h3>Debug & bug fixing</h3><p>Root-cause analysis, state, navigation, async failures and regression-safe fixes.</p><span class="arrow">↗</span></div>
-    <div class="service-row"><span class="n">02</span><h3>Responsive hardening</h3><p>Overflow, landscape, keyboard/IME, large screens, scaling and RTL.</p><span class="arrow">↗</span></div>
-    <div class="service-row"><span class="n">03</span><h3>Android release & Play</h3><p>AAB/build, Gradle/AGP/Kotlin, Play Console blockers and billing.</p><span class="arrow">↗</span></div>
-    <div class="service-row"><span class="n">04</span><h3>Performance & PDF</h3><p>Large documents, deferred work, import/export, previews and temp files.</p><span class="arrow">↗</span></div>
-    <div class="service-row"><span class="n">05</span><h3>QA & regression</h3><p>Targeted tests, suite cleanup, static analysis and release validation.</p><span class="arrow">↗</span></div>
-    <div class="service-row"><span class="n">06</span><h3>Technical audit</h3><p>Read-only risk map, code-path review and prioritized correction plan.</p><span class="arrow">↗</span></div>
+    <div class="services-head"><h2 data-i18n="servicesTitle">Focused<br>services</h2><p data-i18n="servicesIntro">Best for a defined problem in an existing Android/Flutter product: something broken, fragile, slow, inconsistent or blocking release.</p></div>
+    <div class="service-row"><span class="n">01</span><h3 data-i18n="service1Title">Debug & bug fixing</h3><p data-i18n="service1Body">Root-cause analysis, state, navigation, async failures and regression-safe fixes.</p><span class="arrow">↗</span></div>
+    <div class="service-row"><span class="n">02</span><h3 data-i18n="service2Title">Responsive hardening</h3><p data-i18n="service2Body">Overflow, landscape, keyboard/IME, large screens, scaling and RTL.</p><span class="arrow">↗</span></div>
+    <div class="service-row"><span class="n">03</span><h3 data-i18n="service3Title">Android release & Play</h3><p data-i18n="service3Body">AAB/build, Gradle/AGP/Kotlin, Play Console blockers and billing.</p><span class="arrow">↗</span></div>
+    <div class="service-row"><span class="n">04</span><h3 data-i18n="service4Title">Performance & PDF</h3><p data-i18n="service4Body">Large documents, deferred work, import/export, previews and temp files.</p><span class="arrow">↗</span></div>
+    <div class="service-row"><span class="n">05</span><h3 data-i18n="service5Title">QA & regression</h3><p data-i18n="service5Body">Targeted tests, suite cleanup, static analysis and release validation.</p><span class="arrow">↗</span></div>
+    <div class="service-row"><span class="n">06</span><h3 data-i18n="service6Title">Technical audit</h3><p data-i18n="service6Body">Read-only risk map, code-path review and prioritized correction plan.</p><span class="arrow">↗</span></div>
   </div>
 </section>
 
 <section class="expertise">
   <div class="expertise-inner">
-    <div class="micro">Capabilities</div>
-    <h2>From UI<br>to release.</h2>
+    <div class="micro" data-i18n="capabilities">Capabilities</div>
+    <h2 data-i18n="expertiseTitle">From UI<br>to release.</h2>
     <div class="matrix">
-      <div class="matrix-row"><strong>Flutter / UI</strong><span>Adaptive layouts · Landscape & IME · Scaling · RTL · State-driven UI</span></div>
-      <div class="matrix-row"><strong>Android</strong><span>Gradle · AGP · Kotlin · AAB · Play Console · Native bridges</span></div>
-      <div class="matrix-row"><strong>Quality</strong><span>Widget/unit tests · Regression suites · Golden strategy · Static analysis</span></div>
-      <div class="matrix-row"><strong>Documents</strong><span>Multipage PDF · Lazy rasterization · Import/export · Backup/restore</span></div>
+      <div class="matrix-row"><strong>Flutter / UI</strong><span data-i18n="expertiseFlutter">Adaptive layouts · Landscape & IME · Scaling · RTL · State-driven UI</span></div>
+      <div class="matrix-row"><strong>Android</strong><span data-i18n="expertiseAndroid">Gradle · AGP · Kotlin · AAB · Play Console · Native bridges</span></div>
+      <div class="matrix-row"><strong>Quality</strong><span data-i18n="expertiseQuality">Widget/unit tests · Regression suites · Golden strategy · Static analysis</span></div>
+      <div class="matrix-row"><strong>Documents</strong><span data-i18n="expertiseDocs">Multipage PDF · Lazy rasterization · Import/export · Backup/restore</span></div>
     </div>
   </div>
 </section>
 
 <section class="process">
   <div class="process-inner">
-    <div class="micro">Process</div>
-    <h2>From symptom<br>to verified fix.</h2>
+    <div class="micro" data-i18n="processLabel">Process</div>
+    <h2 data-i18n="processTitle">From symptom<br>to verified fix.</h2>
     <div class="steps">
-      <div class="step"><b>01</b><h3>Reproduce</h3></div><div class="step"><b>02</b><h3>Trace</h3></div><div class="step"><b>03</b><h3>Fix</h3></div><div class="step"><b>04</b><h3>Verify</h3></div><div class="step"><b>05</b><h3>Deliver</h3></div>
+      <div class="step"><b>01</b><h3 data-i18n="step1">Reproduce</h3></div><div class="step"><b>02</b><h3 data-i18n="step2">Trace</h3></div><div class="step"><b>03</b><h3 data-i18n="step3">Fix</h3></div><div class="step"><b>04</b><h3 data-i18n="step4">Verify</h3></div><div class="step"><b>05</b><h3 data-i18n="step5">Deliver</h3></div>
     </div>
   </div>
 </section>
 
 <section class="cta" id="contact">
   <div class="cta-orb" aria-hidden="true"></div>
-  <div class="cta-content"><div class="cta-label">Available for focused mobile work</div><h2>Let's make<br>it stronger.</h2></div>
-  <div class="cta-contact"><a href="mailto:support@elmariniapp.com">support@elmariniapp.com ↗</a><span>Flutter / Android / Product quality</span></div>
+  <div class="cta-content"><div class="cta-label" data-i18n="ctaLabel">Available for focused mobile work</div><h2 data-i18n="ctaTitle">Let's make<br>it stronger.</h2></div>
+  <div class="cta-contact"><a href="mailto:support@elmariniapp.com">support@elmariniapp.com ↗</a><span data-i18n="ctaMeta">Flutter / Android / Product quality</span></div>
 </section>
 </main>
 
-<footer><div class="footer-inner"><span>© 2026 El Marini App</span><span>Independent mobile product studio</span></div></footer>
+<footer><div class="footer-inner"><span>© 2026 El Marini App</span><span data-i18n="footerTagline">Independent mobile product studio</span></div></footer>
 
 <script>
 (() => {
+  const translations={
+    en:{
+      talk:"Let's talk",menu:"Menu",close:"Close",navigation:"Navigation",navHome:"Home",navWork:"Work",navServices:"Services",navContact:"Contact",
+      availabilityLabel:"Availability",availability:"Available for focused mobile work",availabilityCopy:"Audits, bug fixing, responsive hardening and release support for existing mobile products.",selectedWork:"Selected work",languageLabel:"Language",
+      heroTopLeft:"Independent Flutter & Android studio",heroTopRight:"Debug · QA · Release",heroTitle:'Fix the<br><span class="outline">hard parts.</span>',heroBody:"I audit, debug and harden existing Flutter & Android apps: responsive UI, build and Play Console blockers, billing, PDF workflows, localization, performance, testing and release readiness.",scroll:"Scroll<br>to explore",
+      manifestoKicker:"Bold engineering, brought to production",manifestoTitle:'A mobile product is only as strong as <span class="muted">the details nobody should have to notice.</span>',manifestoLeft:"I work on the parts that tend to become expensive late in a project: responsive behavior, fragile flows, platform integration, release blockers and regressions.",manifestoRight:"The goal is simple: understand the real cause, fix the correct layer, verify the result, and leave the product stronger than before.",
+      ticker:"Flutter ✦ Android ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ PDF Workflows ✦ Billing ✦ Localization ✦ Release Engineering ✦",
+      workTitle:"Featured<br>work",workIntro:"Three substantial mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.",
+      scanCaption:"Local-first document workflow",scanTags:"PDF · OCR · Billing · Responsive<br>Backup · Localization · Security",scanPositioning:"Local-first document scanning, OCR and signature workflow.",scanDescription:"Scaneris is a privacy-first productivity app focused on fast document capture, local OCR, signature workflows and secure export. I worked on responsive hardening, import reliability, billing robustness, Play Console readiness and regression safety across a large feature surface.",scanPoint1:"Smart scan, OCR and PDF export",scanPoint2:"Signature and local-first workflows",scanPoint3:"Billing and release hardening",scanPoint4:"Responsive and regression-safe architecture",
+      muslimCaption:"Daily-use spiritual product",muslimTests:"3,600+ automated tests",muslimTags:"Quran · Prayer times · Widgets<br>RTL · Premium · Accessibility",muslimPositioning:"A daily Islamic companion built for clarity, accessibility and consistency.",muslimDescription:"Muslim App brings together prayer times, Quran, Qibla, duas and spiritual routines in one experience. I worked on accessibility, premium flows, responsive behavior, onboarding quality, UI consistency and large-scale automated testing.",muslimPoint1:"Prayer times, Quran, Qibla, duas",muslimPoint2:"Accessibility and responsive UI",muslimPoint3:"Premium gateway and polished UX",muslimPoint4:"3,600+ automated tests",
+      stampCaption:"Field photo proof & reports",stampTags:"Photo proof · PDF reports · Geolocation<br>QR traceability · Local-first · Android + iPhone",stampPositioning:"Traceable field-photo proof with verification and structured reporting.",stampDescription:"StampSight turns field captures into verifiable proof with contextual metadata, QR verification and clean reporting. The project focuses on trust, traceability and a clear workflow from capture to proof delivery.",stampPoint1:"Field photo proof",stampPoint2:"QR verification and metadata",stampPoint3:"Structured report generation",stampPoint4:"Android + iPhone product direction",
+      servicesTitle:"Focused<br>services",servicesIntro:"Best for a defined problem in an existing Android/Flutter product: something broken, fragile, slow, inconsistent or blocking release.",service1Title:"Debug & bug fixing",service1Body:"Root-cause analysis, state, navigation, async failures and regression-safe fixes.",service2Title:"Responsive hardening",service2Body:"Overflow, landscape, keyboard/IME, large screens, scaling and RTL.",service3Title:"Android release & Play",service3Body:"AAB/build, Gradle/AGP/Kotlin, Play Console blockers and billing.",service4Title:"Performance & PDF",service4Body:"Large documents, deferred work, import/export, previews and temp files.",service5Title:"QA & regression",service5Body:"Targeted tests, suite cleanup, static analysis and release validation.",service6Title:"Technical audit",service6Body:"Read-only risk map, code-path review and prioritized correction plan.",
+      capabilities:"Capabilities",expertiseTitle:"From UI<br>to release.",expertiseFlutter:"Adaptive layouts · Landscape & IME · Scaling · RTL · State-driven UI",expertiseAndroid:"Gradle · AGP · Kotlin · AAB · Play Console · Native bridges",expertiseQuality:"Widget/unit tests · Regression suites · Golden strategy · Static analysis",expertiseDocs:"Multipage PDF · Lazy rasterization · Import/export · Backup/restore",
+      processLabel:"Process",processTitle:"From symptom<br>to verified fix.",step1:"Reproduce",step2:"Trace",step3:"Fix",step4:"Verify",step5:"Deliver",
+      ctaLabel:"Available for focused mobile work",ctaTitle:"Let's make<br>it stronger.",ctaMeta:"Flutter / Android / Product quality",footerTagline:"Independent mobile product studio"
+    },
+    fr:{
+      talk:"Parlons-en",menu:"Menu",close:"Fermer",navigation:"Navigation",navHome:"Accueil",navWork:"Projets",navServices:"Services",navContact:"Contact",
+      availabilityLabel:"Disponibilité",availability:"Disponible pour des missions mobiles ciblées",availabilityCopy:"Audits, correction de bugs, fiabilisation responsive et accompagnement de mise en production pour des produits mobiles existants.",selectedWork:"Projets sélectionnés",languageLabel:"Langue",
+      heroTopLeft:"Studio indépendant Flutter & Android",heroTopRight:"Débogage · QA · Mise en production",heroTitle:'Corriger les<br><span class="outline">points difficiles.</span>',heroBody:"J’audite, débogue et fiabilise des applications Flutter & Android existantes : UI responsive, blocages de build et Play Console, facturation, flux PDF, localisation, performances, tests et préparation à la mise en production.",scroll:"Défiler<br>pour explorer",
+      manifestoKicker:"Ingénierie exigeante, jusqu’à la production",manifestoTitle:'Un produit mobile n’est solide que si <span class="muted">les détails que personne ne devrait remarquer le sont aussi.</span>',manifestoLeft:"J’interviens sur les points qui deviennent coûteux tard dans un projet : comportement responsive, flux fragiles, intégrations plateforme, blocages de release et régressions.",manifestoRight:"L’objectif est simple : comprendre la cause réelle, corriger au bon niveau, vérifier le résultat et laisser le produit plus robuste qu’avant.",
+      ticker:"Flutter ✦ Android ✦ UI responsive ✦ QA & régression ✦ Google Play ✦ Flux PDF ✦ Facturation ✦ Localisation ✦ Mise en production ✦",
+      workTitle:"Projets<br>phares",workIntro:"Trois produits mobiles conséquents, construits autour de contraintes réelles de production : confidentialité, responsive, usages terrain, intégration plateforme, sécurité contre les régressions et qualité de release.",
+      scanCaption:"Flux documentaire local-first",scanTags:"PDF · OCR · Facturation · Responsive<br>Sauvegarde · Localisation · Sécurité",scanPositioning:"Numérisation, OCR et signature dans un flux documentaire local-first.",scanDescription:"Scaneris est une application de productivité centrée sur la confidentialité, la capture rapide de documents, l’OCR local, la signature et l’export sécurisé. J’ai travaillé sur la robustesse responsive, la fiabilité des imports, la facturation, la préparation Play Console et la prévention des régressions sur un périmètre fonctionnel étendu.",scanPoint1:"Scan intelligent, OCR et export PDF",scanPoint2:"Signature et flux local-first",scanPoint3:"Fiabilisation facturation et release",scanPoint4:"Architecture responsive et sûre face aux régressions",
+      muslimCaption:"Compagnon spirituel du quotidien",muslimTests:"3 600+ tests automatisés",muslimTags:"Coran · Horaires de prière · Widgets<br>RTL · Premium · Accessibilité",muslimPositioning:"Un compagnon islamique quotidien pensé pour la clarté, l’accessibilité et la cohérence.",muslimDescription:"Muslim App réunit horaires de prière, Coran, Qibla, duas et routines spirituelles dans une même expérience. J’ai travaillé sur l’accessibilité, les parcours Premium, le responsive, l’onboarding, la cohérence UI et une couverture de tests automatisés à grande échelle.",muslimPoint1:"Horaires de prière, Coran, Qibla, duas",muslimPoint2:"Accessibilité et UI responsive",muslimPoint3:"Passerelle Premium et UX soignée",muslimPoint4:"3 600+ tests automatisés",
+      stampCaption:"Preuve terrain & rapports",stampTags:"Preuve photo · Rapports PDF · Géolocalisation<br>Traçabilité QR · Local-first · Android + iPhone",stampPositioning:"Preuve photo terrain traçable, avec vérification et rapports structurés.",stampDescription:"StampSight transforme les captures terrain en preuves vérifiables grâce aux métadonnées contextuelles, à la vérification QR et à des rapports propres. Le produit se concentre sur la confiance, la traçabilité et un flux clair de la capture jusqu’à la remise de la preuve.",stampPoint1:"Preuve photo terrain",stampPoint2:"Vérification QR et métadonnées",stampPoint3:"Génération de rapports structurés",stampPoint4:"Direction produit Android + iPhone",
+      servicesTitle:"Services<br>ciblés",servicesIntro:"Idéal pour un problème précis dans un produit Android/Flutter existant : quelque chose de cassé, fragile, lent, incohérent ou bloquant la mise en production.",service1Title:"Débogage & correction de bugs",service1Body:"Analyse de cause racine, état, navigation, erreurs asynchrones et correctifs sûrs face aux régressions.",service2Title:"Fiabilisation responsive",service2Body:"Overflow, paysage, clavier/IME, grands écrans, mise à l’échelle et RTL.",service3Title:"Mise en production Android & Play",service3Body:"AAB/build, Gradle/AGP/Kotlin, blocages Play Console et facturation.",service4Title:"Performance & PDF",service4Body:"Documents volumineux, traitements différés, import/export, aperçus et fichiers temporaires.",service5Title:"QA & régression",service5Body:"Tests ciblés, nettoyage de suite, analyse statique et validation de release.",service6Title:"Audit technique",service6Body:"Cartographie des risques en lecture seule, revue des chemins de code et plan de correction priorisé.",
+      capabilities:"Compétences",expertiseTitle:"De l’UI<br>à la production.",expertiseFlutter:"Layouts adaptatifs · Paysage & IME · Mise à l’échelle · RTL · UI pilotée par l’état",expertiseAndroid:"Gradle · AGP · Kotlin · AAB · Play Console · Bridges natifs",expertiseQuality:"Tests widget/unitaires · Suites de régression · Stratégie golden · Analyse statique",expertiseDocs:"PDF multipage · Rastérisation différée · Import/export · Sauvegarde/restauration",
+      processLabel:"Processus",processTitle:"Du symptôme<br>au correctif vérifié.",step1:"Reproduire",step2:"Tracer",step3:"Corriger",step4:"Vérifier",step5:"Livrer",
+      ctaLabel:"Disponible pour des missions mobiles ciblées",ctaTitle:"Rendons-le<br>plus solide.",ctaMeta:"Flutter / Android / Qualité produit",footerTagline:"Studio indépendant de produits mobiles"
+    }
+  };
+
+  const descriptions={
+    en:"Independent Flutter & Android studio for debugging, responsive hardening, QA and release readiness.",
+    fr:"Studio indépendant Flutter & Android pour le débogage, la fiabilisation responsive, la QA et la préparation à la mise en production."
+  };
+
+  function setLanguage(lang){
+    const safeLang=lang==="fr"?"fr":"en";
+    document.documentElement.lang=safeLang;
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const value=translations[safeLang][el.dataset.i18n];
+      if(value!==undefined)el.innerHTML=value;
+    });
+    document.querySelectorAll(".lang-btn").forEach(btn=>{
+      const active=btn.dataset.lang===safeLang;
+      btn.classList.toggle("active",active);
+      btn.setAttribute("aria-pressed",active?"true":"false");
+    });
+    const meta=document.querySelector('meta[name="description"]');
+    if(meta)meta.setAttribute("content",descriptions[safeLang]);
+    document.title=safeLang==="fr"?"EL MARINI APP — Studio Flutter & Android":"EL MARINI APP — Flutter & Android Studio";
+    try{localStorage.setItem("elmarini-lang",safeLang)}catch(_){}
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(btn=>btn.addEventListener("click",()=>setLanguage(btn.dataset.lang)));
+  let initialLang="en";
+  try{initialLang=localStorage.getItem("elmarini-lang")==="fr"?"fr":"en"}catch(_){}
+  setLanguage(initialLang);
+
   const menu=document.querySelector('.menu'),openBtn=document.querySelector('.menu-btn'),closeBtn=document.querySelector('.menu-close');
-  const openMenu=()=>{menu.classList.add('open');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'};
-  const closeMenu=()=>{menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow=''};
-  openBtn.addEventListener('click',openMenu);closeBtn.addEventListener('click',closeMenu);menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  const openMenu=()=>{menu.classList.add('open');menu.setAttribute('aria-hidden','false');openBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';closeBtn.focus({preventScroll:true})};
+  const closeMenu=()=>{menu.classList.remove('open');menu.setAttribute('aria-hidden','true');openBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';openBtn.focus({preventScroll:true})};
+  openBtn.addEventListener('click',openMenu);closeBtn.addEventListener('click',closeMenu);menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menu.setAttribute('aria-hidden','true');openBtn.setAttribute('aria-expanded','false');document.body.style.overflow=''}));addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open'))closeMenu()});
 
   const cursor=document.querySelector('.cursor');
   if(matchMedia('(pointer:fine)').matches){
