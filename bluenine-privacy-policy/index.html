@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Politique de confidentialité — BlueNine Sudoku</title>
+<meta name="description" content="Politique de confidentialité de BlueNine Sudoku, application mobile éditée par EL MARINI APP.">
+<style>
+:root{
+  --paper:#f1f1ee;--ink:#0b0b0c;--dark:#09090a;--white:#f7f7f3;--muted:#777773;
+  --acid:#d9ff57;--blue:#5867ff;--line:rgba(0,0,0,.16);
+  --max:920px;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  overflow-x:hidden;
+}
+a{color:inherit}
+::selection{background:var(--acid);color:#000}
+.skip{
+  position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+}
+.skip:focus{
+  left:16px;top:16px;width:auto;height:auto;z-index:200;
+  padding:10px 14px;background:var(--acid);color:#000;font-weight:900;
+  text-decoration:none;border-radius:999px;
+}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(241,241,238,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  width:min(calc(100% - 40px),var(--max));
+  margin:auto;
+  min-height:64px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;font-weight:900;letter-spacing:-.03em;
+  text-decoration:none;
+}
+.brand i{
+  width:12px;height:12px;border-radius:50%;background:currentColor;display:inline-block;position:relative;
+}
+.brand i:after{
+  content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:var(--paper);
+  left:50%;top:50%;transform:translate(-50%,-50%);
+}
+.back{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--ink);
+  border-radius:999px;
+  padding:9px 14px;
+  font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;
+  transition:background .25s var(--ease),color .25s var(--ease);
+}
+.back:hover,.back:focus-visible{
+  background:var(--ink);color:var(--white);outline:none;
+}
+.hero{
+  background:#0a0a0b;color:#fff;
+  padding:56px 20px 48px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.hero-inner{width:min(100%,var(--max));margin:auto}
+.kicker{
+  margin:0 0 18px;
+  font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--acid);
+}
+.hero h1{
+  margin:0;
+  max-width:16ch;
+  font-size:clamp(34px,7vw,56px);
+  line-height:.95;
+  letter-spacing:-.055em;
+  font-weight:900;
+}
+.meta{
+  margin:22px 0 0;
+  display:flex;flex-wrap:wrap;gap:10px 18px;
+  font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  color:#aaa;
+}
+.meta strong{color:#fff;font-weight:900}
+.wrap{
+  width:min(calc(100% - 40px),var(--max));
+  margin:0 auto;
+  padding:42px 0 72px;
+}
+.toc{
+  margin:0 0 36px;
+  padding:18px 18px 8px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--white);
+}
+.toc h2{
+  margin:0 0 10px;
+  font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+}
+.toc ol{
+  margin:0;padding:0 0 8px 18px;
+  display:grid;gap:6px;
+}
+.toc a{
+  color:#333;font-size:14px;line-height:1.4;text-decoration:underline;text-underline-offset:3px;
+}
+.toc a:hover,.toc a:focus-visible{color:#000}
+article section{
+  padding:28px 0;
+  border-top:1px solid var(--line);
+}
+article section:first-of-type{border-top:0;padding-top:0}
+article h2{
+  margin:0 0 14px;
+  font-size:clamp(22px,3.4vw,28px);
+  line-height:1.15;
+  letter-spacing:-.035em;
+  font-weight:900;
+}
+article p,article li{
+  margin:0 0 12px;
+  color:#2c2c2a;
+  font-size:15px;
+  line-height:1.6;
+}
+article ul{
+  margin:0 0 12px;
+  padding-left:1.15em;
+}
+article li{margin-bottom:8px}
+article a{
+  color:#1d2db8;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  word-break:break-word;
+}
+article a:hover,article a:focus-visible{color:#000}
+.note{
+  margin-top:8px;
+  padding:14px 16px;
+  border-left:3px solid var(--acid);
+  background:#eaeae5;
+  font-size:14px;
+}
+footer{
+  background:#101011;color:#888;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding:22px 20px 28px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+}
+.footer-inner{
+  width:min(100%,var(--max));
+  margin:auto;
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;
+}
+.footer-inner a{
+  color:#ddd;text-decoration:underline;text-underline-offset:3px;text-transform:none;letter-spacing:0;font-size:13px;
+}
+@media(max-width:680px){
+  .topbar-inner{width:calc(100% - 28px);min-height:58px}
+  .hero{padding:42px 16px 36px}
+  .wrap{width:calc(100% - 28px);padding:32px 0 56px}
+  .brand span{max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  article p,article li{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="https://elmariniapp.github.io/">
+      <i aria-hidden="true"></i>
+      <span>EL MARINI APP</span>
+    </a>
+    <a class="back" href="https://elmariniapp.github.io/">Retour au site</a>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="kicker">BlueNine Sudoku</p>
+    <h1>Politique de confidentialité — BlueNine Sudoku</h1>
+    <div class="meta">
+      <span>Éditeur : <strong>EL MARINI APP</strong></span>
+      <span>Mise à jour : <strong>21 septembre 2026</strong></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="contenu">
+  <nav class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#responsable">Responsable</a></li>
+      <li><a href="#fonctionnement">Fonctionnement de l’application</a></li>
+      <li><a href="#donnees-locales">Données conservées localement</a></li>
+      <li><a href="#achats">Achat Premium et Google Play Billing</a></li>
+      <li><a href="#publicite">Publicité récompensée</a></li>
+      <li><a href="#admob">Google Mobile Ads / AdMob</a></li>
+      <li><a href="#consentement">Consentement publicitaire</a></li>
+      <li><a href="#pas-de-vente">Absence de vente de données</a></li>
+      <li><a href="#sous-traitants">Services Google concernés</a></li>
+      <li><a href="#age">Public concerné</a></li>
+      <li><a href="#droits">Vos droits (RGPD)</a></li>
+      <li><a href="#securite">Sécurité</a></li>
+      <li><a href="#evolution">Évolution de cette politique</a></li>
+    </ol>
+  </nav>
+
+  <article>
+    <section id="responsable">
+      <h2>1. Responsable</h2>
+      <p>Le responsable du traitement des informations décrites dans cette politique pour l’application <strong>BlueNine Sudoku</strong> est <strong>EL MARINI APP</strong>.</p>
+      <p>Contact : <a href="mailto:elmariniapp@gmail.com">elmariniapp@gmail.com</a>.</p>
+    </section>
+
+    <section id="fonctionnement">
+      <h2>2. Fonctionnement de l’application</h2>
+      <p>BlueNine Sudoku fonctionne <strong>sans compte utilisateur</strong> et <strong>sans serveur propre à EL MARINI APP</strong>.</p>
+      <p>L’application n’exige pas de création de compte, de connexion Google ni de profil en ligne géré par EL MARINI APP pour jouer.</p>
+    </section>
+
+    <section id="donnees-locales">
+      <h2>3. Données conservées localement</h2>
+      <p>Les données de jeu, préférences, progression, statistiques, thèmes, réglages et statut Premium sont conservés <strong>localement sur l’appareil</strong>.</p>
+      <p>Ces informations restent sur votre téléphone ou tablette. Vous pouvez les supprimer en effaçant les données de l’application dans les réglages Android, ou en désinstallant l’application.</p>
+    </section>
+
+    <section id="achats">
+      <h2>4. Achat Premium et Google Play Billing</h2>
+      <p>L’achat unique <strong>BlueNine Premium à vie</strong> est traité par <strong>Google Play Billing</strong>.</p>
+      <p>Google traite les données de paiement selon sa propre politique de confidentialité. <strong>EL MARINI APP ne reçoit ni ne stocke les coordonnées bancaires</strong>.</p>
+    </section>
+
+    <section id="publicite">
+      <h2>5. Publicité récompensée</h2>
+      <p>La version gratuite propose uniquement des <strong>publicités récompensées facultatives</strong>, choisies par l’utilisateur pour obtenir une seconde chance ou un indice bonus.</p>
+      <p><strong>Premium</strong> ne charge ni n’affiche de publicité.</p>
+    </section>
+
+    <section id="admob">
+      <h2>6. Google Mobile Ads / AdMob</h2>
+      <p>Les services Google Mobile Ads / AdMob peuvent traiter des informations techniques telles que :</p>
+      <ul>
+        <li>l’identifiant publicitaire ;</li>
+        <li>l’adresse IP ;</li>
+        <li>le type d’appareil ;</li>
+        <li>le système ;</li>
+        <li>les interactions publicitaires ;</li>
+        <li>les informations nécessaires à la prévention de fraude.</li>
+      </ul>
+      <p>Ces traitements sont réalisés conformément à la politique de Google.</p>
+    </section>
+
+    <section id="consentement">
+      <h2>7. Consentement publicitaire</h2>
+      <p>Le consentement publicitaire est demandé lorsque la réglementation l’exige, notamment dans l’Espace économique européen.</p>
+      <p>Vous pouvez revoir vos choix dans les réglages de l’application lorsque cette option est disponible.</p>
+    </section>
+
+    <section id="pas-de-vente">
+      <h2>8. Absence de vente de données</h2>
+      <p>L’application <strong>ne vend pas</strong> les données personnelles et <strong>n’exploite pas</strong> de profil publicitaire propriétaire.</p>
+    </section>
+
+    <section id="sous-traitants">
+      <h2>9. Services Google concernés</h2>
+      <p>Des données peuvent être traitées par Google pour Play Billing, AdMob et la gestion du consentement.</p>
+      <p>Pour en savoir plus :</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Politique de confidentialité de Google</a></li>
+        <li><a href="https://policies.google.com/technologies/ads" rel="noopener noreferrer" target="_blank">Technologies publicitaires de Google</a></li>
+      </ul>
+    </section>
+
+    <section id="age">
+      <h2>10. Public concerné</h2>
+      <p>L’application est destinée aux personnes de <strong>13 ans et plus</strong>.</p>
+    </section>
+
+    <section id="droits">
+      <h2>11. Vos droits (RGPD)</h2>
+      <p>Conformément au RGPD, vous disposez notamment des droits suivants :</p>
+      <ul>
+        <li>droit d’accès ;</li>
+        <li>droit de rectification ;</li>
+        <li>droit à l’effacement ;</li>
+        <li>droit à la limitation du traitement ;</li>
+        <li>droit d’opposition ;</li>
+        <li>droit d’introduire une réclamation auprès de l’autorité compétente.</li>
+      </ul>
+      <p>Pour exercer vos droits, contactez <a href="mailto:elmariniapp@gmail.com">elmariniapp@gmail.com</a>.</p>
+      <p class="note">Comme la plupart des données de jeu sont stockées localement sur votre appareil, la suppression des données de l’application ou la désinstallation constitue souvent le moyen le plus direct d’effacer ces informations locales.</p>
+    </section>
+
+    <section id="securite">
+      <h2>12. Sécurité</h2>
+      <p>Les mesures de sécurité dépendent notamment des protections Android et des services Google.</p>
+      <p>Aucune transmission Internet ne peut être garantie totalement sans risque.</p>
+    </section>
+
+    <section id="evolution">
+      <h2>13. Évolution de cette politique</h2>
+      <p>Cette politique pourra évoluer. La date de mise à jour indiquée en tête de page sera modifiée en conséquence.</p>
+      <p>Date de mise à jour actuelle : <strong>21 septembre 2026</strong>.</p>
+    </section>
+  </article>
+
+  <p style="margin-top:28px">
+    <a class="back" href="https://elmariniapp.github.io/">Retour au site</a>
+  </p>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© EL MARINI APP — BlueNine Sudoku</span>
+    <a href="mailto:elmariniapp@gmail.com">elmariniapp@gmail.com</a>
+  </div>
+</footer>
+</body>
+</html>
