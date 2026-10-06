@@ -716,6 +716,11 @@ html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){anima
   let initialLang="en";
   try{initialLang=localStorage.getItem("elmarini-lang")==="fr"?"fr":"en"}catch(_){}
   setLanguage(initialLang);
+  addEventListener('load',()=>{
+    if(!location.hash||location.hash==='#top')return;
+    const target=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(target)requestAnimationFrame(()=>target.scrollIntoView({block:'start',behavior:'instant'}));
+  },{once:true});
 
   const ticker=document.querySelector('.ticker'),tickerToggle=document.querySelector('.ticker-toggle');
   tickerToggle.addEventListener('click',()=>{
