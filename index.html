@@ -336,6 +336,80 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
 }
 @media(max-width:680px){html.motion-ready .motion-reveal{transform:translate3d(0,16px,0)}}
 
+/* Studio motion and case evidence */
+.mobile-break{display:none}
+.read-progress{position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--acid);transform:scaleX(0);transform-origin:left;pointer-events:none}
+.hero{isolation:isolate}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 67% 43%,rgba(217,255,87,.055),transparent 32%);z-index:1}
+.hero-grid{z-index:1}
+.hero-copy{z-index:2}
+.hero.motion-start .hero-title{animation:heroCut 1.16s var(--ease) .12s both}
+.hero.motion-start .hero-bottom{animation:heroRise .86s var(--ease) .5s both}
+@keyframes heroCut{from{opacity:0;clip-path:inset(0 100% 0 0);transform:translate3d(0,24px,0)}to{opacity:1;clip-path:inset(0 0 0 0);transform:translate3d(0,0,0)}}
+.scroll-tag{position:relative;animation:none;transition:background .3s,color .3s;outline-offset:5px}
+.scroll-tag::before{content:"";position:absolute;inset:-7px;border:1px dashed rgba(255,255,255,.5);border-radius:50%;animation:spinSlow 24s linear infinite}
+.scroll-tag:hover,.scroll-tag:focus-visible{background:var(--acid);color:#090909}
+.scroll-tag:hover::before,.scroll-tag:focus-visible::before{border-color:var(--acid)}
+.ticker{position:relative;padding-right:58px}
+.ticker-track{animation-duration:32s}
+.ticker:hover .ticker-track,.ticker.is-paused .ticker-track{animation-play-state:paused}
+.ticker-toggle{position:absolute;right:0;top:0;bottom:0;width:58px;display:grid;place-items:center;border:0;border-left:1px solid rgba(0,0,0,.35);background:var(--acid);color:#080808;font-size:17px;font-weight:900;cursor:pointer;z-index:2}
+.ticker-toggle:hover{background:#ecffad}
+.ticker-toggle:focus-visible,.work-bridge a:focus-visible{outline:3px solid #5867ff;outline-offset:3px}
+html.motion-ready .project-media.motion-reveal .project-visual::before{content:"";position:absolute;inset:0;background:var(--paper);z-index:3;transform:translateX(0);transition:transform 1.02s var(--ease) .16s;pointer-events:none}
+html.motion-ready .project-media.motion-reveal.is-visible .project-visual::before{transform:translateX(102%)}
+.project-visual img{transition:transform .9s var(--ease),filter .9s var(--ease)}
+@media(hover:hover) and (pointer:fine){
+  .project-media:hover .project-visual img{transform:scale(1.035);filter:saturate(1.07)}
+}
+.case-evidence{margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
+.case-evidence>div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:14px;border-bottom:1px solid var(--line);padding:12px 0}
+.case-evidence dt{font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#777773;padding-top:3px}
+.case-evidence dd{margin:0;font-size:13px;line-height:1.45;font-weight:700;letter-spacing:-.01em}
+.case-proof{position:relative;isolation:isolate;display:flex;align-items:center;gap:18px;min-height:116px;margin-top:18px;padding:19px 22px;background:#121414;color:#fff;border-radius:14px;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.case-proof::before{content:"";position:absolute;z-index:-1;right:-60px;top:-100px;width:290px;height:290px;border-radius:50%;background:radial-gradient(circle,rgba(217,255,87,.19),transparent 66%);transition:transform .7s var(--ease)}
+.case-proof:hover{transform:translateY(-3px);box-shadow:0 20px 35px rgba(0,0,0,.16)}
+.case-proof:hover::before{transform:scale(1.3)}
+.case-proof-number{font-size:clamp(42px,4.4vw,66px);line-height:.82;font-weight:900;letter-spacing:-.08em;color:var(--acid);white-space:nowrap}
+.case-proof-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.case-proof-copy strong{font-size:15px;line-height:1.08;letter-spacing:-.025em;text-transform:uppercase}
+.case-proof-copy small{font-size:10px;line-height:1.35;color:#b9b9b3;text-transform:uppercase;letter-spacing:.04em}
+.case-proof-mark{margin-left:auto;align-self:flex-start;font-size:20px;color:var(--acid)}
+#muslim-app .case-proof{background:#0b261f}
+#stampsight .case-proof{background:#201b2c}
+html.motion-ready .project-copy.is-visible .case-evidence>div{animation:caseRowIn .62s var(--ease) both}
+html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(2){animation-delay:.09s}
+html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){animation-delay:.18s}
+@keyframes caseRowIn{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+.work-bridge{display:flex;align-items:center;justify-content:space-between;gap:36px;margin-top:26px;padding:34px 40px;background:#101112;color:#fff;border-radius:18px}
+.work-bridge>div{display:flex;flex-direction:column;gap:11px}
+.work-bridge .micro{color:var(--acid)}
+.work-bridge strong{max-width:650px;font-size:clamp(25px,3.5vw,50px);line-height:1;letter-spacing:-.055em;text-transform:uppercase}
+.work-bridge a{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:14px 20px;border-radius:999px;background:var(--acid);color:#080808;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.035em;transition:transform .3s var(--ease),background .3s}
+.work-bridge a:hover{transform:translateY(-3px);background:#ecffad}
+@media(max-width:980px){.work-bridge{flex-direction:column;align-items:flex-start}}
+@media(max-width:680px){
+  .mobile-break{display:block}
+  .hero.motion-start .hero-title{animation-duration:.85s}
+  .ticker{padding-right:46px}.ticker-toggle{width:46px}
+  .case-evidence{margin-top:18px}
+  .case-evidence>div{grid-template-columns:1fr;gap:4px;padding:11px 0}
+  .case-evidence dd{font-size:13px}
+  .case-proof{min-height:100px;gap:12px;padding:17px 14px}
+  .case-proof-number{font-size:clamp(38px,12vw,58px)}
+  .case-proof-copy strong{font-size:12px}
+  .case-proof-copy small{font-size:9px}
+  .case-proof-mark{font-size:16px}
+  .work-bridge{margin-top:10px;padding:26px 22px;gap:26px}
+  .work-bridge a{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .scroll-tag::before,.ticker-track,.hero.motion-start .hero-title,.hero.motion-start .hero-bottom,
+  html.motion-ready .project-copy.is-visible .case-evidence>div{animation:none!important}
+  html.motion-ready .project-media.motion-reveal .project-visual::before{display:none}
+  .read-progress,.case-proof,.work-bridge a{transition:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -354,6 +428,7 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="siteMenu" data-i18n="menu">Menu</button>
     </div>
   </div>
+  <div class="read-progress" aria-hidden="true"></div>
 </header>
 
 <div class="menu" id="siteMenu" aria-hidden="true">
@@ -409,7 +484,7 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
     <h1 class="hero-title" data-i18n="heroTitle">Fix the<br><span class="outline">hard parts.</span></h1>
     <div class="hero-bottom">
       <p data-i18n="heroBody">I audit, debug and harden Flutter apps for Android and iOS: responsive UI, build and store blockers, billing, PDF workflows, localization, performance, testing and release readiness.</p>
-      <div class="scroll-tag" data-i18n="scroll">Scroll<br>to explore</div>
+      <a class="scroll-tag" href="#work" data-i18n="scroll">Scroll<br>to explore</a>
     </div>
   </div>
 </section>
@@ -425,7 +500,7 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><span data-i18n="ticker">Flutter ✦ Android ✦ iOS ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ App Store Connect ✦ PDF Workflows ✦ Billing ✦ Localization ✦</span><span data-i18n="ticker">Flutter ✦ Android ✦ iOS ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ App Store Connect ✦ PDF Workflows ✦ Billing ✦ Localization ✦</span></div></div>
+<div class="ticker"><div class="ticker-track" aria-hidden="true"><span data-i18n="ticker">Flutter ✦ Android ✦ iOS ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ App Store Connect ✦ PDF Workflows ✦ Billing ✦ Localization ✦</span><span data-i18n="ticker">Flutter ✦ Android ✦ iOS ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ App Store Connect ✦ PDF Workflows ✦ Billing ✦ Localization ✦</span></div><button class="ticker-toggle" type="button" aria-label="Pause animation" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button></div>
 
 <section class="work" id="work">
   <div class="work-inner">
@@ -449,12 +524,12 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
             <h3>Scaneris</h3>
             <p class="project-positioning" data-i18n="scanPositioning">Local-first document scanning, OCR and signature workflow.</p>
             <p class="project-description" data-i18n="scanDescription">Scaneris is a privacy-first productivity app focused on fast document capture, local OCR, signature workflows and secure export. I worked on responsive hardening, import reliability, billing robustness, Play Console readiness, iOS parity with StoreKit 2 purchase verification, and regression safety across a large feature surface.</p>
-            <ul class="project-points">
-              <li data-i18n="scanPoint1">Smart scan, OCR and PDF export</li>
-              <li data-i18n="scanPoint2">Signature and local-first workflows</li>
-              <li data-i18n="scanPoint3">Billing and release hardening</li>
-              <li data-i18n="scanPoint4">Responsive and regression-safe architecture</li>
-            </ul>
+            <dl class="case-evidence">
+               <div><dt data-i18n="caseChallenge">Challenge</dt><dd data-i18n="scanChallenge">Landscape, complex PDF flows and purchase verification across platforms.</dd></div>
+               <div><dt data-i18n="caseWork">Work</dt><dd data-i18n="scanWork">Adaptive UI, document workflow fixes and StoreKit 2 transaction checks.</dd></div>
+               <div><dt data-i18n="caseResult">Result</dt><dd data-i18n="scanResult">Analysis clean; the iOS parity suite passed its non-golden tests.</dd></div>
+             </dl>
+             <div class="case-proof"><span class="case-proof-number" data-i18n="scanProofNumber">1,364</span><span class="case-proof-copy"><strong data-i18n="scanProofLabel">automated tests passed</strong><small data-i18n="scanProofDetail">iOS parity suite · non-golden</small></span><span class="case-proof-mark" aria-hidden="true">↗</span></div>
             <div class="project-meta">Flutter · Android · iOS · OCR · PDF · Billing · QA</div>
           </div>
         </div>
@@ -469,19 +544,19 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
             <div class="project-visual muslim">
               <img src="assets/muslim-app-feature.avif" alt="Muslim App prayer times, Quran, Qibla, duas and daily essentials interface" loading="lazy" decoding="async">
             </div>
-            <figcaption class="project-caption"><span data-i18n="muslimCaption">Daily-use spiritual product</span><span data-i18n="muslimTests">3,600+ automated tests</span></figcaption>
+            <figcaption class="project-caption"><span data-i18n="muslimCaption">Daily-use spiritual product</span><span data-i18n="muslimTests">3,800+ automated tests</span></figcaption>
           </figure>
           <div class="project-copy">
             <div class="project-tags" data-i18n="muslimTags">Quran · Prayer times · Widgets<br>RTL · Premium · Accessibility</div>
             <h3>Muslim App</h3>
             <p class="project-positioning" data-i18n="muslimPositioning">A daily Islamic companion built for clarity, accessibility and consistency.</p>
             <p class="project-description" data-i18n="muslimDescription">Muslim App brings together prayer times, Quran, Qibla, duas and spiritual routines in one experience. I worked on accessibility, premium flows, responsive behavior, onboarding quality, UI consistency, iOS audio adaptation and large-scale automated testing.</p>
-            <ul class="project-points">
-              <li data-i18n="muslimPoint1">Prayer times, Quran, Qibla, duas</li>
-              <li data-i18n="muslimPoint2">Accessibility and responsive UI</li>
-              <li data-i18n="muslimPoint3">Premium gateway and polished UX</li>
-              <li data-i18n="muslimPoint4">3,600+ automated tests</li>
-            </ul>
+            <dl class="case-evidence">
+               <div><dt data-i18n="caseChallenge">Challenge</dt><dd data-i18n="muslimChallenge">A dense daily app across six languages, RTL layouts and iOS audio rights.</dd></div>
+               <div><dt data-i18n="caseWork">Work</dt><dd data-i18n="muslimWork">Responsive and accessibility fixes; Quran audio adapted for iOS.</dd></div>
+               <div><dt data-i18n="caseResult">Result</dt><dd data-i18n="muslimResult">The full local test suite passed with one skipped test.</dd></div>
+             </dl>
+             <div class="case-proof"><span class="case-proof-number" data-i18n="muslimProofNumber">3,827</span><span class="case-proof-copy"><strong data-i18n="muslimProofLabel">automated tests passed</strong><small data-i18n="muslimProofDetail">Full suite · 1 skipped</small></span><span class="case-proof-mark" aria-hidden="true">↗</span></div>
             <div class="project-meta">Flutter · Android · iOS · RTL · Accessibility · Premium</div>
           </div>
         </div>
@@ -503,17 +578,18 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
             <h3>StampSight</h3>
             <p class="project-positioning" data-i18n="stampPositioning">Traceable field-photo proof with verification and structured reporting.</p>
             <p class="project-description" data-i18n="stampDescription">StampSight turns field captures into verifiable proof with contextual metadata, QR verification and clean reporting. The project focuses on trust, traceability and a clear workflow from capture to proof delivery.</p>
-            <ul class="project-points">
-              <li data-i18n="stampPoint1">Field photo proof</li>
-              <li data-i18n="stampPoint2">QR verification and metadata</li>
-              <li data-i18n="stampPoint3">Structured report generation</li>
-              <li data-i18n="stampPoint4">Android + iPhone product direction</li>
-            </ul>
+            <dl class="case-evidence">
+               <div><dt data-i18n="caseChallenge">Challenge</dt><dd data-i18n="stampChallenge">Make a field capture understandable and verifiable beyond the device.</dd></div>
+               <div><dt data-i18n="caseWork">Work</dt><dd data-i18n="stampWork">Connect capture, contextual metadata, QR verification and reporting.</dd></div>
+               <div><dt data-i18n="caseResult">Result</dt><dd data-i18n="stampResult">A clear three-stage product flow for the Android and iPhone direction.</dd></div>
+             </dl>
+             <div class="case-proof"><span class="case-proof-number" data-i18n="stampProofNumber">03</span><span class="case-proof-copy"><strong data-i18n="stampProofLabel">steps from capture to proof</strong><small data-i18n="stampProofDetail">Product direction · Android + iPhone</small></span><span class="case-proof-mark" aria-hidden="true">↗</span></div>
             <div class="project-meta">Proof workflow · Reporting · Verification · Mobile product</div>
           </div>
         </div>
       </div>
     </article>
+    <div class="work-bridge"><div><span class="micro" data-i18n="bridgeKicker">A concrete issue?</span><strong data-i18n="bridgeTitle">Let’s make your next release stronger.</strong></div><a href="mailto:support@elmariniapp.com?subject=Flutter%20app%20audit" data-i18n="bridgeLink">Show me the problem ↗</a></div>
   </div>
 </section>
 
@@ -566,30 +642,40 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
 (() => {
   const translations={
     en:{
+      caseChallenge:"Challenge",caseWork:"Intervention",caseResult:"Verified",
       talk:"Let's talk",menu:"Menu",close:"Close",navigation:"Navigation",navHome:"Home",navWork:"Work",navServices:"Services",navContact:"Contact",
       availabilityLabel:"Availability",availability:"Available for focused mobile work",availabilityCopy:"Audits, bug fixing, responsive hardening and release support for existing mobile products.",selectedWork:"Selected work",languageLabel:"Language",
       heroTopLeft:"Independent Flutter studio · Android & iOS",heroTopRight:"Debug · QA · Release",heroTitle:'Fix the<br><span class="outline">hard parts.</span>',heroBody:"I audit, debug and harden Flutter apps for Android and iOS: responsive UI, build and store blockers, billing, PDF workflows, localization, performance, testing and release readiness.",scroll:"Scroll<br>to explore",
       manifestoKicker:"Bold engineering, brought to production",manifestoTitle:'A mobile product is only as strong as <span class="muted">the details nobody should have to notice.</span>',manifestoLeft:"I work on the parts that tend to become expensive late in a project: responsive behavior, fragile flows, platform integration, release blockers and regressions.",manifestoRight:"The goal is simple: understand the real cause, fix the correct layer, verify the result, and leave the product stronger than before.",
       ticker:"Flutter ✦ Android ✦ iOS ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ App Store Connect ✦ PDF Workflows ✦ Billing ✦ Localization ✦",
       workTitle:"Featured<br>work",workIntro:"Three substantial mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.",
+      scanChallenge:"Landscape, complex PDF flows and purchase verification across platforms.",scanWork:"Adaptive UI, document workflow fixes and StoreKit 2 transaction checks.",scanResult:"Analysis clean; the iOS parity suite passed its non-golden tests.",scanProofNumber:"1,364",scanProofLabel:"automated tests passed",scanProofDetail:"iOS parity suite · non-golden",
       scanCaption:"Local-first document workflow",scanTags:"PDF · OCR · Billing · Responsive<br>Backup · Localization · Security",scanPositioning:"Local-first document scanning, OCR and signature workflow.",scanDescription:"Scaneris is a privacy-first productivity app focused on fast document capture, local OCR, signature workflows and secure export. I worked on responsive hardening, import reliability, Play Console readiness, iOS parity with StoreKit 2 purchase verification, and regression safety.",scanPoint1:"Smart scan, OCR and PDF export",scanPoint2:"Signature and local-first workflows",scanPoint3:"Billing and release hardening",scanPoint4:"Responsive and regression-safe architecture",
-      muslimCaption:"Daily-use spiritual product",muslimTests:"3,600+ automated tests",muslimTags:"Quran · Prayer times · Widgets<br>RTL · Premium · Accessibility",muslimPositioning:"A daily Islamic companion built for clarity, accessibility and consistency.",muslimDescription:"Muslim App brings together prayer times, Quran, Qibla, duas and spiritual routines in one experience. I worked on accessibility, premium flows, responsive behavior, iOS audio adaptation, UI consistency and large-scale automated testing.",muslimPoint1:"Prayer times, Quran, Qibla, duas",muslimPoint2:"Accessibility and responsive UI",muslimPoint3:"Premium gateway and polished UX",muslimPoint4:"3,600+ automated tests",
+      muslimChallenge:"A dense daily app across six languages, RTL layouts and iOS audio rights.",muslimWork:"Responsive and accessibility fixes; Quran audio adapted for iOS.",muslimResult:"The full local test suite passed with one skipped test.",muslimProofNumber:"3,827",muslimProofLabel:"automated tests passed",muslimProofDetail:"Full suite · 1 skipped",
+      muslimCaption:"Daily-use spiritual product",muslimTests:"3,800+ automated tests",muslimTags:"Quran · Prayer times · Widgets<br>RTL · Premium · Accessibility",muslimPositioning:"A daily Islamic companion built for clarity, accessibility and consistency.",muslimDescription:"Muslim App brings together prayer times, Quran, Qibla, duas and spiritual routines in one experience. I worked on accessibility, premium flows, responsive behavior, iOS audio adaptation, UI consistency and large-scale automated testing.",muslimPoint1:"Prayer times, Quran, Qibla, duas",muslimPoint2:"Accessibility and responsive UI",muslimPoint3:"Premium gateway and polished UX",muslimPoint4:"3,600+ automated tests",
+      stampChallenge:"Make a field capture understandable and verifiable beyond the device.",stampWork:"Connect capture, contextual metadata, QR verification and reporting.",stampResult:"A clear three-stage product flow for the Android and iPhone direction.",stampProofNumber:"03",stampProofLabel:"steps from capture to proof",stampProofDetail:"Product direction · Android + iPhone",
       stampCaption:"Field photo proof & reports",stampTags:"Photo proof · PDF reports · Geolocation<br>QR traceability · Local-first · Android + iPhone",stampPositioning:"Traceable field-photo proof with verification and structured reporting.",stampDescription:"StampSight turns field captures into verifiable proof with contextual metadata, QR verification and clean reporting. The project focuses on trust, traceability and a clear workflow from capture to proof delivery.",stampPoint1:"Field photo proof",stampPoint2:"QR verification and metadata",stampPoint3:"Structured report generation",stampPoint4:"Android + iPhone product direction",
+      bridgeKicker:"A concrete issue?",bridgeTitle:"Let’s make your next release stronger.",bridgeLink:"Show me the problem ↗",
       servicesTitle:"Focused<br>services",servicesIntro:"Best for a defined problem in an existing Flutter app for Android or iOS: something broken, fragile, slow, inconsistent or blocking release.",service1Title:"Debug & bug fixing",service1Body:"Root-cause analysis, state, navigation, async failures and regression-safe fixes.",service2Title:"Responsive hardening",service2Body:"Overflow, landscape, keyboard/IME, large screens, scaling and RTL.",service3Title:"Android & iOS release",service3Body:"AAB and IPA builds, Play Console, App Store Connect, TestFlight and StoreKit 2 / Play billing.",service4Title:"Performance & PDF",service4Body:"Large documents, deferred work, import/export, previews and temp files.",service5Title:"QA & regression",service5Body:"Targeted tests, suite cleanup, static analysis and release validation.",service6Title:"Technical audit",service6Body:"Read-only risk map, code-path review and prioritized correction plan.",
       capabilities:"Capabilities",expertiseTitle:"From UI<br>to release.",expertiseFlutter:"Adaptive layouts · Landscape & IME · Scaling · RTL · State-driven UI",expertiseAndroid:"Gradle · AGP · Kotlin · AAB · Play Console · Native bridges",expertiseIos:"StoreKit 2 · App Store Connect · TestFlight · iPhone / iPad · Native bridges",expertiseQuality:"Widget/unit tests · Regression suites · Golden strategy · Static analysis",expertiseDocs:"Multipage PDF · Lazy rasterization · Import/export · Backup/restore",
       processLabel:"Process",processTitle:"From symptom<br>to verified fix.",step1:"Reproduce",step2:"Trace",step3:"Fix",step4:"Verify",step5:"Deliver",
       ctaLabel:"Available for focused mobile work",ctaTitle:"Let's make<br>it stronger.",ctaMeta:"Flutter / Android / iOS / Product quality",footerTagline:"Independent mobile product studio"
     },
     fr:{
+      caseChallenge:"Enjeu",caseWork:"Intervention",caseResult:"Résultat",
       talk:"Parlons-en",menu:"Menu",close:"Fermer",navigation:"Navigation",navHome:"Accueil",navWork:"Projets",navServices:"Services",navContact:"Contact",
       availabilityLabel:"Disponibilité",availability:"Disponible pour des missions mobiles ciblées",availabilityCopy:"Audits, correction de bugs, fiabilisation responsive et accompagnement de mise en production pour des produits mobiles existants.",selectedWork:"Projets sélectionnés",languageLabel:"Langue",
-      heroTopLeft:"Studio Flutter indépendant · Android & iOS",heroTopRight:"Débogage · QA · Mise en production",heroTitle:'Corriger les<br><span class="outline">points difficiles.</span>',heroBody:"J’audite, débogue et fiabilise des applications Flutter pour Android et iOS : UI responsive, blocages de build et de publication, achats intégrés, flux PDF, localisation, performances, tests et préparation à la mise en production.",scroll:"Défiler<br>pour explorer",
+      heroTopLeft:"Studio Flutter indépendant · Android & iOS",heroTopRight:"Débogage · QA · Mise en production",heroTitle:'Corriger les<br><span class="outline">points<br class="mobile-break"> difficiles.</span>',heroBody:"J’audite, débogue et fiabilise des applications Flutter pour Android et iOS : UI responsive, blocages de build et de publication, achats intégrés, flux PDF, localisation, performances, tests et préparation à la mise en production.",scroll:"Défiler<br>pour explorer",
       manifestoKicker:"Ingénierie exigeante, jusqu’à la production",manifestoTitle:'Un produit mobile n’est solide que si <span class="muted">les détails que personne ne devrait remarquer le sont aussi.</span>',manifestoLeft:"J’interviens sur les points qui deviennent coûteux tard dans un projet : comportement responsive, flux fragiles, intégrations plateforme, blocages de release et régressions.",manifestoRight:"L’objectif est simple : comprendre la cause réelle, corriger au bon niveau, vérifier le résultat et laisser le produit plus robuste qu’avant.",
       ticker:"Flutter ✦ Android ✦ iOS ✦ UI responsive ✦ QA & régression ✦ Google Play ✦ App Store Connect ✦ Flux PDF ✦ Achats intégrés ✦ Localisation ✦",
       workTitle:"Projets<br>phares",workIntro:"Trois produits mobiles conséquents, construits autour de contraintes réelles de production : confidentialité, responsive, usages terrain, intégration plateforme, sécurité contre les régressions et qualité de release.",
+      scanChallenge:"Éditeur paysage, PDF multipage et contrôle des achats sur deux plateformes.",scanWork:"UI adaptative, fiabilisation documentaire et vérification des transactions StoreKit 2.",scanResult:"Analyse statique sans erreur ; suite iOS hors golden validée.",scanProofNumber:"1 364",scanProofLabel:"tests automatisés réussis",scanProofDetail:"Suite parité iOS · hors golden",
       scanCaption:"Flux documentaire local-first",scanTags:"PDF · OCR · Facturation · Responsive<br>Sauvegarde · Localisation · Sécurité",scanPositioning:"Numérisation, OCR et signature dans un flux documentaire local-first.",scanDescription:"Scaneris est une application de productivité centrée sur la confidentialité, la capture rapide de documents, l’OCR local, la signature et l’export sécurisé. J’ai travaillé sur le responsive, la fiabilité des imports, la préparation Play Console, la parité iOS avec vérification des achats StoreKit 2 et la prévention des régressions.",scanPoint1:"Scan intelligent, OCR et export PDF",scanPoint2:"Signature et flux local-first",scanPoint3:"Fiabilisation facturation et release",scanPoint4:"Architecture responsive et sûre face aux régressions",
-      muslimCaption:"Compagnon spirituel du quotidien",muslimTests:"3 600+ tests automatisés",muslimTags:"Coran · Horaires de prière · Widgets<br>RTL · Premium · Accessibilité",muslimPositioning:"Un compagnon islamique quotidien pensé pour la clarté, l’accessibilité et la cohérence.",muslimDescription:"Muslim App réunit horaires de prière, Coran, Qibla, duas et routines spirituelles dans une même expérience. J’ai travaillé sur l’accessibilité, les parcours Premium, le responsive, l’adaptation des audios pour iOS, la cohérence UI et une couverture de tests automatisés à grande échelle.",muslimPoint1:"Horaires de prière, Coran, Qibla, duas",muslimPoint2:"Accessibilité et UI responsive",muslimPoint3:"Passerelle Premium et UX soignée",muslimPoint4:"3 600+ tests automatisés",
+      muslimChallenge:"Application quotidienne dense en six langues, RTL et droits audio iOS.",muslimWork:"Correctifs responsive et accessibilité ; adaptation des audios du Coran pour iOS.",muslimResult:"Suite locale complète réussie, avec un test ignoré.",muslimProofNumber:"3 827",muslimProofLabel:"tests automatisés réussis",muslimProofDetail:"Suite complète · 1 ignoré",
+      muslimCaption:"Compagnon spirituel du quotidien",muslimTests:"3 800+ tests automatisés",muslimTags:"Coran · Horaires de prière · Widgets<br>RTL · Premium · Accessibilité",muslimPositioning:"Un compagnon islamique quotidien pensé pour la clarté, l’accessibilité et la cohérence.",muslimDescription:"Muslim App réunit horaires de prière, Coran, Qibla, duas et routines spirituelles dans une même expérience. J’ai travaillé sur l’accessibilité, les parcours Premium, le responsive, l’adaptation des audios pour iOS, la cohérence UI et une couverture de tests automatisés à grande échelle.",muslimPoint1:"Horaires de prière, Coran, Qibla, duas",muslimPoint2:"Accessibilité et UI responsive",muslimPoint3:"Passerelle Premium et UX soignée",muslimPoint4:"3 600+ tests automatisés",
+      stampChallenge:"Rendre une capture terrain compréhensible et vérifiable hors de l’appareil.",stampWork:"Relier capture, métadonnées contextuelles, vérification QR et rapport.",stampResult:"Un parcours produit clair en trois étapes pour Android et iPhone.",stampProofNumber:"03",stampProofLabel:"étapes de la capture à la preuve",stampProofDetail:"Direction produit · Android + iPhone",
       stampCaption:"Preuve terrain & rapports",stampTags:"Preuve photo · Rapports PDF · Géolocalisation<br>Traçabilité QR · Local-first · Android + iPhone",stampPositioning:"Preuve photo terrain traçable, avec vérification et rapports structurés.",stampDescription:"StampSight transforme les captures terrain en preuves vérifiables grâce aux métadonnées contextuelles, à la vérification QR et à des rapports propres. Le produit se concentre sur la confiance, la traçabilité et un flux clair de la capture jusqu’à la remise de la preuve.",stampPoint1:"Preuve photo terrain",stampPoint2:"Vérification QR et métadonnées",stampPoint3:"Génération de rapports structurés",stampPoint4:"Direction produit Android + iPhone",
+      bridgeKicker:"Un problème concret ?",bridgeTitle:"Fiabilisons votre prochaine version.",bridgeLink:"Montrez-moi le problème ↗",
       servicesTitle:"Services<br>ciblés",servicesIntro:"Idéal pour un problème précis dans une application Flutter Android ou iOS existante : quelque chose de cassé, fragile, lent, incohérent ou bloquant la mise en production.",service1Title:"Débogage & correction de bugs",service1Body:"Analyse de cause racine, état, navigation, erreurs asynchrones et correctifs sûrs face aux régressions.",service2Title:"Fiabilisation responsive",service2Body:"Overflow, paysage, clavier/IME, grands écrans, mise à l’échelle et RTL.",service3Title:"Publication Android & iOS",service3Body:"Builds AAB et IPA, Play Console, App Store Connect, TestFlight et achats StoreKit 2 / Google Play.",service4Title:"Performance & PDF",service4Body:"Documents volumineux, traitements différés, import/export, aperçus et fichiers temporaires.",service5Title:"QA & régression",service5Body:"Tests ciblés, nettoyage de suite, analyse statique et validation de release.",service6Title:"Audit technique",service6Body:"Cartographie des risques en lecture seule, revue des chemins de code et plan de correction priorisé.",
       capabilities:"Compétences",expertiseTitle:"De l’UI<br>à la production.",expertiseFlutter:"Layouts adaptatifs · Paysage & IME · Mise à l’échelle · RTL · UI pilotée par l’état",expertiseAndroid:"Gradle · AGP · Kotlin · AAB · Play Console · Ponts natifs",expertiseIos:"StoreKit 2 · App Store Connect · TestFlight · iPhone / iPad · Ponts natifs",expertiseQuality:"Tests widget/unitaires · Suites de régression · Stratégie golden · Analyse statique",expertiseDocs:"PDF multipage · Rastérisation différée · Import/export · Sauvegarde/restauration",
       processLabel:"Processus",processTitle:"Du symptôme<br>au correctif vérifié.",step1:"Reproduire",step2:"Tracer",step3:"Corriger",step4:"Vérifier",step5:"Livrer",
@@ -617,6 +703,10 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
     const meta=document.querySelector('meta[name="description"]');
     if(meta)meta.setAttribute("content",descriptions[safeLang]);
     document.title=safeLang==="fr"?"EL MARINI APP — Studio Flutter, Android & iOS":"EL MARINI APP — Flutter, Android & iOS Studio";
+    const tickerButton=document.querySelector(".ticker-toggle");
+    if(tickerButton)tickerButton.setAttribute("aria-label",safeLang==="fr"?(tickerButton.getAttribute("aria-pressed")==="true"?"Relancer l’animation":"Mettre l’animation en pause"):(tickerButton.getAttribute("aria-pressed")==="true"?"Play animation":"Pause animation"));
+    const bridge=document.querySelector(".work-bridge a");
+    if(bridge)bridge.href=safeLang==="fr"?"mailto:support@elmariniapp.com?subject=Audit%20application%20Flutter":"mailto:support@elmariniapp.com?subject=Flutter%20app%20audit";
     try{localStorage.setItem("elmarini-lang",safeLang)}catch(_){}
   }
 
@@ -624,6 +714,24 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
   let initialLang="en";
   try{initialLang=localStorage.getItem("elmarini-lang")==="fr"?"fr":"en"}catch(_){}
   setLanguage(initialLang);
+
+  const ticker=document.querySelector('.ticker'),tickerToggle=document.querySelector('.ticker-toggle');
+  tickerToggle.addEventListener('click',()=>{
+    const paused=ticker.classList.toggle('is-paused');
+    tickerToggle.setAttribute('aria-pressed',paused?'true':'false');
+    tickerToggle.querySelector('span').textContent=paused?'▶':'Ⅱ';
+    tickerToggle.setAttribute('aria-label',document.documentElement.lang==='fr'?(paused?'Relancer l’animation':'Mettre l’animation en pause'):(paused?'Play animation':'Pause animation'));
+  });
+  const progress=document.querySelector('.read-progress');
+  let progressQueued=false;
+  const updateProgress=()=>{
+    const max=document.documentElement.scrollHeight-innerHeight;
+    progress.style.transform='scaleX('+(max>0?Math.max(0,Math.min(1,scrollY/max)):0)+')';
+    progressQueued=false;
+  };
+  addEventListener('scroll',()=>{if(!progressQueued){progressQueued=true;requestAnimationFrame(updateProgress)}},{passive:true});
+  addEventListener('resize',updateProgress,{passive:true});
+  updateProgress();
 
   const menu=document.querySelector('.menu'),openBtn=document.querySelector('.menu-btn'),closeBtn=document.querySelector('.menu-close');
   const openMenu=()=>{menu.classList.add('open');menu.setAttribute('aria-hidden','false');openBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';closeBtn.focus({preventScroll:true})};
@@ -637,20 +745,65 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
   }
 
   const canvas=document.getElementById('heroCanvas'),ctx=canvas.getContext('2d');
-  let w=0,h=0,dpr=1,pts=[],mx=.5,my=.5;
+  const heroSection=document.querySelector('.hero');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w=0,h=0,dpr=1,pts=[],mx=.5,my=.5,raf=0,running=false;
+  const introStart=performance.now();
   function resize(){
-    dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);
-    const count=Math.max(420,Math.min(1100,Math.floor(w*h/1600)));
-    pts=Array.from({length:count},()=>{const a=Math.random()*Math.PI*2,u=Math.random()*2-1,r=Math.sqrt(1-u*u);return{a,u,r,s:.35+Math.random()*.65,z:Math.random(),o:.15+Math.random()*.8}});
+    dpr=Math.min(devicePixelRatio||1,2);
+    w=innerWidth;h=heroSection.getBoundingClientRect().height;
+    canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);
+    canvas.style.width=w+'px';canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const count=Math.max(180,Math.min(660,Math.floor(w*h/1800)));
+    pts=Array.from({length:count},()=>{
+      const a=Math.random()*Math.PI*2,u=Math.random()*2-1;
+      return{a,u,s:.35+Math.random()*.65,z:Math.random(),o:.15+Math.random()*.8,
+        sx:(Math.random()-.5)*.9,sy:(Math.random()-.5)*.9};
+    });
   }
   function draw(t){
-    ctx.clearRect(0,0,w,h);const cx=w*(w<700?.58:.67),cy=h*.42,R=Math.min(w,h)*(w<700?.31:.38),rx=(mx-.5)*.75,ry=(my-.5)*.55;
-    for(const p of pts){const a=p.a+(reduced?0:t*.00008*p.s)+rx,u=Math.max(-1,Math.min(1,p.u+Math.sin(t*.00022+p.a)*.035)),rr=Math.sqrt(Math.max(0,1-u*u));let x=Math.cos(a)*rr,z=Math.sin(a)*rr,y=u;const yy=y*Math.cos(ry)-z*Math.sin(ry),zz=y*Math.sin(ry)+z*Math.cos(ry),pers=.78+zz*.27,px=cx+x*R*pers,py=cy+yy*R*pers,alpha=Math.max(.03,p.o*(.2+(zz+1)*.38)),size=(.55+p.s*1.65)*pers;ctx.beginPath();ctx.arc(px,py,size,0,Math.PI*2);const g=Math.floor(205+50*p.z);ctx.fillStyle=`rgba(${g},${g},${g},${alpha})`;ctx.fill()}
-    const grad=ctx.createRadialGradient(cx-R*.15,cy-R*.25,0,cx,cy,R*.8);grad.addColorStop(0,'rgba(217,255,87,.10)');grad.addColorStop(.35,'rgba(88,103,255,.075)');grad.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=grad;ctx.beginPath();ctx.arc(cx,cy,R*.95,0,Math.PI*2);ctx.fill();
-    if(!reduced)requestAnimationFrame(draw);
+    ctx.clearRect(0,0,w,h);
+    const cx=w*(w<700?.58:.67),cy=h*.43,R=Math.min(w,h)*(w<700?.31:.38);
+    const rx=(mx-.5)*.75,ry=(my-.5)*.55;
+    const pIntro=reduced?1:Math.max(0,Math.min(1,(t-introStart)/1450));
+    const assembled=1-Math.pow(1-pIntro,3),scatter=1-assembled;
+    for(const p of pts){
+      const a=p.a+(reduced?0:t*.00008*p.s)+rx;
+      const u=Math.max(-1,Math.min(1,p.u+(reduced?0:Math.sin(t*.00022+p.a)*.035)));
+      const rr=Math.sqrt(Math.max(0,1-u*u));
+      const x=Math.cos(a)*rr,z=Math.sin(a)*rr,y=u;
+      const yy=y*Math.cos(ry)-z*Math.sin(ry),zz=y*Math.sin(ry)+z*Math.cos(ry);
+      const pers=.78+zz*.27;
+      const px=cx+x*R*pers+p.sx*w*.46*scatter;
+      const py=cy+yy*R*pers+p.sy*h*.46*scatter;
+      const alpha=Math.max(.03,p.o*(.2+(zz+1)*.38))*(.28+.72*assembled);
+      const size=(.55+p.s*1.65)*pers;
+      ctx.beginPath();ctx.arc(px,py,size,0,Math.PI*2);
+      const g=Math.floor(205+50*p.z);
+      ctx.fillStyle=`rgba(${g},${g},${g},${alpha})`;ctx.fill();
+    }
+    const grad=ctx.createRadialGradient(cx-R*.15,cy-R*.25,0,cx,cy,R*.8);
+    grad.addColorStop(0,'rgba(217,255,87,.12)');
+    grad.addColorStop(.35,'rgba(88,103,255,.07)');
+    grad.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=grad;ctx.beginPath();ctx.arc(cx,cy,R*.95,0,Math.PI*2);ctx.fill();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(-.25);
+    ctx.beginPath();ctx.ellipse(0,0,R*1.08,R*.43,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(217,255,87,'+(.08+.15*assembled)+')';
+    ctx.lineWidth=1;ctx.stroke();ctx.restore();
   }
-  addEventListener('pointermove',e=>{mx=e.clientX/w;my=e.clientY/h},{passive:true});addEventListener('resize',resize,{passive:true});resize();draw(0);if(!reduced)requestAnimationFrame(draw);
+  function frame(t){if(!running)return;draw(t);raf=requestAnimationFrame(frame)}
+  function start(){if(reduced||running)return;running=true;raf=requestAnimationFrame(frame)}
+  function stop(){running=false;if(raf)cancelAnimationFrame(raf)}
+  const visible=()=>{const r=heroSection.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight};
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(([entry])=>{if(entry.isIntersecting&&!document.hidden)start();else stop()}).observe(heroSection);
+  }else if(!document.hidden)start();
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(visible())start()});
+  if(matchMedia('(pointer:fine)').matches)addEventListener('pointermove',e=>{mx=e.clientX/w;my=e.clientY/h},{passive:true});
+  addEventListener('resize',()=>{resize();draw(performance.now())},{passive:true});
+  resize();draw(reduced?introStart+1450:performance.now());
   if(!reduced){addEventListener('scroll',()=>{const y=scrollY,hero=document.querySelector('.hero-copy');if(y<innerHeight*1.2)hero.style.transform=`translateY(${y*.13}px)`;const orb=document.querySelector('.cta-orb'),r=orb.parentElement.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)orb.style.transform=`translateY(${(innerHeight-r.top)*.035}px)`},{passive:true})}
 })();
 </script>
