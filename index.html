@@ -337,7 +337,7 @@ html.motion-ready .motion-reveal.is-visible{opacity:1;transform:translate3d(0,0,
 @media(max-width:680px){html.motion-ready .motion-reveal{transform:translate3d(0,16px,0)}}
 
 /* Studio motion and case evidence */
-:is(#work,#scaneris,#muslim-app,#stampsight,#services,#contact){scroll-margin-top:82px}
+:is(#work,#scaneris,#muslim-app,#stampsight,#alarmbolt,#bluenine-sudoku,#services,#contact){scroll-margin-top:82px}
 .mobile-break{display:none}
 .read-progress{position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--acid);transform:scaleX(0);transform-origin:left;pointer-events:none}
 .hero{isolation:isolate}
@@ -412,6 +412,8 @@ html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){anima
   .read-progress,.case-proof,.work-bridge a{transition:none!important}
 }
 
+.project-legal{display:inline-block;margin-top:18px;font-size:11px;font-weight:900;letter-spacing:.04em;text-decoration:underline;text-underline-offset:4px;transition:color .2s}
+.project-legal:hover{color:#315ab4}.project-legal:focus-visible{outline:2px solid #315ab4;outline-offset:5px}
 </style>
 </head>
 <body>
@@ -459,6 +461,8 @@ html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){anima
       <a class="menu-project-link" href="#scaneris"><span>01</span><strong>Scaneris</strong><em>PDF · OCR · QA</em></a>
       <a class="menu-project-link" href="#muslim-app"><span>02</span><strong>Muslim App</strong><em>Quran · Prayer · RTL</em></a>
       <a class="menu-project-link" href="#stampsight"><span>03</span><strong>StampSight</strong><em>Proof · Reports · QR</em></a>
+      <a class="menu-project-link" href="#alarmbolt"><span>04</span><strong>AlarmBolt</strong><em>Alarm · Missions</em></a>
+      <a class="menu-project-link" href="#bluenine-sudoku"><span>05</span><strong>BlueNine Sudoku</strong><em>Logic · Daily</em></a>
     </div>
 
     <div class="menu-bottom">
@@ -508,7 +512,7 @@ html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){anima
   <div class="work-inner">
     <div class="section-top">
       <h2 data-i18n="workTitle">Featured<br>work</h2>
-      <p data-i18n="workIntro">Three substantial mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.</p>
+      <p data-i18n="workIntro">Five mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.</p>
     </div>
 
     <article class="project project-case" id="scaneris">
@@ -591,6 +595,61 @@ html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){anima
         </div>
       </div>
     </article>
+    <article class="project project-case" id="alarmbolt">
+      <div class="project-index">04 / AlarmBolt</div>
+      <div class="project-main">
+        <div class="project-case-grid">
+          <figure class="project-media">
+            <div class="project-visual alarmbolt">
+              <img src="assets/alarmbolt-feature.webp" alt="AlarmBolt alarm editor with a large time dial and weekday schedule" loading="lazy" decoding="async" width="1600" height="781">
+            </div>
+            <figcaption class="project-caption"><span data-i18n="alarmCaption">Alarm and wake-up missions</span><span>Flutter / Android + iOS</span></figcaption>
+          </figure>
+          <div class="project-copy">
+            <div class="project-tags" data-i18n="alarmTags">Alarm schedules · Offline sounds<br>Wake-up missions · Native integration</div>
+            <h3>AlarmBolt</h3>
+            <p class="project-positioning" data-i18n="alarmPositioning">An alarm built around the moment you actually get up.</p>
+            <p class="project-description" data-i18n="alarmDescription">AlarmBolt brings together repeat schedules, offline alarm sounds and wake-up missions. Its Android alarm flow plays through a native service, while iOS AlarmKit integration is prepared for its first device validation.</p>
+            <dl class="case-evidence">
+              <div><dt data-i18n="caseChallenge">Challenge</dt><dd data-i18n="alarmChallenge">Keep the alarm dependable from scheduling to stopping its sound.</dd></div>
+              <div><dt data-i18n="caseWork">Intervention</dt><dd data-i18n="alarmWork">Alarm UX, missions, sound selection and native platform integration.</dd></div>
+              <div><dt data-i18n="caseResult">Outcome</dt><dd data-i18n="alarmResult">Signed Android build; iPhone behavior awaiting device validation.</dd></div>
+            </dl>
+            <div class="case-proof"><span class="case-proof-number">10</span><span class="case-proof-copy"><strong data-i18n="alarmProofLabel">CC0 alarm sounds</strong><small data-i18n="alarmProofDetail">Offline assets · Android and iOS</small></span><span class="case-proof-mark" aria-hidden="true">↗</span></div>
+            <div class="project-meta">Flutter · Android · iOS / AlarmKit · Audio · Accessibility</div>
+            <a class="project-legal" href="/alarmbolt-privacy-policy/" data-i18n="privacyLink">Privacy policy ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project project-case" id="bluenine-sudoku">
+      <div class="project-index">05 / BlueNine Sudoku</div>
+      <div class="project-main">
+        <div class="project-case-grid">
+          <figure class="project-media">
+            <div class="project-visual bluenine">
+              <img src="assets/bluenine-feature.webp" alt="Official BlueNine Sudoku app icon with blue number nine and Sudoku tiles" loading="lazy" decoding="async" width="1600" height="781">
+            </div>
+            <figcaption class="project-caption"><span data-i18n="blueCaption">A daily logic ritual</span><span>Flutter / Android + iOS</span></figcaption>
+          </figure>
+          <div class="project-copy">
+            <div class="project-tags" data-i18n="blueTags">Sudoku · Daily challenges<br>Guided learning · Local progress</div>
+            <h3>BlueNine Sudoku</h3>
+            <p class="project-positioning" data-i18n="bluePositioning">A calmer way to play, learn and come back each day.</p>
+            <p class="project-description" data-i18n="blueDescription">BlueNine Sudoku is a local-first puzzle game for Android and iOS. The experience combines classic Sudoku, a daily challenge, a guided learning flow and progress saved on device.</p>
+            <dl class="case-evidence">
+              <div><dt data-i18n="caseChallenge">Challenge</dt><dd data-i18n="blueChallenge">Make a familiar logic game clear and rewarding across sessions.</dd></div>
+              <div><dt data-i18n="caseWork">Intervention</dt><dd data-i18n="blueWork">Puzzle experience, daily play, guided lessons and progress.</dd></div>
+              <div><dt data-i18n="caseResult">Outcome</dt><dd data-i18n="blueResult">A complete local-first Sudoku experience for Android and iOS.</dd></div>
+            </dl>
+            <div class="case-proof"><span class="case-proof-number">9×9</span><span class="case-proof-copy"><strong data-i18n="blueProofLabel">classic Sudoku grid</strong><small data-i18n="blueProofDetail">Daily challenge · guided learning</small></span><span class="case-proof-mark" aria-hidden="true">↗</span></div>
+            <div class="project-meta">Flutter · Android · iOS · Games · Local-first</div>
+            <a class="project-legal" href="/bluenine-privacy-policy/" data-i18n="privacyLink">Privacy policy ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
     <div class="work-bridge"><div><span class="micro" data-i18n="bridgeKicker">A concrete issue?</span><strong data-i18n="bridgeTitle">Let’s make your next release stronger.</strong></div><a href="mailto:support@elmariniapp.com?subject=Flutter%20app%20audit" data-i18n="bridgeLink">Show me the problem ↗</a></div>
   </div>
 </section>
@@ -650,13 +709,15 @@ html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){anima
       heroTopLeft:"Independent Flutter studio · Android & iOS",heroTopRight:"Debug · QA · Release",heroTitle:'Fix the<br><span class="outline">hard parts.</span>',heroBody:"I audit, debug and harden Flutter apps for Android and iOS: responsive UI, build and store blockers, billing, PDF workflows, localization, performance, testing and release readiness.",scroll:"Scroll<br>to explore",
       manifestoKicker:"Bold engineering, brought to production",manifestoTitle:'A mobile product is only as strong as <span class="muted">the details nobody should have to notice.</span>',manifestoLeft:"I work on the parts that tend to become expensive late in a project: responsive behavior, fragile flows, platform integration, release blockers and regressions.",manifestoRight:"The goal is simple: understand the real cause, fix the correct layer, verify the result, and leave the product stronger than before.",
       ticker:"Flutter ✦ Android ✦ iOS ✦ Responsive UI ✦ QA & Regression ✦ Google Play ✦ App Store Connect ✦ PDF Workflows ✦ Billing ✦ Localization ✦",
-      workTitle:"Featured<br>work",workIntro:"Three substantial mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.",
+      workTitle:"Featured<br>work",workIntro:"Five mobile products shaped around real production constraints: privacy, responsive behavior, field workflows, platform integration, regression safety and release quality.",
       scanChallenge:"Landscape, complex PDF flows and purchase verification across platforms.",scanWork:"Adaptive UI, document workflow fixes and StoreKit 2 transaction checks.",scanResult:"Analysis clean; the iOS parity suite passed its non-golden tests.",scanProofNumber:"1,364",scanProofLabel:"automated tests passed",scanProofDetail:"iOS parity suite · non-golden",
       scanCaption:"Local-first document workflow",scanTags:"PDF · OCR · Billing · Responsive<br>Backup · Localization · Security",scanPositioning:"Local-first document scanning, OCR and signature workflow.",scanDescription:"Scaneris is a privacy-first productivity app focused on fast document capture, local OCR, signature workflows and secure export. I worked on responsive hardening, import reliability, Play Console readiness, iOS parity with StoreKit 2 purchase verification, and regression safety.",scanPoint1:"Smart scan, OCR and PDF export",scanPoint2:"Signature and local-first workflows",scanPoint3:"Billing and release hardening",scanPoint4:"Responsive and regression-safe architecture",
       muslimChallenge:"A dense daily app across six languages, RTL layouts and iOS audio rights.",muslimWork:"Responsive and accessibility fixes; Quran audio adapted for iOS.",muslimResult:"The full local test suite passed with one skipped test.",muslimProofNumber:"3,827",muslimProofLabel:"automated tests passed",muslimProofDetail:"Full suite · 1 skipped",
       muslimCaption:"Daily-use spiritual product",muslimTests:"3,800+ automated tests",muslimTags:"Quran · Prayer times · Widgets<br>RTL · Premium · Accessibility",muslimPositioning:"A daily Islamic companion built for clarity, accessibility and consistency.",muslimDescription:"Muslim App brings together prayer times, Quran, Qibla, duas and spiritual routines in one experience. I worked on accessibility, premium flows, responsive behavior, iOS audio adaptation, UI consistency and large-scale automated testing.",muslimPoint1:"Prayer times, Quran, Qibla, duas",muslimPoint2:"Accessibility and responsive UI",muslimPoint3:"Premium gateway and polished UX",muslimPoint4:"3,600+ automated tests",
       stampChallenge:"Make a field capture understandable and verifiable beyond the device.",stampWork:"Connect capture, contextual metadata, QR verification and reporting.",stampResult:"A clear three-stage product flow for the Android and iPhone direction.",stampProofNumber:"03",stampProofLabel:"steps from capture to proof",stampProofDetail:"Product direction · Android + iPhone",
       stampCaption:"Field photo proof & reports",stampTags:"Photo proof · PDF reports · Geolocation<br>QR traceability · Local-first · Android + iPhone",stampPositioning:"Traceable field-photo proof with verification and structured reporting.",stampDescription:"StampSight turns field captures into verifiable proof with contextual metadata, QR verification and clean reporting. The project focuses on trust, traceability and a clear workflow from capture to proof delivery.",stampPoint1:"Field photo proof",stampPoint2:"QR verification and metadata",stampPoint3:"Structured report generation",stampPoint4:"Android + iPhone product direction",
+      alarmCaption:"Alarm and wake-up missions",alarmTags:"Alarm schedules · Offline sounds<br>Wake-up missions · Native integration",alarmPositioning:"An alarm built around the moment you actually get up.",alarmDescription:"AlarmBolt brings together repeat schedules, offline alarm sounds and wake-up missions. Its Android alarm flow plays through a native service, while iOS AlarmKit integration is prepared for its first device validation.",alarmChallenge:"Keep the alarm dependable from scheduling to stopping its sound.",alarmWork:"Alarm UX, missions, sound selection and native platform integration.",alarmResult:"Signed Android build; iPhone behavior awaiting device validation.",alarmProofLabel:"CC0 alarm sounds",alarmProofDetail:"Offline assets · Android and iOS",
+      blueCaption:"A daily logic ritual",blueTags:"Sudoku · Daily challenges<br>Guided learning · Local progress",bluePositioning:"A calmer way to play, learn and come back each day.",blueDescription:"BlueNine Sudoku is a local-first puzzle game for Android and iOS. The experience combines classic Sudoku, a daily challenge, a guided learning flow and progress saved on device.",blueChallenge:"Make a familiar logic game clear and rewarding across sessions.",blueWork:"Puzzle experience, daily play, guided lessons and progress.",blueResult:"A complete local-first Sudoku experience for Android and iOS.",blueProofLabel:"classic Sudoku grid",blueProofDetail:"Daily challenge · guided learning",privacyLink:"Privacy policy ↗",
       bridgeKicker:"A concrete issue?",bridgeTitle:"Let’s make your next release stronger.",bridgeLink:"Show me the problem ↗",
       servicesTitle:"Focused<br>services",servicesIntro:"Best for a defined problem in an existing Flutter app for Android or iOS: something broken, fragile, slow, inconsistent or blocking release.",service1Title:"Debug & bug fixing",service1Body:"Root-cause analysis, state, navigation, async failures and regression-safe fixes.",service2Title:"Responsive hardening",service2Body:"Overflow, landscape, keyboard/IME, large screens, scaling and RTL.",service3Title:"Android & iOS release",service3Body:"AAB and IPA builds, Play Console, App Store Connect, TestFlight and StoreKit 2 / Play billing.",service4Title:"Performance & PDF",service4Body:"Large documents, deferred work, import/export, previews and temp files.",service5Title:"QA & regression",service5Body:"Targeted tests, suite cleanup, static analysis and release validation.",service6Title:"Technical audit",service6Body:"Read-only risk map, code-path review and prioritized correction plan.",
       capabilities:"Capabilities",expertiseTitle:"From UI<br>to release.",expertiseFlutter:"Adaptive layouts · Landscape & IME · Scaling · RTL · State-driven UI",expertiseAndroid:"Gradle · AGP · Kotlin · AAB · Play Console · Native bridges",expertiseIos:"StoreKit 2 · App Store Connect · TestFlight · iPhone / iPad · Native bridges",expertiseQuality:"Widget/unit tests · Regression suites · Golden strategy · Static analysis",expertiseDocs:"Multipage PDF · Lazy rasterization · Import/export · Backup/restore",
@@ -670,13 +731,15 @@ html.motion-ready .project-copy.is-visible .case-evidence>div:nth-child(3){anima
       heroTopLeft:"Studio Flutter indépendant · Android & iOS",heroTopRight:"Débogage · QA · Mise en production",heroTitle:'Corriger les<br><span class="outline">points<br class="mobile-break"> difficiles.</span>',heroBody:"J’audite, débogue et fiabilise des applications Flutter pour Android et iOS : UI responsive, blocages de build et de publication, achats intégrés, flux PDF, localisation, performances, tests et préparation à la mise en production.",scroll:"Défiler<br>pour explorer",
       manifestoKicker:"Ingénierie exigeante, jusqu’à la production",manifestoTitle:'Un produit mobile n’est solide que si <span class="muted">les détails que personne ne devrait remarquer le sont aussi.</span>',manifestoLeft:"J’interviens sur les points qui deviennent coûteux tard dans un projet : comportement responsive, flux fragiles, intégrations plateforme, blocages de release et régressions.",manifestoRight:"L’objectif est simple : comprendre la cause réelle, corriger au bon niveau, vérifier le résultat et laisser le produit plus robuste qu’avant.",
       ticker:"Flutter ✦ Android ✦ iOS ✦ UI responsive ✦ QA & régression ✦ Google Play ✦ App Store Connect ✦ Flux PDF ✦ Achats intégrés ✦ Localisation ✦",
-      workTitle:"Projets<br>phares",workIntro:"Trois produits mobiles conséquents, construits autour de contraintes réelles de production : confidentialité, responsive, usages terrain, intégration plateforme, sécurité contre les régressions et qualité de release.",
+      workTitle:"Projets<br>phares",workIntro:"Cinq produits mobiles construits autour de contraintes réelles de production : confidentialité, responsive, usages terrain, intégration plateforme, sécurité contre les régressions et qualité de release.",
       scanChallenge:"Éditeur paysage, PDF multipage et contrôle des achats sur deux plateformes.",scanWork:"UI adaptative, fiabilisation documentaire et vérification des transactions StoreKit 2.",scanResult:"Analyse statique sans erreur ; suite iOS hors golden validée.",scanProofNumber:"1 364",scanProofLabel:"tests automatisés réussis",scanProofDetail:"Suite parité iOS · hors golden",
       scanCaption:"Flux documentaire local-first",scanTags:"PDF · OCR · Facturation · Responsive<br>Sauvegarde · Localisation · Sécurité",scanPositioning:"Numérisation, OCR et signature dans un flux documentaire local-first.",scanDescription:"Scaneris est une application de productivité centrée sur la confidentialité, la capture rapide de documents, l’OCR local, la signature et l’export sécurisé. J’ai travaillé sur le responsive, la fiabilité des imports, la préparation Play Console, la parité iOS avec vérification des achats StoreKit 2 et la prévention des régressions.",scanPoint1:"Scan intelligent, OCR et export PDF",scanPoint2:"Signature et flux local-first",scanPoint3:"Fiabilisation facturation et release",scanPoint4:"Architecture responsive et sûre face aux régressions",
       muslimChallenge:"Application quotidienne dense en six langues, RTL et droits audio iOS.",muslimWork:"Correctifs responsive et accessibilité ; adaptation des audios du Coran pour iOS.",muslimResult:"Suite locale complète réussie, avec un test ignoré.",muslimProofNumber:"3 827",muslimProofLabel:"tests automatisés réussis",muslimProofDetail:"Suite complète · 1 ignoré",
       muslimCaption:"Compagnon spirituel du quotidien",muslimTests:"3 800+ tests automatisés",muslimTags:"Coran · Horaires de prière · Widgets<br>RTL · Premium · Accessibilité",muslimPositioning:"Un compagnon islamique quotidien pensé pour la clarté, l’accessibilité et la cohérence.",muslimDescription:"Muslim App réunit horaires de prière, Coran, Qibla, duas et routines spirituelles dans une même expérience. J’ai travaillé sur l’accessibilité, les parcours Premium, le responsive, l’adaptation des audios pour iOS, la cohérence UI et une couverture de tests automatisés à grande échelle.",muslimPoint1:"Horaires de prière, Coran, Qibla, duas",muslimPoint2:"Accessibilité et UI responsive",muslimPoint3:"Passerelle Premium et UX soignée",muslimPoint4:"3 600+ tests automatisés",
       stampChallenge:"Rendre une capture terrain compréhensible et vérifiable hors de l’appareil.",stampWork:"Relier capture, métadonnées contextuelles, vérification QR et rapport.",stampResult:"Un parcours produit clair en trois étapes pour Android et iPhone.",stampProofNumber:"03",stampProofLabel:"étapes de la capture à la preuve",stampProofDetail:"Direction produit · Android + iPhone",
       stampCaption:"Preuve terrain & rapports",stampTags:"Preuve photo · Rapports PDF · Géolocalisation<br>Traçabilité QR · Local-first · Android + iPhone",stampPositioning:"Preuve photo terrain traçable, avec vérification et rapports structurés.",stampDescription:"StampSight transforme les captures terrain en preuves vérifiables grâce aux métadonnées contextuelles, à la vérification QR et à des rapports propres. Le produit se concentre sur la confiance, la traçabilité et un flux clair de la capture jusqu’à la remise de la preuve.",stampPoint1:"Preuve photo terrain",stampPoint2:"Vérification QR et métadonnées",stampPoint3:"Génération de rapports structurés",stampPoint4:"Direction produit Android + iPhone",
+      alarmCaption:"Réveil et missions de réveil",alarmTags:"Horaires · Sons hors ligne<br>Missions de réveil · Intégration native",alarmPositioning:"Un réveil pensé pour le moment où l’on se lève vraiment.",alarmDescription:"AlarmBolt réunit répétition des alarmes, sonneries hors ligne et missions de réveil. Sur Android, l’alarme est lue par un service natif. L’intégration AlarmKit sur iOS attend sa première validation sur appareil.",alarmChallenge:"Fiabiliser le réveil, de la programmation à l’arrêt du son.",alarmWork:"Interface des alarmes, missions, sélection du son et intégration native.",alarmResult:"Build Android signé ; comportement iPhone à valider sur appareil.",alarmProofLabel:"sonneries CC0",alarmProofDetail:"Fichiers hors ligne · Android et iOS",
+      blueCaption:"Le rendez-vous logique du jour",blueTags:"Sudoku · Défis quotidiens<br>Apprentissage guidé · Progression locale",bluePositioning:"Une façon plus sereine de jouer, d’apprendre et de progresser.",blueDescription:"BlueNine Sudoku est un jeu de réflexion local-first pour Android et iOS. Il associe Sudoku classique, défi quotidien, apprentissage guidé et progression enregistrée sur l’appareil.",blueChallenge:"Rendre un jeu de logique familier clair et gratifiant jour après jour.",blueWork:"Expérience de jeu, défis quotidiens, leçons guidées et progression.",blueResult:"Une expérience Sudoku complète et locale sur Android et iOS.",blueProofLabel:"grille de Sudoku classique",blueProofDetail:"Défi quotidien · apprentissage guidé",privacyLink:"Politique de confidentialité ↗",
       bridgeKicker:"Un problème concret ?",bridgeTitle:"Fiabilisons votre prochaine version.",bridgeLink:"Montrez-moi le problème ↗",
       servicesTitle:"Services<br>ciblés",servicesIntro:"Idéal pour un problème précis dans une application Flutter Android ou iOS existante : quelque chose de cassé, fragile, lent, incohérent ou bloquant la mise en production.",service1Title:"Débogage & correction de bugs",service1Body:"Analyse de cause racine, état, navigation, erreurs asynchrones et correctifs sûrs face aux régressions.",service2Title:"Fiabilisation responsive",service2Body:"Overflow, paysage, clavier/IME, grands écrans, mise à l’échelle et RTL.",service3Title:"Publication Android & iOS",service3Body:"Builds AAB et IPA, Play Console, App Store Connect, TestFlight et achats StoreKit 2 / Google Play.",service4Title:"Performance & PDF",service4Body:"Documents volumineux, traitements différés, import/export, aperçus et fichiers temporaires.",service5Title:"QA & régression",service5Body:"Tests ciblés, nettoyage de suite, analyse statique et validation de release.",service6Title:"Audit technique",service6Body:"Cartographie des risques en lecture seule, revue des chemins de code et plan de correction priorisé.",
       capabilities:"Compétences",expertiseTitle:"De l’UI<br>à la production.",expertiseFlutter:"Layouts adaptatifs · Paysage & IME · Mise à l’échelle · RTL · UI pilotée par l’état",expertiseAndroid:"Gradle · AGP · Kotlin · AAB · Play Console · Ponts natifs",expertiseIos:"StoreKit 2 · App Store Connect · TestFlight · iPhone / iPad · Ponts natifs",expertiseQuality:"Tests widget/unitaires · Suites de régression · Stratégie golden · Analyse statique",expertiseDocs:"PDF multipage · Rastérisation différée · Import/export · Sauvegarde/restauration",
