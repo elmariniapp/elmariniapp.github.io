@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<title>El Marini App – Développeur Flutter Android et iOS</title>
+<meta name="description" content="Je débloque les apps Flutter qui n'arrivent pas jusqu'aux stores. Audit à prix fixe, correction et publication sur Google Play et l'App Store.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000;
+  --graphite:#1d1d1f;
+  --ash:#86868b;
+  --silver:#f5f5f7;
+  --white:#fff;
+  --blue:#2997ff;
+  --violet:#7a5cff;
+  --green:#30d158;
+  --red:#ff453a;
+  --amber:#ffd60a;
+  --display:"Inter Tight",-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif;
+  --text:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --wrap:1120px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--black);color:var(--white);font-family:var(--text);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.03em;line-height:1.05;font-weight:700}
+:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:8px}
+.wrap{width:min(100% - 40px,var(--wrap));margin-inline:auto}
+
+/* Nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;height:52px;background:rgba(0,0,0,.6);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(255,255,255,.08);transition:background .4s,color .4s,border-color .4s}
+.nav.light{background:rgba(245,245,247,.72);color:var(--graphite);border-bottom-color:rgba(0,0,0,.08)}
+.nav-row{height:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+.logo i{width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,var(--blue),var(--violet));display:block}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:13px}
+.nav-links a{opacity:.8;transition:opacity .2s}
+.nav-links a:hover{opacity:1}
+.nav-cta{background:var(--blue);color:#fff!important;opacity:1!important;padding:6px 14px;border-radius:999px;font-weight:600}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--text);font-weight:600;font-size:17px;padding:13px 26px;border-radius:999px;border:0;cursor:pointer;transition:transform .4s var(--ease),background .3s,box-shadow .3s;will-change:transform}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:#45a6ff;box-shadow:0 10px 40px rgba(41,151,255,.35)}
+.btn-line{color:var(--blue);background:transparent;box-shadow:inset 0 0 0 1.5px var(--blue)}
+.btn-line:hover{background:rgba(41,151,255,.1)}
+.light-sec .btn-line{color:#0071e3;box-shadow:inset 0 0 0 1.5px #0071e3}
+.light-sec .btn-blue{background:#0071e3}
+
+/* Hero */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:110px 0 60px;overflow:hidden;isolation:isolate}
+.aura{position:absolute;inset:-20%;z-index:-1;background:
+  radial-gradient(38% 34% at 62% 52%,rgba(122,92,255,.42),transparent 70%),
+  radial-gradient(30% 30% at 40% 60%,rgba(41,151,255,.38),transparent 70%),
+  radial-gradient(24% 22% at 70% 30%,rgba(48,209,88,.12),transparent 70%);
+  filter:blur(30px);animation:breathe 9s var(--ease-io) infinite alternate}
+@keyframes breathe{from{transform:scale(1) translate3d(0,0,0)}to{transform:scale(1.12) translate3d(-2%,2%,0)}}
+.grain{position:absolute;inset:0;z-index:-1;opacity:.06;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:40px;align-items:center}
+.hero h1{font-size:clamp(44px,6.3vw,92px);font-weight:800;letter-spacing:-.05em;line-height:.94}
+.line{display:block;overflow:hidden;padding-bottom:.06em}
+.line > span{display:block;transform:translateY(110%);transition:transform 1.2s var(--ease)}
+.loaded .line > span{transform:none}
+.loaded .line:nth-child(2) > span{transition-delay:.08s}
+.loaded .line:nth-child(3) > span{transition-delay:.16s}
+.grad{background:linear-gradient(92deg,#fff 0%,#c9c9ff 40%,var(--blue) 70%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:sheen 7s var(--ease-io) infinite alternate}
+@keyframes sheen{to{background-position:100% 0}}
+.hero-sub{margin-top:30px;font-size:clamp(18px,1.6vw,22px);color:#a1a1a6;max-width:30em;line-height:1.45;opacity:0;transform:translateY(16px);transition:opacity 1s var(--ease) .45s,transform 1s var(--ease) .45s}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;opacity:0;transform:translateY(16px);transition:opacity 1s var(--ease) .6s,transform 1s var(--ease) .6s}
+.loaded .hero-sub,.loaded .hero-actions{opacity:1;transform:none}
+.hero-stage{perspective:1400px;display:grid;place-items:center}
+.hero-phone{transform:translateY(80px) rotateX(18deg) rotateY(-14deg) scale(.92);opacity:0;transition:transform 1.6s var(--ease) .2s,opacity 1.2s var(--ease) .2s;transform-style:preserve-3d}
+.loaded .hero-phone{opacity:1;transform:rotateX(var(--rx,4deg)) rotateY(var(--ry,-8deg))}
+.loaded .hero-phone.tracking{transition:transform .6s var(--ease)}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--ash);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity 1s 1.4s}
+.loaded .scroll-cue{opacity:1}
+.scroll-cue i{width:1px;height:38px;background:linear-gradient(var(--ash),transparent);animation:drip 2.2s var(--ease-io) infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* Phone */
+.phone{position:relative;width:290px;aspect-ratio:9/19.3;border-radius:52px;padding:11px;background:linear-gradient(145deg,#3a3a3c,#0c0c0d 40%,#2c2c2e);box-shadow:0 0 0 1.5px #48484a,0 50px 100px -20px rgba(0,0,0,.8),0 30px 60px -30px rgba(41,151,255,.35)}
+.phone::before{content:"";position:absolute;right:-3px;top:150px;width:3px;height:70px;border-radius:0 3px 3px 0;background:#3a3a3c}
+.screen{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#0b0b0f;color:#fff}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:92px;height:27px;border-radius:20px;background:#000;z-index:5}
+.sbar{position:absolute;top:14px;left:26px;right:24px;display:flex;justify-content:space-between;font-size:12px;font-weight:600;font-family:var(--text);z-index:4}
+.sbar b{display:flex;gap:4px;align-items:center}
+.sbar b i{display:block;width:16px;height:9px;border-radius:2.5px;border:1px solid rgba(255,255,255,.6);position:relative}
+.sbar b i::after{content:"";position:absolute;inset:1px;right:4px;background:#fff;border-radius:1px}
+.ui{position:absolute;inset:56px 18px 22px;display:flex;flex-direction:column}
+.ui-app{display:flex;align-items:center;gap:10px}
+.ui-icon{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--violet));display:grid;place-items:center}
+.ui-icon::after{content:"";width:12px;height:12px;border-radius:50%;background:#fff}
+.ui-app strong{display:block;font-family:var(--display);font-size:16px;letter-spacing:-.02em}
+.ui-app span{display:block;font-size:11.5px;color:#8e8e93}
+.pill{align-self:flex-start;margin-top:18px;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:6px 11px;border-radius:999px;transition:background .5s,color .5s}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor}
+.pill[data-s="0"]{background:rgba(255,69,58,.16);color:var(--red)}
+.pill[data-s="1"],.pill[data-s="2"]{background:rgba(255,214,10,.14);color:var(--amber)}
+.pill[data-s="3"]{background:rgba(48,209,88,.16);color:var(--green)}
+.panes{position:relative;flex:1;margin-top:16px}
+.pane{position:absolute;inset:0;opacity:0;transform:translateY(14px) scale(.98);transition:opacity .6s var(--ease),transform .7s var(--ease);pointer-events:none}
+.pane.on{opacity:1;transform:none}
+.card{text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px}
+.card small{display:block;font-size:11px;color:#8e8e93;margin-bottom:4px}
+.card p{font-size:13.5px;line-height:1.4}
+.rej-list{text-align:left;margin-top:10px;display:grid;gap:8px}
+.rej-list div{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#c7c7cc}
+.rej-list i{width:16px;height:16px;border-radius:50%;flex:none;display:grid;place-items:center;background:rgba(255,69,58,.18)}
+.rej-list i::after{content:"";width:6px;height:2px;background:var(--red);border-radius:2px}
+.code{text-align:left;font-family:var(--mono);font-size:10.5px;line-height:1.75;padding:12px;border-radius:16px;background:#14141a;border:1px solid rgba(255,255,255,.07);color:#a1a1aa;white-space:pre;overflow:hidden}
+.code .k{color:#c792ea}.code .f{color:#82aaff}.code .s{color:#c3e88d}
+.code .bad{display:block;margin:0 -12px;padding:0 12px;background:rgba(255,69,58,.14);box-shadow:inset 2px 0 var(--red);transition:background .6s,box-shadow .6s}
+.code.fixed .bad{background:rgba(48,209,88,.14);box-shadow:inset 2px 0 var(--green)}
+.code .scan{position:absolute;left:0;right:0;height:26px;background:linear-gradient(transparent,rgba(41,151,255,.18),transparent);top:-30px}
+.pane.on .code .scan{animation:scan 1.8s var(--ease-io) 2}
+@keyframes scan{to{top:100%}}
+.code-wrap{position:relative;overflow:hidden;border-radius:16px}
+.diag{margin-top:10px}
+.tests-num{text-align:left;font-family:var(--display);font-size:54px;font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.tests-lbl{text-align:left;font-size:12.5px;color:#8e8e93;margin-top:4px}
+.bar{height:6px;border-radius:6px;background:rgba(255,255,255,.08);margin-top:16px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--blue),var(--green))}
+.suites{text-align:left;margin-top:14px;display:grid;gap:7px}
+.suites div{display:flex;justify-content:space-between;font-size:12px;color:#c7c7cc;opacity:.35;transition:opacity .4s}
+.suites div.ok{opacity:1}
+.suites div.ok b{color:var(--green)}
+.live{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:14px}
+.check{width:96px;height:96px}
+.check circle{stroke:var(--green);stroke-width:5;fill:rgba(48,209,88,.1);stroke-dasharray:290;stroke-dashoffset:290}
+.check path{stroke:var(--green);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:70;stroke-dashoffset:70}
+.pane.on .check circle{transition:stroke-dashoffset .9s var(--ease) .1s;stroke-dashoffset:0}
+.pane.on .check path{transition:stroke-dashoffset .5s var(--ease) .8s;stroke-dashoffset:0}
+.live h4{font-family:var(--display);font-size:22px;margin:18px 0 0;letter-spacing:-.02em}
+.live p{font-size:13px;color:#8e8e93;margin-top:6px;line-height:1.4}
+.stores{display:flex;gap:8px;margin-top:18px}
+.stores span{font-size:11.5px;font-weight:600;padding:6px 10px;border-radius:9px;background:rgba(255,255,255,.08)}
+.home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:4px;border-radius:4px;background:rgba(255,255,255,.55)}
+
+/* Intro statement */
+.statement{padding:140px 0 120px}
+.statement p{font-family:var(--display);font-weight:700;font-size:clamp(30px,4.4vw,58px);letter-spacing:-.035em;line-height:1.12;max-width:20em}
+.statement .w{color:#3a3a3c;transition:color .5s}
+.statement .w.lit{color:#f5f5f7}
+
+/* Story (sticky) */
+.story{position:relative;height:420vh}
+.story-pin{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
+.story-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:60px;align-items:center}
+.story-head{font-size:15px;color:var(--ash);margin-bottom:22px}
+.chapters{position:relative;height:300px}
+.chapter{position:absolute;inset:0;opacity:0;transform:translateY(40px);transition:opacity .7s var(--ease),transform .9s var(--ease);pointer-events:none}
+.chapter.on{opacity:1;transform:none}
+.chapter.past{opacity:0;transform:translateY(-40px)}
+.chapter h2{font-size:clamp(40px,5.6vw,76px);letter-spacing:-.045em;line-height:1}
+.chapter p{margin-top:22px;color:#a1a1a6;font-size:clamp(17px,1.5vw,21px);max-width:26em}
+.rail{display:flex;gap:10px;margin-top:40px}
+.rail button{position:relative;width:60px;height:4px;border:0;padding:0;border-radius:4px;background:rgba(255,255,255,.14);overflow:hidden;cursor:pointer}
+.rail button i{position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(0)}
+.rail-labels{display:flex;gap:10px;margin-top:10px;font-size:12px;color:var(--ash)}
+.rail-labels span{width:60px}
+.story-phone{transition:transform 1s var(--ease)}
+
+/* Light sections */
+.light-sec{background:var(--silver);color:var(--graphite)}
+.sec{padding:140px 0}
+.sec-title{font-size:clamp(40px,5.6vw,80px);letter-spacing:-.045em;line-height:1;max-width:12ch}
+.sec-lead{margin-top:22px;font-size:clamp(18px,1.6vw,22px);color:#6e6e73;max-width:30em}
+
+.showcase{margin-top:80px}
+.showcase-media{position:relative;border-radius:var(--r,44px);overflow:hidden;transform:scale(var(--s,.86));transform-origin:center top;background:#0e2a22;box-shadow:0 40px 100px -40px rgba(0,0,0,.4);will-change:transform}
+.showcase-media img{width:100%;height:auto;aspect-ratio:2.05/1;object-fit:cover;transform:scale(var(--is,1.12));will-change:transform}
+.show-info{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end;margin-top:56px}
+.show-info h3{font-size:clamp(34px,3.8vw,52px);letter-spacing:-.04em}
+.show-info p{margin-top:14px;color:#6e6e73;font-size:19px;max-width:28em}
+.nums{display:flex;gap:56px}
+.num strong{display:block;font-family:var(--display);font-weight:800;font-size:clamp(46px,5vw,72px);letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.num > span{display:block;margin-top:8px;font-size:15px;color:#6e6e73}
+.review{margin-top:56px;display:flex;gap:22px;align-items:center;padding:26px 30px;border-radius:24px;background:#fff;max-width:640px}
+.stars{color:#ff9f0a;font-size:18px;letter-spacing:2px;white-space:nowrap}
+.review p{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.25}
+.review small{display:block;margin-top:6px;font-size:14px;color:#6e6e73;font-family:var(--text);font-weight:400;letter-spacing:0}
+.link-row{display:flex;gap:26px;margin-top:28px;flex-wrap:wrap;font-size:17px}
+.alink{color:#0071e3;font-weight:500}
+.alink:hover{text-decoration:underline;text-underline-offset:4px}
+.qlink{color:#6e6e73;font-size:15px}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:120px}
+.tile{background:#fff;border-radius:32px;overflow:hidden;display:flex;flex-direction:column;transition:transform .7s var(--ease),box-shadow .7s var(--ease)}
+.tile:hover{transform:translateY(-6px);box-shadow:0 30px 70px -30px rgba(0,0,0,.25)}
+.tile-media{overflow:hidden;aspect-ratio:2.05/1}
+.tile-media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.tile:hover .tile-media img{transform:scale(1.04)}
+.tile-body{padding:34px 34px 32px;display:flex;flex-direction:column;flex:1}
+.tile h3{font-size:32px;letter-spacing:-.035em}
+.tile .stat{margin-top:8px;font-weight:600;color:#248a3d;font-size:16px}
+.tile .desc{margin-top:14px;color:#6e6e73;font-size:17px}
+.tile .link-row{margin-top:auto;padding-top:24px}
+
+.soon{margin-top:100px;display:grid;grid-template-columns:auto 1fr 1fr;gap:24px;align-items:center}
+.soon h3{font-size:22px;letter-spacing:-.02em;padding-right:20px}
+.soon-item{display:flex;gap:16px;align-items:center;padding:16px;border-radius:22px;background:rgba(0,0,0,.035)}
+.soon-item img{width:104px;height:51px;border-radius:12px;object-fit:cover;flex:none}
+.soon-item strong{display:block;font-family:var(--display);font-size:18px;letter-spacing:-.02em}
+.soon-item span{display:block;font-size:14px;color:#6e6e73;line-height:1.4}
+
+/* Offer */
+.offer{background:#fff}
+.offer-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:28px;margin-top:80px;align-items:stretch}
+.price-card{position:relative;border-radius:36px;padding:3px;overflow:hidden;isolation:isolate}
+.price-card::before{content:"";position:absolute;inset:-60%;z-index:-1;background:conic-gradient(from var(--a,0deg),var(--blue),var(--violet),#ff375f,var(--amber),var(--green),var(--blue));animation:spin 8s linear infinite}
+@property --a{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes spin{to{--a:360deg}}
+@supports not (background:conic-gradient(from var(--a),red,blue)){.price-card::before{animation:none}}
+.price-in{height:100%;border-radius:33px;background:#000;color:#fff;padding:46px;display:flex;flex-direction:column}
+.price-in h3{font-size:28px;letter-spacing:-.03em}
+.price{display:flex;align-items:flex-start;gap:6px;margin-top:22px}
+.price strong{font-family:var(--display);font-weight:800;font-size:clamp(84px,9vw,124px);letter-spacing:-.06em;line-height:.85}
+.price sup{font-family:var(--display);font-weight:700;font-size:40px;margin-top:6px}
+.price-terms{margin-top:14px;color:#a1a1a6;font-size:16px}
+.incl{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:14px}
+.incl li{display:flex;gap:12px;font-size:17px;color:#e5e5ea}
+.incl svg{flex:none;width:20px;height:20px;margin-top:2px}
+.price-note{margin-top:26px;font-size:14px;color:#86868b}
+.price-in .btn{margin-top:32px;align-self:flex-start}
+.side{display:grid;gap:20px;align-content:start}
+.side-item{border-radius:28px;background:var(--silver);padding:32px}
+.side-item h3{font-size:24px;letter-spacing:-.03em}
+.side-item p{margin-top:10px;color:#6e6e73;font-size:17px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chips span{font-size:14px;padding:8px 14px;border-radius:999px;background:#fff;color:var(--graphite)}
+
+/* CTA */
+.cta{position:relative;padding:180px 0 150px;text-align:center;overflow:hidden;isolation:isolate}
+.cta .aura{animation-duration:12s;opacity:.8}
+.cta h2{font-size:clamp(52px,9vw,140px);font-weight:800;letter-spacing:-.06em;line-height:.92}
+.cta p{margin:28px auto 0;color:#a1a1a6;font-size:clamp(18px,1.6vw,22px);max-width:30em}
+.cta .hero-actions{justify-content:center;opacity:1;transform:none}
+.cta .cta-mail{margin-top:22px;font-size:15px;color:var(--ash)}
+
+footer{border-top:1px solid #1d1d1f;padding:28px 0 44px;font-size:13px;color:var(--ash)}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a:hover{color:#fff}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(48px);transition:opacity 1.1s var(--ease),transform 1.3s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;text-align:center}
+  .hero-sub{margin-inline:auto}
+  .hero-actions{justify-content:center}
+  .hero-stage{margin-top:20px}
+  .story-grid{grid-template-columns:1fr;gap:20px;justify-items:center;text-align:center}
+  .story-copy{order:2;width:100%}
+  .chapters{height:190px}
+  .chapter p{margin-inline:auto}
+  .rail,.rail-labels{justify-content:center}
+  .story-phone .phone{width:220px;border-radius:40px;padding:8px}
+  .story-phone .screen{border-radius:33px}
+  .show-info,.offer-grid{grid-template-columns:1fr}
+  .soon{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .nav-links a:not(.nav-cta){display:none}
+  .hero{padding-top:90px}
+  .hero-phone .phone{width:250px}
+  .statement{padding:100px 0 80px}
+  .sec{padding:100px 0}
+  .duo{grid-template-columns:1fr;margin-top:80px}
+  .nums{gap:36px}
+  .review{flex-direction:column;align-items:flex-start;padding:24px}
+  .price-in{padding:32px 26px}
+  .cta{padding:130px 0 110px}
+  .chapter h2{font-size:38px}
+  .chapter p{font-size:16px;margin-top:12px}
+  .story-head{display:none}
+  .rail{margin-top:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .line > span,.hero-sub,.hero-actions,.hero-phone,.rv{opacity:1!important;transform:none!important}
+  .showcase-media{--s:1!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>El Marini App</a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#methode">Méthode</a>
+      <a href="#apps">Mes apps</a>
+      <a href="#offre">Offre</a>
+      <a class="nav-cta js-book" href="#contact">Réserver un audit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="aura" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <h1><span class="line"><span>Je débloque</span></span><span class="line"><span>les apps Flutter.</span></span><span class="line"><span class="grad">Jusqu'au store.</span></span></h1>
+      <p class="hero-sub">Bugs tenaces, écrans cassés, achats intégrés qui échouent, version rejetée par Google Play ou l'App Store. Je trouve la vraie cause, je corrige et je vérifie avant la mise en ligne.</p>
+      <div class="hero-actions">
+        <a class="btn btn-blue magnet js-book" href="#contact">Réserver un audit</a>
+        <a class="btn btn-line magnet" href="#methode">Voir comment</a>
+      </div>
+    </div>
+    <div class="hero-stage" id="heroStage">
+      <div class="hero-phone" id="heroPhone">
+        <div class="phone">
+          <div class="screen">
+            <div class="island"></div>
+            <div class="sbar"><span>9:41</span><b><i></i></b></div>
+            <div class="ui">
+              <div class="ui-app"><div class="ui-icon"></div><div><strong>Votre app</strong><span>Version 2.4.1</span></div></div>
+              <span class="pill" data-s="3">En ligne</span>
+              <div class="panes">
+                <div class="pane on">
+                  <div class="live">
+                    <svg class="check" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45"/><path d="M30 52 44 65 71 37"/></svg>
+                    <h4>Publiée</h4>
+                    <p>Acceptée sur les deux stores après correction.</p>
+                    <div class="stores"><span>Google Play</span><span>App Store</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="home-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">Faites défiler<i></i></div>
+</section>
+
+<section class="statement">
+  <div class="wrap">
+    <p id="statement">Une app qui plante, un paiement qui échoue ou une version refusée, c'est chaque jour des utilisateurs perdus. Mon travail consiste à remettre votre produit en ligne, vite et durablement.</p>
+  </div>
+</section>
+
+<section class="story" id="methode" aria-label="Méthode en quatre étapes">
+  <div class="story-pin">
+    <div class="wrap story-grid">
+      <div class="story-copy">
+        <div class="story-head">Du rejet à la mise en ligne, en quatre étapes</div>
+        <div class="chapters">
+          <div class="chapter on" data-c="0"><h2>Reproduire.</h2><p>Je fais apparaître le problème sur un vrai appareil, dans les mêmes conditions que vos utilisateurs.</p></div>
+          <div class="chapter" data-c="1"><h2>Trouver la cause.</h2><p>Je remonte jusqu'à l'origine dans le code, plutôt que de masquer le symptôme.</p></div>
+          <div class="chapter" data-c="2"><h2>Corriger et tester.</h2><p>Je modifie la bonne partie du code et j'ajoute des tests pour que le bug ne revienne pas.</p></div>
+          <div class="chapter" data-c="3"><h2>Publier.</h2><p>Je vérifie sur Android et iOS, puis la version part sur Google Play et l'App Store.</p></div>
+        </div>
+        <div class="rail" id="rail">
+          <button type="button" aria-label="Étape 1 : reproduire"><i></i></button>
+          <button type="button" aria-label="Étape 2 : trouver la cause"><i></i></button>
+          <button type="button" aria-label="Étape 3 : corriger et tester"><i></i></button>
+          <button type="button" aria-label="Étape 4 : publier"><i></i></button>
+        </div>
+        <div class="rail-labels" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      </div>
+      <div class="story-phone" id="storyPhone">
+        <div class="phone">
+          <div class="screen">
+            <div class="island"></div>
+            <div class="sbar"><span>9:41</span><b><i></i></b></div>
+            <div class="ui">
+              <div class="ui-app"><div class="ui-icon"></div><div><strong>Votre app</strong><span>Version 2.4.1</span></div></div>
+              <span class="pill" id="pill" data-s="0">Rejetée</span>
+              <div class="panes" aria-hidden="true">
+                <div class="pane on" data-p="0">
+                  <div class="card"><small>Motif du rejet</small><p>Les achats intégrés ne se valident pas sur iPhone.</p></div>
+                  <div class="rej-list"><div><i></i>Achat bloqué après paiement</div><div><i></i>Écran Premium vide sur iPad</div><div><i></i>Plantage au retour d'arrière-plan</div></div>
+                </div>
+                <div class="pane" data-p="1">
+                  <div class="code-wrap"><div class="code" id="code"><span class="k">final</span> tx = <span class="k">await</span>
+  store.<span class="f">purchase</span>(product);
+<span class="bad" id="badLine"><span class="k">if</span> (tx.status == <span class="s">'ok'</span>) {</span>  <span class="f">unlock</span>(premium);
+}
+<span class="k">await</span> tx.<span class="f">finish</span>();</div><div class="scan"></div></div>
+                  <div class="card diag"><small>Cause trouvée</small><p id="diagText">La transaction n'est jamais vérifiée côté StoreKit 2.</p></div>
+                </div>
+                <div class="pane" data-p="2">
+                  <div class="tests-num" id="testsNum">0</div>
+                  <div class="tests-lbl">tests réussis</div>
+                  <div class="bar"><i id="testsBar"></i></div>
+                  <div class="suites" id="suites"><div><span>Achats intégrés</span><b>OK</b></div><div><span>Mise en page iPad</span><b>OK</b></div><div><span>Cycle de vie</span><b>OK</b></div><div><span>Régressions</span><b>OK</b></div></div>
+                </div>
+                <div class="pane" data-p="3">
+                  <div class="live">
+                    <svg class="check" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45"/><path d="M30 52 44 65 71 37"/></svg>
+                    <h4>Publiée</h4>
+                    <p>Acceptée sur les deux stores après correction.</p>
+                    <div class="stores"><span>Google Play</span><span>App Store</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="home-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light-sec sec" id="apps">
+  <div class="wrap">
+    <h2 class="sec-title rv">Mes apps. En ligne et utilisées.</h2>
+    <p class="sec-lead rv d1">Je conçois et publie mes propres apps Flutter. Ce que j'apprends en production sert directement les apps de mes clients.</p>
+
+    <div class="showcase">
+      <div class="showcase-media" id="showcase">
+        <img src="../assets/muslim-app-feature.avif" alt="Muslim App : horaires de prière, Coran, Qibla et duas" width="1600" height="781">
+      </div>
+      <div class="show-info">
+        <div class="rv">
+          <h3>Muslim App</h3>
+          <p>Horaires de prière, Coran, Qibla, duas et widgets dans une seule app, en six langues dont l'arabe et l'ourdou.</p>
+        </div>
+        <div class="nums rv d1">
+          <div class="num"><strong><span class="count" data-to="5000" data-sep=" ">0</span>+</strong><span>téléchargements</span></div>
+          <div class="num"><strong><span class="count" data-to="4.8" data-dec="1">0</span>★</strong><span>sur 79 avis</span></div>
+        </div>
+      </div>
+      <div class="review rv">
+        <div class="stars" aria-label="5 étoiles">★★★★★</div>
+        <div><p>« Un outil indispensable au quotidien. »</p><small>Yassir B., avis Google Play</small></div>
+      </div>
+      <div class="link-row rv"><a class="alink" href="https://play.google.com/store/apps/details?id=com.elmariniapp.muslimapp" target="_blank" rel="noopener">Voir sur Google Play</a><a class="qlink" href="/muslim-app-policy/">Confidentialité</a></div>
+    </div>
+
+    <div class="duo">
+      <article class="tile rv">
+        <div class="tile-media"><img src="../assets/scaneris-feature.avif" alt="Scaneris : scanner PDF, OCR et signature" width="1600" height="781" loading="lazy"></div>
+        <div class="tile-body">
+          <h3>Scaneris</h3>
+          <p class="stat">1 000+ téléchargements</p>
+          <p class="desc">Scanner PDF avec OCR, signature et éditeur, entièrement sur l'appareil. Sans publicité, avec une offre Pro.</p>
+          <div class="link-row"><a class="alink" href="https://play.google.com/store/apps/details?id=com.elmariniapp.scaneris" target="_blank" rel="noopener">Voir sur Google Play</a><a class="qlink" href="/scaneris-privacy-policy/privacy.html">Confidentialité</a></div>
+        </div>
+      </article>
+      <article class="tile rv d1">
+        <div class="tile-media"><img src="../assets/stampsight-feature.avif" alt="StampSight : preuves photo terrain et rapports PDF" width="1600" height="781" loading="lazy"></div>
+        <div class="tile-body">
+          <h3>StampSight</h3>
+          <p class="stat">Disponible sur Google Play</p>
+          <p class="desc">Transforme les photos de chantier, de livraison ou d'inspection en preuves datées et géolocalisées, exportées en rapports PDF.</p>
+          <div class="link-row"><a class="alink" href="https://play.google.com/store/apps/details?id=com.elmariniapp.stampsight" target="_blank" rel="noopener">Voir sur Google Play</a><a class="qlink" href="/stampsight-privacy-policy/">Confidentialité</a></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="soon rv">
+      <h3>Bientôt.</h3>
+      <div class="soon-item"><img src="../assets/alarmbolt-feature.webp" alt="" loading="lazy"><div><strong>AlarmBolt</strong><span>Un réveil avec missions pour vraiment se lever.</span></div></div>
+      <div class="soon-item"><img src="../assets/bluenine-feature.webp" alt="" loading="lazy"><div><strong>BlueNine Sudoku</strong><span>Défi quotidien et leçons guidées.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec offer light-sec" id="offre" style="background:#fff">
+  <div class="wrap">
+    <h2 class="sec-title rv">Commencez par un audit. Prix fixe.</h2>
+    <p class="sec-lead rv d1">Vous savez exactement ce qui ne va pas, ce que ça coûte à corriger et dans quel ordre, avant de vous engager.</p>
+    <div class="offer-grid">
+      <div class="price-card rv">
+        <div class="price-in">
+          <h3>Audit Flutter</h3>
+          <div class="price"><strong>390</strong><sup>€</sup></div>
+          <p class="price-terms">HT, rapport livré sous 48 h ouvrées</p>
+          <ul class="incl">
+            <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#30d158" fill-opacity=".18"/><path d="m6 10.3 2.7 2.6L14 7.4" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Je reproduis le problème et je lis le code concerné</li>
+            <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#30d158" fill-opacity=".18"/><path d="m6 10.3 2.7 2.6L14 7.4" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Vous recevez la liste des risques, classés par priorité</li>
+            <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#30d158" fill-opacity=".18"/><path d="m6 10.3 2.7 2.6L14 7.4" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Chaque correction est chiffrée avec un prix fixe</li>
+            <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#30d158" fill-opacity=".18"/><path d="m6 10.3 2.7 2.6L14 7.4" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Un appel de 30 minutes pour tout passer en revue</li>
+          </ul>
+          <p class="price-note">Si vous me confiez ensuite la correction, le prix de l'audit est déduit.</p>
+          <a class="btn btn-blue magnet js-book" href="#contact" style="background:#2997ff">Réserver un audit</a>
+        </div>
+      </div>
+      <div class="side">
+        <div class="side-item rv d1"><h3>Correction au forfait</h3><p>Je corrige les points retenus dans l'audit, au prix annoncé, avec des tests qui empêchent le problème de revenir.</p></div>
+        <div class="side-item rv d2"><h3>Publication sur les stores</h3><p>Builds signés, TestFlight, achats intégrés et réponses aux rejets, sur Google Play et l'App Store.</p></div>
+        <div class="side-item rv d3"><h3>Ce que je corrige souvent</h3>
+          <div class="chips"><span>Écrans qui débordent</span><span>Paysage et clavier</span><span>Arabe et RTL</span><span>Abonnements</span><span>Builds qui échouent</span><span>Export PDF lent</span><span>Plantages</span><span>Tests cassés</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="aura" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2 class="rv">Dites-moi<br><span class="grad">ce qui bloque.</span></h2>
+    <p class="rv d1">Quelques lignes suffisent : ce qui se passe, sur quelle plateforme, et depuis quand. Je vous réponds avec une première lecture et le créneau le plus proche.</p>
+    <div class="hero-actions rv d2">
+      <a class="btn btn-blue magnet js-book" href="#contact">Réserver un audit</a>
+      <a class="btn btn-line magnet" href="mailto:support@elmariniapp.com?subject=Mon%20app%20Flutter">Écrire un e-mail</a>
+    </div>
+    <p class="cta-mail">support@elmariniapp.com</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 El Marini App, développeur Flutter indépendant en France</span>
+    <a href="/privacy/">Politiques de confidentialité</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const BOOKING_URL = "mailto:support@elmariniapp.com?subject=R%C3%A9servation%20audit%20Flutter";
+  document.querySelectorAll(".js-book").forEach(a => a.href = BOOKING_URL);
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (v,a,b) => Math.min(b,Math.max(a,v));
+  const vh = () => innerHeight;
+
+  // Load sequence
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add("loaded")));
+
+  // Hero phone follows the pointer
+  const stage = document.getElementById("heroStage"), hp = document.getElementById("heroPhone");
+  if (!reduce && matchMedia("(pointer:fine)").matches) {
+    document.querySelector(".hero").addEventListener("pointermove", e => {
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - (r.left + r.width/2)) / innerWidth, y = (e.clientY - (r.top + r.height/2)) / innerHeight;
+      hp.classList.add("tracking");
+      hp.style.setProperty("--ry", (-8 + x*22).toFixed(2) + "deg");
+      hp.style.setProperty("--rx", (4 - y*16).toFixed(2) + "deg");
+    });
+  }
+
+  // Statement: words light up as you read
+  const st = document.getElementById("statement");
+  st.innerHTML = st.textContent.split(" ").map(w => '<span class="w">' + w + '</span>').join(" ");
+  const words = [...st.querySelectorAll(".w")];
+
+  // Story
+  const story = document.querySelector(".story");
+  const chapters = [...document.querySelectorAll(".chapter")];
+  const panes = [...document.querySelectorAll(".pane[data-p]")];
+  const railBtns = [...document.querySelectorAll("#rail button")];
+  const pill = document.getElementById("pill");
+  const pillText = ["Rejetée","Diagnostic","En correction","En ligne"];
+  const storyPhone = document.getElementById("storyPhone");
+  const code = document.getElementById("code");
+  const testsNum = document.getElementById("testsNum"), testsBar = document.getElementById("testsBar");
+  const suites = [...document.querySelectorAll("#suites div")];
+  let step = -1, testsAnim = null, codeTimer = null;
+
+  function runTests(){
+    cancelAnimationFrame(testsAnim);
+    const total = 1364, dur = reduce ? 0 : 1800, t0 = performance.now();
+    const tick = now => {
+      const p = dur ? clamp((now - t0)/dur,0,1) : 1, e = 1 - Math.pow(1-p,3);
+      testsNum.textContent = Math.round(total*e).toLocaleString("fr-FR");
+      testsBar.style.width = (e*100) + "%";
+      suites.forEach((s,i) => s.classList.toggle("ok", e > (i+1)/suites.length - .05));
+      if (p < 1) testsAnim = requestAnimationFrame(tick);
+    };
+    testsAnim = requestAnimationFrame(tick);
+  }
+
+  function setStep(s){
+    if (s === step) return;
+    step = s;
+    chapters.forEach((c,i) => { c.classList.toggle("on", i === s); c.classList.toggle("past", i < s); });
+    panes.forEach((p,i) => p.classList.toggle("on", i === s));
+    pill.dataset.s = s; pill.textContent = pillText[s];
+    clearTimeout(codeTimer); code.classList.remove("fixed");
+    if (s === 1) codeTimer = setTimeout(() => code.classList.add("fixed"), reduce ? 0 : 2000);
+    if (s === 2) runTests();
+  }
+  railBtns.forEach((b,i) => b.addEventListener("click", () => {
+    const top = story.getBoundingClientRect().top + scrollY;
+    const span = story.offsetHeight - vh();
+    scrollTo({top: top + span*((i + .5)/4), behavior: reduce ? "auto" : "smooth"});
+  }));
+
+  // Showcase + counters
+  const show = document.getElementById("showcase");
+  const counters = [...document.querySelectorAll(".count")];
+  function count(el){
+    const to = parseFloat(el.dataset.to), dec = +(el.dataset.dec||0), sep = el.dataset.sep || "";
+    const dur = reduce ? 0 : 1600, t0 = performance.now();
+    const fmt = v => dec ? v.toFixed(dec).replace(".", ",") : Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+    const tick = now => { const p = dur ? clamp((now-t0)/dur,0,1) : 1; el.textContent = fmt(to*(1-Math.pow(1-p,4))); if (p<1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
+
+  // Reveal on view
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("in");
+    e.target.querySelectorAll(".count").forEach(count);
+    io.unobserve(e.target);
+  }), {threshold:.18, rootMargin:"0px 0px -6% 0px"});
+  document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+  // Nav theme follows section
+  const nav = document.getElementById("nav");
+  const lights = [...document.querySelectorAll(".light-sec")];
+
+  let ticking = false;
+  function frame(){
+    ticking = false;
+    const H = vh();
+    // statement
+    const sr = st.getBoundingClientRect();
+    const sp = clamp((H*.85 - sr.top) / (sr.height + H*.35), 0, 1);
+    const lit = Math.round(sp * words.length);
+    words.forEach((w,i) => w.classList.toggle("lit", i < lit));
+    // story
+    const r = story.getBoundingClientRect();
+    const p = clamp(-r.top / (story.offsetHeight - H), 0, 1);
+    setStep(Math.min(3, Math.floor(p*4)));
+    railBtns.forEach((b,i) => b.firstElementChild.style.transform = "scaleX(" + clamp(p*4 - i,0,1) + ")");
+    if (!reduce) storyPhone.style.transform = "translateY(" + ((.5-p)*50).toFixed(1) + "px) rotate(" + ((p-.5)*-4).toFixed(2) + "deg)";
+    // showcase zoom
+    if (!reduce) {
+      const m = show.getBoundingClientRect();
+      const q = clamp((H - m.top) / (H*.9), 0, 1);
+      show.style.setProperty("--s", (.86 + .14*q).toFixed(4));
+      show.style.setProperty("--r", (44 - 16*q).toFixed(1) + "px");
+      show.style.setProperty("--is", (1.12 - .12*q).toFixed(4));
+    }
+    // nav
+    const onLight = lights.some(s => { const b = s.getBoundingClientRect(); return b.top <= 26 && b.bottom >= 26; });
+    nav.classList.toggle("light", onLight);
+  }
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
+  addEventListener("scroll", onScroll, {passive:true});
+  addEventListener("resize", onScroll);
+  frame();
+
+  // Magnetic buttons
+  if (!reduce && matchMedia("(pointer:fine)").matches) {
+    document.querySelectorAll(".magnet").forEach(b => {
+      b.addEventListener("pointermove", e => {
+        const r = b.getBoundingClientRect();
+        b.style.transform = "translate(" + ((e.clientX - r.left - r.width/2)*.22).toFixed(1) + "px," + ((e.clientY - r.top - r.height/2)*.3).toFixed(1) + "px)";
+      });
+      b.addEventListener("pointerleave", () => b.style.transform = "");
+    });
+  }
+})();
+</script>
+</body>
+</html>
