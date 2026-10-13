@@ -314,7 +314,7 @@ footer a:hover{color:#fff}
       <a href="#apps">Mes apps</a>
       <a href="#offre">Offre</a>
       <button class="lang-btn" type="button" id="langBtn" aria-label="English version">EN</button>
-      <a class="nav-cta js-book" href="#contact">Réserver un audit</a>
+      <a class="nav-cta js-book" href="mailto:support@elmariniapp.com?subject=R%C3%A9servation%20audit%20Flutter">Réserver un audit</a>
     </nav>
   </div>
 </header>
@@ -328,7 +328,7 @@ footer a:hover{color:#fff}
       <h1><span class="line"><span>Je débloque</span></span><span class="line"><span>les apps Flutter.</span></span><span class="line"><span class="grad">Jusqu'au store.</span></span></h1>
       <p class="hero-sub">Bugs tenaces, écrans cassés, achats intégrés qui échouent, version rejetée par Google Play ou l'App Store. Je trouve la vraie cause, je corrige et je vérifie avant la mise en ligne.</p>
       <div class="hero-actions">
-        <a class="btn btn-blue magnet js-book" href="#contact">Réserver un audit</a>
+        <a class="btn btn-blue magnet js-book" href="mailto:support@elmariniapp.com?subject=R%C3%A9servation%20audit%20Flutter">Réserver un audit</a>
         <a class="btn btn-line magnet" href="#methode">Voir comment</a>
       </div>
     </div>
@@ -503,7 +503,7 @@ footer a:hover{color:#fff}
             <li><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#30d158" fill-opacity=".18"/><path d="m6 10.3 2.7 2.6L14 7.4" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Un appel de 30 minutes pour tout passer en revue</li>
           </ul>
           <p class="price-note">Si vous me confiez ensuite la correction, le prix de l'audit est déduit.</p>
-          <a class="btn btn-blue magnet js-book" href="#contact" style="background:#2997ff">Réserver un audit</a>
+          <a class="btn btn-blue magnet js-book" href="mailto:support@elmariniapp.com?subject=R%C3%A9servation%20audit%20Flutter" style="background:#2997ff">Réserver un audit</a>
         </div>
       </div>
       <div class="side">
@@ -523,8 +523,8 @@ footer a:hover{color:#fff}
     <h2 class="rv">Dites-moi<br><span class="grad">ce qui bloque.</span></h2>
     <p class="rv d1">Quelques lignes suffisent : ce qui se passe, sur quelle plateforme, et depuis quand. Je vous réponds avec une première lecture et le créneau le plus proche.</p>
     <div class="hero-actions rv d2">
-      <a class="btn btn-blue magnet js-book" href="#contact">Réserver un audit</a>
-      <a class="btn btn-line magnet" href="mailto:support@elmariniapp.com?subject=Mon%20app%20Flutter">Écrire un e-mail</a>
+      <a class="btn btn-blue magnet js-book" href="mailto:support@elmariniapp.com?subject=R%C3%A9servation%20audit%20Flutter">Réserver un audit</a>
+      <a class="btn btn-line magnet js-email" href="mailto:support@elmariniapp.com?subject=Mon%20app%20Flutter">Écrire un e-mail</a>
     </div>
     <p class="cta-mail">support@elmariniapp.com</p>
   </div>
@@ -540,8 +540,27 @@ footer a:hover{color:#fff}
 
 <script>
 (() => {
-  const BOOKING_URL = "mailto:support@elmariniapp.com?subject=R%C3%A9servation%20audit%20Flutter";
-  document.querySelectorAll(".js-book").forEach(a => a.href = BOOKING_URL);
+  const contactEmail = "support@elmariniapp.com";
+  const mobileMailApp = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
+    || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  function updateContactLinks(language) {
+    const subjects = language === "en"
+      ? {audit: "Flutter audit request", email: "My Flutter app"}
+      : {audit: "Réservation audit Flutter", email: "Mon app Flutter"};
+    document.querySelectorAll(".js-book, .js-email").forEach(link => {
+      const subject = link.classList.contains("js-book") ? subjects.audit : subjects.email;
+      link.href = mobileMailApp
+        ? "mailto:" + contactEmail + "?subject=" + encodeURIComponent(subject)
+        : "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(contactEmail) + "&su=" + encodeURIComponent(subject);
+      if (mobileMailApp) {
+        link.removeAttribute("target");
+        link.removeAttribute("rel");
+      } else {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
+    });
+  }
 
   const EN = {"Méthode": "Method", "Mes apps": "My apps", "Offre": "Offer", "Réserver un audit": "Book an audit", "Je débloque": "I fix stuck", "les apps Flutter.": "Flutter apps.", "Jusqu'au store.": "Right to the store.", "Bugs tenaces, écrans cassés, achats intégrés qui échouent, version rejetée par Google Play ou l'App Store. Je trouve la vraie cause, je corrige et je vérifie avant la mise en ligne.": "Stubborn bugs, broken screens, failing in-app purchases, a release rejected by Google Play or the App Store. I find the real cause, fix it and verify it before it goes live.", "Voir comment": "See how", "Votre app": "Your app", "En ligne": "Live", "Publiée": "Published", "Acceptée sur les deux stores après correction.": "Approved on both stores after the fix.", "Faites défiler": "Scroll", "Du rejet à la mise en ligne, en quatre étapes": "From rejection to release, in four steps", "Reproduire.": "Reproduce.", "Je fais apparaître le problème sur un vrai appareil, dans les mêmes conditions que vos utilisateurs.": "I make the issue happen on a real device, in the same conditions as your users.", "Trouver la cause.": "Find the cause.", "Je remonte jusqu'à l'origine dans le code, plutôt que de masquer le symptôme.": "I trace it back to its origin in the code instead of hiding the symptom.", "Corriger et tester.": "Fix and test.", "Je modifie la bonne partie du code et j'ajoute des tests pour que le bug ne revienne pas.": "I change the right part of the code and add tests so the bug stays fixed.", "Publier.": "Release.", "Je vérifie sur Android et iOS, puis la version part sur Google Play et l'App Store.": "I verify on Android and iOS, then the release goes out to Google Play and the App Store.", "Rejetée": "Rejected", "Motif du rejet": "Rejection reason", "Les achats intégrés ne se valident pas sur iPhone.": "In-app purchases fail to validate on iPhone.", "Achat bloqué après paiement": "Purchase stuck after payment", "Écran Premium vide sur iPad": "Premium screen blank on iPad", "Plantage au retour d'arrière-plan": "Crash when returning from background", "Cause trouvée": "Cause found", "La transaction n'est jamais vérifiée côté StoreKit 2.": "The transaction is never verified with StoreKit 2.", "tests réussis": "tests passed", "Achats intégrés": "In-app purchases", "Mise en page iPad": "iPad layout", "Cycle de vie": "App lifecycle", "Régressions": "Regressions", "Mes apps. En ligne et utilisées.": "My apps. Live and in use.", "Je conçois et publie mes propres apps Flutter. Ce que j'apprends en production sert directement les apps de mes clients.": "I design and ship my own Flutter apps. What I learn in production goes straight into my clients' apps.", "Horaires de prière, Coran, Qibla, duas et widgets dans une seule app, en six langues dont l'arabe et l'ourdou.": "Prayer times, Quran, Qibla, duas and widgets in one app, in six languages including Arabic and Urdu.", "téléchargements": "downloads", "sur 79 avis": "from 79 reviews", "« Un outil indispensable au quotidien. »": "“An essential everyday tool.”", "Yassir B., avis Google Play": "Yassir B., Google Play review (translated)", "Voir sur Google Play": "View on Google Play", "Confidentialité": "Privacy", "1 000+ téléchargements": "1,000+ downloads", "Scanner PDF avec OCR, signature et éditeur, entièrement sur l'appareil. Sans publicité, avec une offre Pro.": "PDF scanner with OCR, signing and an editor, all on the device. No ads, with a Pro plan.", "Disponible sur Google Play": "Available on Google Play", "Transforme les photos de chantier, de livraison ou d'inspection en preuves datées et géolocalisées, exportées en rapports PDF.": "Turns site, delivery or inspection photos into dated, geolocated proof, exported as PDF reports.", "Bientôt.": "Coming soon.", "Un réveil avec missions pour vraiment se lever.": "An alarm with missions that actually gets you up.", "Défi quotidien et leçons guidées.": "Daily challenge and guided lessons.", "Commencez par un audit. Prix fixe.": "Start with an audit. Fixed price.", "Vous savez exactement ce qui ne va pas, ce que ça coûte à corriger et dans quel ordre, avant de vous engager.": "You know exactly what is wrong, what it costs to fix and in which order, before you commit.", "Audit Flutter": "Flutter audit", "HT, rapport livré sous 48 h ouvrées": "Excl. VAT, report within 2 business days", "Je reproduis le problème et je lis le code concerné": "I reproduce the issue and read the code involved", "Vous recevez la liste des risques, classés par priorité": "You get a list of risks, ranked by priority", "Chaque correction est chiffrée avec un prix fixe": "Every fix comes with a fixed price", "Un appel de 30 minutes pour tout passer en revue": "A 30-minute call to walk through it all", "Si vous me confiez ensuite la correction, le prix de l'audit est déduit.": "If you then hire me for the fixes, the audit fee is deducted.", "Correction au forfait": "Fixed-price fixes", "Je corrige les points retenus dans l'audit, au prix annoncé, avec des tests qui empêchent le problème de revenir.": "I fix the items you choose from the audit, at the quoted price, with tests that stop the issue from coming back.", "Publication sur les stores": "Store release", "Builds signés, TestFlight, achats intégrés et réponses aux rejets, sur Google Play et l'App Store.": "Signed builds, TestFlight, in-app purchases and replies to rejections, on Google Play and the App Store.", "Ce que je corrige souvent": "What I often fix", "Écrans qui débordent": "Overflowing screens", "Paysage et clavier": "Landscape and keyboard", "Arabe et RTL": "Arabic and RTL", "Abonnements": "Subscriptions", "Builds qui échouent": "Failing builds", "Export PDF lent": "Slow PDF export", "Plantages": "Crashes", "Tests cassés": "Broken tests", "Dites-moi": "Tell me", "ce qui bloque.": "what's stuck.", "Quelques lignes suffisent : ce qui se passe, sur quelle plateforme, et depuis quand. Je vous réponds avec une première lecture et le créneau le plus proche.": "A few lines are enough: what happens, on which platform, and since when. I'll reply with a first read and the earliest slot.", "Écrire un e-mail": "Send an email", "© 2026 El Marini App, développeur Flutter indépendant en France": "© 2026 El Marini App, independent Flutter developer in France", "Politiques de confidentialité": "Privacy policies", "@Navigation principale": "Main navigation", "@Méthode en quatre étapes": "Method in four steps", "@Étape 1 : reproduire": "Step 1: reproduce", "@Étape 2 : trouver la cause": "Step 2: find the cause", "@Étape 3 : corriger et tester": "Step 3: fix and test", "@Étape 4 : publier": "Step 4: release", "@Muslim App : horaires de prière, Coran, Qibla et duas": "Muslim App: prayer times, Quran, Qibla and duas", "@5 étoiles": "5 stars", "@Scaneris : scanner PDF, OCR et signature": "Scaneris: PDF scanner, OCR and signing", "@StampSight : preuves photo terrain et rapports PDF": "StampSight: field photo proof and PDF reports"};
   const STATEMENT = {fr: null, en: "A crashing app, a failing payment or a rejected release means users lost every single day. My job is to get your product back live, fast and for good."};
@@ -667,6 +686,7 @@ footer a:hover{color:#fff}
     document.querySelector('meta[name="description"]').setAttribute("content", META[lang].desc);
     langBtn.textContent = en ? "FR" : "EN";
     langBtn.setAttribute("aria-label", en ? "Version française" : "English version");
+    updateContactLinks(lang);
     splitStatement();
     if (step >= 0) { pill.textContent = PILL[lang][step]; if (step === 2) runTests(); }
     document.querySelectorAll(".count").forEach(c => { if (c.closest(".rv.in")) count(c); });
