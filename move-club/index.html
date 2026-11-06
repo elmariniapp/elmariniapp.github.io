@@ -4,16 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#ffda17">
-  <meta name="description" content="MOVE CLUB, l’app pour compter tes pas, enregistrer tes marches GPS, suivre tes progrès et relever des défis entre amis. Bientôt sur Android.">
+  <meta name="description" content="MOVE CLUB, l’app pour compter tes pas, enregistrer tes marches GPS, suivre tes progrès et relever des défis entre amis.">
   <title>MOVE CLUB — Chaque pas compte</title>
   <link rel="canonical" href="https://elmariniapp.github.io/move-club/">
+  <link rel="alternate" hreflang="fr" href="https://elmariniapp.github.io/move-club/">
+  <link rel="alternate" hreflang="en" href="https://elmariniapp.github.io/move-club/en/">
+  <link rel="alternate" hreflang="x-default" href="https://elmariniapp.github.io/move-club/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="MOVE CLUB — Chaque pas compte">
-  <meta property="og:description" content="Tes pas, tes objectifs et tes défis entre amis dans une seule app. Bientôt sur Android.">
+  <meta property="og:description" content="Tes pas, tes objectifs et tes défis entre amis dans une seule app.">
   <meta property="og:url" content="https://elmariniapp.github.io/move-club/">
   <link rel="icon" href="/move-club-legal/assets/marque.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="site.css?v=3">
+  <link rel="stylesheet" href="site.css?v=4">
   <script src="motion.js" defer></script>
+  <script src="downloads.js" defer></script>
 </head>
 <body>
   <div class="page-progress" aria-hidden="true"></div>
@@ -26,17 +30,23 @@
         <a href="#fonctionnalites">Fonctionnalités</a>
         <a href="#questions">Questions</a>
       </nav>
-      <a class="publisher" href="/#apps">El Marini App <span aria-hidden="true">↗</span></a>
+      <div class="header-actions">
+        <a class="publisher" href="/#apps">El Marini App <span aria-hidden="true">↗</span></a>
+        <nav class="language-switch" aria-label="Langue du site">
+          <a href="./" lang="fr" hreflang="fr" aria-label="Français" aria-current="page"><img src="assets/drapeau-fr.svg" alt="" width="20" height="14">FR</a>
+          <a href="en/" lang="en" hreflang="en" aria-label="English"><img src="assets/drapeau-gb.svg" alt="" width="20" height="14">EN</a>
+        </nav>
+      </div>
     </div>
   </header>
   <main id="contenu">
     <section class="shell hero" aria-labelledby="titre">
       <div class="hero-copy">
-        <span class="tag"><span class="status-dot"></span>Bientôt sur Android</span>
+        <span class="tag"><span class="status-dot"></span>Pas, défis et progrès</span>
         <h1 id="titre"><span class="title-line"><span>Chaque pas</span></span>
           <span class="title-line title-accent"><span>compte.</span></span></h1>
         <p>Compte tes pas, garde le rythme et relève des défis. À ton rythme, seul ou entre amis.</p>
-        <a class="button dark" href="#apercu">Découvrir l’app <span aria-hidden="true">↓</span></a>
+        <a class="button dark" href="#telecharger">Télécharger MOVE CLUB <span aria-hidden="true">↓</span></a>
       </div>
       <div class="hero-art" aria-hidden="true">
         <svg class="route" viewBox="0 0 680 570" fill="none" aria-hidden="true">
@@ -51,6 +61,17 @@
           <img class="hero-shoe" src="assets/basket-accueil.webp" alt="" fetchpriority="high" width="740" height="662">
         </div>
         <div class="hero-index"><span>01 / DÉPART</span><strong>02 / OBJECTIF</strong></div>
+      </div>
+    </section>
+
+    <section class="shell download-panel" id="telecharger" aria-labelledby="telecharger-titre">
+      <div>
+        <span class="kicker">L’application mobile</span>
+        <h2 id="telecharger-titre">Télécharger MOVE CLUB</h2>
+      </div>
+      <div class="download-actions">
+        <p class="download-status">Les liens de téléchargement s’affichent selon la disponibilité dans chaque boutique.</p>
+        <div class="store-links" hidden></div>
       </div>
     </section>
 
@@ -171,7 +192,7 @@
         <details><summary>Comment connecter une montre ?</summary><p>Sur Android, son application doit pouvoir partager les pas avec Health Connect. Autorise ensuite MOVE CLUB à les lire et vérifie la réception depuis le guide de l’app.</p></details>
         <details><summary>Quels réglages puis-je personnaliser ?</summary><p>Tu peux choisir entre le français, l’anglais, l’espagnol et le portugais du Brésil, changer de thème et d’unités, régler les notifications et les vibrations, ou réduire les animations.</p></details>
         <details><summary>Que puis-je faire avec mon compte et mes données ?</summary><p>Personnalise ton profil, ta photo et ton @identifiant. Connecte-toi par e-mail ou via une méthode proposée sur ton appareil. Tu peux gérer tes autorisations, exporter ou effacer tes données locales et demander la suppression de ton compte. Le tracé d’une marche est enregistré sur ton appareil. <a href="/move-club-legal/confidentialite.html">Consulter la politique de confidentialité</a>.</p></details>
-        <details><summary>Où télécharger MOVE CLUB ?</summary><p>Le lancement Android est en préparation. Le lien Google Play sera ajouté ici quand la fiche publique sera disponible.</p></details>
+        <details><summary>Où télécharger MOVE CLUB ?</summary><p>Retrouve les liens officiels dans la section <a href="#telecharger">Télécharger MOVE CLUB</a>.</p></details>
         <details><summary>Comment contacter l’équipe ?</summary><p>Utilise la Boîte à idées dans l’app pour proposer une amélioration, ou écris à <a href="mailto:support@elmariniapp.com">support@elmariniapp.com</a>.</p></details>
       </div>
     </section>

@@ -226,3 +226,55 @@ details a { color:#1641c7; }
     to { opacity:1; transform:none; }
   }
 }
+
+.header-actions {
+  display:flex;
+  align-items:center;
+  gap:clamp(.65rem,2vw,1.3rem);
+}
+.header-actions .language-switch {
+  display:flex;
+  flex-wrap:nowrap;
+  gap:.2rem;
+  padding:.2rem;
+  border:1px solid var(--line);
+  border-radius:999px;
+}
+.header-actions .language-switch a {
+  min-height:2rem;
+  padding:.2rem .4rem;
+  border-radius:999px;
+  font-size:.74rem;
+  line-height:1;
+}
+.language-switch a[aria-current="page"] { background:var(--yellow); }
+.language-switch img { width:1rem; height:.7rem; object-fit:cover; border-radius:2px; }
+.download-panel {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem 2rem;
+  margin-top:clamp(1rem,3vw,2rem);
+  padding:clamp(1rem,3vw,1.8rem);
+  border:1px solid var(--line);
+  border-radius:1.2rem;
+  background:var(--white);
+}
+.download-panel h2 {
+  margin-top:.3rem;
+  font-size:clamp(1.6rem,3.5vw,2.5rem);
+  line-height:1.03;
+  letter-spacing:-.045em;
+}
+.download-status { max-width:24rem; color:var(--muted); font-size:.93rem; }
+.store-links:not([hidden]) { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; }
+.store-link { display:inline-flex; align-items:center; color:var(--ink); font-weight:750; }
+.store-link img { width:auto; max-width:100%; }
+.store-link[data-store="apple"] img { height:44px; }
+.store-link[data-store="google"] img { height:64px; }
+@media (max-width:44rem) {
+  .header-actions { grid-column:2; grid-row:1; }
+  .header-actions .publisher { display:none; }
+  .download-panel { align-items:flex-start; flex-direction:column; }
+  .store-links:not([hidden]) { align-items:flex-start; flex-direction:column; }
+}
