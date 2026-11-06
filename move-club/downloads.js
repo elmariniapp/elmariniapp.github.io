@@ -2,17 +2,16 @@
   const links = document.querySelector('.store-links');
   const status = document.querySelector('.download-status');
   const french = document.documentElement.lang === 'fr';
+  const assetDirectory = new URL('assets/', document.currentScript.src);
   const stores = {
     apple: {
-      badge: 'https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg',
+      badge: french ? 'app-store-fr.svg' : 'app-store-en.svg',
       label: french ? 'Télécharger sur l’App Store' : 'Download on the App Store',
       matches: (url) => url.origin === 'https://apps.apple.com'
         && /^\/(?:[a-z]{2}\/)?app\/(?:[^/]+\/)?id\d+\/?$/.test(url.pathname),
     },
     google: {
-      badge: french
-        ? 'https://play.google.com/intl/en_us/badges/static/images/badges/fr_badge_web_generic.png'
-        : 'https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png',
+      badge: french ? 'google-play-fr.png' : 'google-play-en.png',
       label: french ? 'Télécharger sur Google Play' : 'Get it on Google Play',
       matches: (url) => url.origin === 'https://play.google.com'
         && url.pathname === '/store/apps/details'
@@ -37,9 +36,8 @@
     link.href = url.href;
     const image = document.createElement('img');
     image.alt = store.label;
-    image.referrerPolicy = 'no-referrer';
     image.addEventListener('error', () => { link.textContent = store.label; }, { once: true });
-    image.src = store.badge;
+    image.src = new URL(store.badge, assetDirectory).href;
     link.append(image);
     links.append(link);
   }
