@@ -12,9 +12,11 @@
   <meta property="og:description" content="Tes pas, tes objectifs et tes défis entre amis dans une seule app. Bientôt sur Android.">
   <meta property="og:url" content="https://elmariniapp.github.io/move-club/">
   <link rel="icon" href="/move-club-legal/assets/marque.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="site.css?v=2">
+  <link rel="stylesheet" href="site.css?v=3">
+  <script src="motion.js" defer></script>
 </head>
 <body>
+  <div class="page-progress" aria-hidden="true"></div>
   <a class="skip" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="shell header-inner">
@@ -31,14 +33,24 @@
     <section class="shell hero" aria-labelledby="titre">
       <div class="hero-copy">
         <span class="tag"><span class="status-dot"></span>Bientôt sur Android</span>
-        <h1 id="titre">Chaque pas<br><span>compte.</span></h1>
+        <h1 id="titre"><span class="title-line"><span>Chaque pas</span></span>
+          <span class="title-line title-accent"><span>compte.</span></span></h1>
         <p>Compte tes pas, garde le rythme et relève des défis. À ton rythme, seul ou entre amis.</p>
         <a class="button dark" href="#apercu">Découvrir l’app <span aria-hidden="true">↓</span></a>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <svg class="route" viewBox="0 0 680 570" fill="none"><path d="M-8 322C89 352 107 152 215 168s70 201 178 198 155-250 296-187" stroke="currentColor" stroke-width="3" stroke-dasharray="3 11" stroke-linecap="round"/><circle cx="216" cy="168" r="8" fill="currentColor"/><circle cx="394" cy="366" r="8" fill="currentColor"/></svg>
-        <img class="hero-shoe" src="assets/basket-accueil.webp" alt="" fetchpriority="high" width="740" height="662">
-        <div class="hero-index"><span>MOVE CLUB</span><strong>BOUGE<br>À TON RYTHME.</strong></div>
+        <svg class="route" viewBox="0 0 680 570" fill="none" aria-hidden="true">
+          <circle class="route-orbit" cx="353" cy="293" r="206"/>
+          <circle class="route-orbit route-orbit-inner" cx="353" cy="293" r="180"/>
+          <path class="route-guide" d="M45 437C129 438 89 236 174 222S233 330 309 305 420 137 512 130 586 175 635 119"/>
+          <path class="route-trace" d="M45 437C129 438 89 236 174 222S233 330 309 305 420 137 512 130 586 175 635 119" pathLength="1"/>
+          <circle class="route-point route-start" cx="45" cy="437" r="6"/>
+          <circle class="route-point route-end" cx="635" cy="119" r="7"/>
+        </svg>
+        <div class="hero-shoe-scene">
+          <img class="hero-shoe" src="assets/basket-accueil.webp" alt="" fetchpriority="high" width="740" height="662">
+        </div>
+        <div class="hero-index"><span>01 / DÉPART</span><strong>02 / OBJECTIF</strong></div>
       </div>
     </section>
 
@@ -88,7 +100,7 @@
               <p>Lance, mets en pause ou reprends un enregistrement GPS facultatif. Retrouve la carte, l’historique, la durée, la distance et l’allure de tes marches, avec les rues de départ et d’arrivée lorsqu’elles sont disponibles.</p>
               <p>Sur Android, tu peux revoir les portions du trajet et exclure un déplacement en véhicule de ton bilan.</p>
             </div>
-            <svg class="feature-art gps-art" viewBox="0 0 220 200" fill="none" aria-hidden="true"><path d="M18 150C55 174 49 80 100 83s24 65 53 47 9-80 49-87" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><circle cx="18" cy="150" r="12" fill="#fffefa" stroke="currentColor" stroke-width="5"/><circle cx="202" cy="43" r="12" fill="#fffefa" stroke="currentColor" stroke-width="5"/></svg>
+            <svg class="feature-art gps-art" viewBox="0 0 220 200" fill="none" aria-hidden="true"><path class="gps-trace" pathLength="1" d="M18 150C55 174 49 80 100 83s24 65 53 47 9-80 49-87" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><circle cx="18" cy="150" r="12" fill="#fffefa" stroke="currentColor" stroke-width="5"/><circle cx="202" cy="43" r="12" fill="#fffefa" stroke="currentColor" stroke-width="5"/></svg>
           </article>
           <article class="feature cyan">
             <div class="feature-copy">
