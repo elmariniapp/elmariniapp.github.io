@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#EAF3FF">
+<title>MOVE CLUB</title>
+<style>
+  :root {
+    --navy: #07194F; --blue: #0A4FE0; --blue-2: #1E73FF; --solar: #FFD426;
+    --ok: #0F8A47; --bad: #C0362C; --sky: #EAF3FF;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100vh; min-height: 100dvh; color: var(--navy);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(180deg, #DCEBFF 0%, #F2F8FF 55%, #FFFFFF 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
+             max(150px, calc(env(safe-area-inset-bottom) + 130px)) max(20px, env(safe-area-inset-left));
+    position: relative; overflow-x: hidden;
+  }
+  /* The blue and yellow waves of the app, drawn once at the bottom. */
+  .waves { position: fixed; left: 0; right: 0; bottom: 0; height: 22vh; min-height: 120px; max-height: 210px;
+           pointer-events: none; z-index: 0; }
+  .waves svg { display: block; width: 100%; height: 100%; }
+  main { position: relative; z-index: 1; width: 100%; max-width: 460px; text-align: center; }
+  .logo { display: block; width: min(300px, 74%); height: auto; margin: 0 auto 26px; }
+  .card {
+    background: linear-gradient(160deg, #FFFFFF 0%, #EEF4FF 100%); border: 1.5px solid #fff; border-radius: 30px;
+    padding: 30px 24px 26px; box-shadow: 0 18px 44px rgba(10, 79, 224, .18), 0 2px 6px rgba(7, 25, 79, .06);
+  }
+  .icon { width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 18px; display: grid; place-items: center;
+          color: #fff; box-shadow: 0 8px 20px rgba(7, 25, 79, .18); }
+  .icon svg { width: 36px; height: 36px; }
+  .ok .icon { background: linear-gradient(145deg, #19B25F, var(--ok)); }
+  .bad .icon { background: linear-gradient(145deg, #E2574C, var(--bad)); }
+  .wait .icon { background: linear-gradient(145deg, var(--blue-2), var(--blue)); }
+  h1 { font-size: clamp(25px, 6.4vw, 32px); line-height: 1.15; margin: 0 0 12px; font-weight: 900; letter-spacing: -.02em; }
+  .bar { width: 64px; height: 6px; border-radius: 3px; background: var(--solar); margin: 0 auto 16px; }
+  p { font-size: clamp(16px, 4.2vw, 18px); line-height: 1.5; margin: 0 0 10px; color: #1B2A5C; }
+  .hint { font-size: 15px; color: #4A5A86; }
+  a.button {
+    display: none; margin: 20px auto 0; width: 100%; max-width: 360px; padding: 17px 22px; border-radius: 999px; border: 0;
+    background: linear-gradient(180deg, var(--blue-2) 0%, var(--blue) 100%); color: #fff; font-weight: 800; font-size: 17px;
+    text-decoration: none; box-shadow: 0 10px 24px rgba(10, 79, 224, .35); text-align: center;
+  }
+  a.button.show { display: block; }
+  a.button:focus-visible { outline: 3px solid var(--solar); outline-offset: 3px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation: rise .45s ease-out both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  }
+  noscript p { color: var(--bad); font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="move_club_logo.png" width="2040" height="296" alt="MOVE CLUB">
+  <section class="card wait" id="card" aria-live="polite">
+    <div class="icon" id="icon" aria-hidden="true"></div>
+    <h1 id="title">MOVE CLUB</h1>
+    <div class="bar" aria-hidden="true"></div>
+    <p id="text"></p>
+    <p class="hint" id="hint"></p>
+    <a class="button" id="open" href="#"></a>
+    <noscript><p>JavaScript is required to read the result of this link.</p></noscript>
+  </section>
+</main>
+<div class="waves" aria-hidden="true">
+  <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+    <path d="M0,120 C180,40 360,60 560,130 C700,180 820,215 900,220 L0,220 Z" fill="#0A4FE0"/>
+    <path d="M1440,70 C1250,110 1130,190 960,215 C900,222 860,222 820,220 L1440,220 Z" fill="#FFD426"/>
+  </svg>
+</div>
+<script>
+(function () {
+  // Landing page of the sign-up confirmation e-mail.
+  //
+  // What the address tells us. The e-mail link first goes to Supabase, which checks the one-time token and, only if it
+  // is valid, confirms the address and sends the browser here with a `code` (or an `access_token`). A refused or used
+  // token comes back with `error` / `error_code` instead. So "code, no error" really means the address was confirmed by
+  // Supabase. This page itself checks nothing, stores nothing and sends nothing: a hand-made address would only show
+  // the same message, without creating any session. Without a code and without an error there is nothing to confirm,
+  // and the page says so instead of showing a success.
+  var T = {
+    fr: { okT: "E-mail confirmé", ok: "Ton compte MOVE CLUB est prêt.",
+          okApp: "Ouvre l’application pour continuer.",
+          okPc: "Retourne dans MOVE CLUB sur ton téléphone et connecte-toi avec ton e-mail et ton mot de passe.",
+          expT: "Lien expiré", exp: "Ce lien a expiré ou a déjà été utilisé.",
+          expHint: "Si ton e-mail est déjà confirmé, ouvre MOVE CLUB et connecte-toi. Sinon, demande un nouvel e-mail depuis l’écran d’inscription.",
+          badT: "Lien non valide", bad: "Ce lien n’est pas valide, rien n’a été confirmé.",
+          badHint: "Ouvre-le depuis l’e-mail le plus récent, ou demande-en un nouveau dans MOVE CLUB.",
+          open: "Ouvrir MOVE CLUB" },
+    en: { okT: "E-mail confirmed", ok: "Your MOVE CLUB account is ready.",
+          okApp: "Open the app to continue.",
+          okPc: "Go back to MOVE CLUB on your phone and sign in with your e-mail and password.",
+          expT: "Link expired", exp: "This link has expired or was already used.",
+          expHint: "If your e-mail is already confirmed, open MOVE CLUB and sign in. Otherwise request a new e-mail from the sign-up screen.",
+          badT: "Invalid link", bad: "This link is not valid, nothing was confirmed.",
+          badHint: "Open it from the most recent e-mail, or request a new one in MOVE CLUB.",
+          open: "Open MOVE CLUB" },
+    es: { okT: "Correo confirmado", ok: "Tu cuenta de MOVE CLUB está lista.",
+          okApp: "Abre la aplicación para continuar.",
+          okPc: "Vuelve a MOVE CLUB en tu teléfono e inicia sesión con tu correo y tu contraseña.",
+          expT: "Enlace caducado", exp: "Este enlace ha caducado o ya se usó.",
+          expHint: "Si tu correo ya está confirmado, abre MOVE CLUB e inicia sesión. Si no, pide un nuevo correo desde la pantalla de registro.",
+          badT: "Enlace no válido", bad: "Este enlace no es válido, no se ha confirmado nada.",
+          badHint: "Ábrelo desde el correo más reciente o pide uno nuevo en MOVE CLUB.",
+          open: "Abrir MOVE CLUB" },
+    pt: { okT: "E-mail confirmado", ok: "Sua conta MOVE CLUB está pronta.",
+          okApp: "Abra o aplicativo para continuar.",
+          okPc: "Volte ao MOVE CLUB no seu celular e entre com seu e-mail e sua senha.",
+          expT: "Link expirado", exp: "Este link expirou ou já foi usado.",
+          expHint: "Se seu e-mail já está confirmado, abra o MOVE CLUB e entre. Caso contrário, peça um novo e-mail na tela de cadastro.",
+          badT: "Link inválido", bad: "Este link não é válido, nada foi confirmado.",
+          badHint: "Abra-o pelo e-mail mais recente ou peça um novo no MOVE CLUB.",
+          open: "Abrir o MOVE CLUB" }
+  };
+  var lang = ((navigator.language || "fr").slice(0, 2)).toLowerCase();
+  var t = T[lang] || T.fr;
+  document.documentElement.lang = T[lang] ? lang : "fr";
+
+  function params(s) { try { return new URLSearchParams(s); } catch (e) { return new URLSearchParams(""); } }
+  var q = params(location.search), h = params(location.hash.replace(/^#/, ""));
+  function get(k) { return q.get(k) || h.get(k); }
+
+  var mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var error = get("error") || get("error_code") || get("error_description");
+  var state;
+  if (error) {
+    var info = ((get("error_code") || "") + " " + (get("error_description") || "")).toLowerCase();
+    state = info.indexOf("expired") !== -1 ? "expired" : "invalid";
+  } else if (get("code") || get("access_token")) {
+    state = "ok";
+  } else {
+    state = "invalid"; // nothing to confirm: never a success by default
+  }
+
+  var ICON = {
+    ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    bad: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 6v8"/><path d="M12 18.2v.1"/></svg>'
+  };
+  var card = document.getElementById("card");
+  var title = document.getElementById("title");
+  var text = document.getElementById("text");
+  var hint = document.getElementById("hint");
+  var icon = document.getElementById("icon");
+  if (state === "ok") {
+    card.className = "card ok"; icon.innerHTML = ICON.ok;
+    title.textContent = t.okT; text.textContent = t.ok; hint.textContent = mobile ? t.okApp : t.okPc;
+  } else if (state === "expired") {
+    card.className = "card bad"; icon.innerHTML = ICON.bad;
+    title.textContent = t.expT; text.textContent = t.exp; hint.textContent = t.expHint;
+  } else {
+    card.className = "card bad"; icon.innerHTML = ICON.bad;
+    title.textContent = t.badT; text.textContent = t.bad; hint.textContent = t.badHint;
+  }
+  document.title = "MOVE CLUB – " + title.textContent;
+
+  // On a phone the same link is handed over to the app, which finishes the sign-in with the code it holds (the code can
+  // only be exchanged by the app that asked for the sign-up). A computer cannot open the app: no button there, the page
+  // says what to do on the phone instead.
+  if (mobile) {
+    var btn = document.getElementById("open");
+    btn.textContent = t.open;
+    btn.href = "moveclub://app/auth-callback" + location.search + location.hash;
+    btn.className = "button show";
+    if (state === "ok") { setTimeout(function () { location.href = btn.href; }, 700); }
+  }
+})();
+</script>
+</body>
+</html>
