@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#EAF3FF">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; connect-src https://rjorkshgehdjlshkmjci.supabase.co; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>MOVE CLUB – Réinitialiser le mot de passe</title>
+<style>
+:root { color-scheme:light; --navy:#07194F; --blue:#0A4FE0; --blue2:#1E73FF; --yellow:#FFD426; --muted:#53648B; --error:#B72929; --ok:#087B42; }
+* { box-sizing:border-box; }
+[hidden] { display:none!important; }
+html,body { margin:0; min-height:100%; }
+body { min-height:100vh; min-height:100dvh; padding:36px 20px 160px; display:flex; justify-content:center; align-items:center; background:linear-gradient(180deg,#DCEBFF,#F2F8FF 56%,#fff); color:var(--navy); font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; position:relative; overflow-x:hidden; }
+main { width:100%; max-width:455px; position:relative; z-index:1; text-align:center; }
+.logo { display:block; width:min(300px,74%); height:auto; margin:0 auto 28px; }
+.card { padding:32px 26px 30px; border:1px solid white; border-radius:30px; background:linear-gradient(160deg,#fff,#EEF4FF); box-shadow:0 18px 44px rgba(10,79,224,.16),0 2px 6px rgba(7,25,79,.06); text-align:left; }
+.symbol { margin:0 auto 18px; display:grid; place-items:center; width:68px; height:68px; border-radius:50%; background:linear-gradient(145deg,#1E73FF,#0A4FE0); box-shadow:0 7px 17px rgba(10,79,224,.23); font-size:34px; color:white; }
+h1 { font-size:clamp(25px,6vw,31px); text-align:center; line-height:1.17; letter-spacing:-.02em; margin:0 0 12px; font-weight:850; }
+.bar { width:64px; height:6px; background:var(--yellow); border-radius:999px; margin:0 auto 18px; }
+.intro { color:#1B2A5C; font-size:16px; line-height:1.5; margin:0 0 24px; text-align:center; }
+label { display:block; font-size:14px; font-weight:750; margin:0 0 7px; }
+input { width:100%; padding:14px 15px; min-height:49px; border:1.5px solid #B6C7E2; border-radius:14px; background:#fff; color:#07194F; font:inherit; font-size:16px; outline:none; }
+input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,79,224,.14); }
+.field { margin-bottom:16px; }
+.note { font-size:13px; color:var(--muted); line-height:1.55; margin:3px 0 18px; }
+.primary { display:block; width:100%; min-height:52px; border:0; border-radius:999px; padding:14px 22px; background:linear-gradient(180deg,var(--blue2),var(--blue)); color:white; font:inherit; font-size:16px; font-weight:800; cursor:pointer; box-shadow:0 10px 20px rgba(10,79,224,.27); }
+.primary:disabled { opacity:.65; cursor:progress; }
+.primary:focus-visible,.secondary:focus-visible { outline:3px solid var(--yellow); outline-offset:3px; }
+.message { min-height:20px; margin:0 0 14px; font-size:14px; line-height:1.5; text-align:center; }
+.message.error { color:var(--error); font-weight:650; }
+.message.success { color:var(--ok); font-weight:650; }
+.secondary { display:block; margin:16px auto 0; color:var(--blue); font-weight:750; text-align:center; text-decoration:underline; text-underline-offset:3px; }
+.waves { position:fixed; left:0; right:0; bottom:0; height:clamp(120px,22vh,210px); pointer-events:none; z-index:0; }
+.waves svg { display:block; width:100%; height:100%; }
+@media (max-height:670px) { body { align-items:flex-start; padding-top:22px; } .logo { margin-bottom:15px; } .card { padding:23px 20px; } }
+@media (prefers-reduced-motion:no-preference) { .card { animation:rise .35s ease-out both; } @keyframes rise { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} } }
+</style>
+</head>
+<body>
+<main>
+<img class="logo" src="../confirmed/move_club_logo.png" width="2040" height="296" alt="MOVE CLUB">
+<section class="card" aria-live="polite" aria-atomic="false">
+<div class="symbol" aria-hidden="true" id="symbol">🔒</div>
+<h1 id="title">Réinitialiser le mot de passe</h1>
+<div class="bar" aria-hidden="true"></div>
+<p class="intro" id="intro">Choisissez un nouveau mot de passe pour votre compte MOVE CLUB.</p>
+<form id="reset-form" hidden novalidate autocomplete="off">
+<div class="field"><label id="label-password" for="password">Nouveau mot de passe</label><input id="password" name="new-password" type="password" minlength="8" maxlength="256" autocomplete="new-password" required></div>
+<div class="field"><label id="label-confirm" for="confirmation">Confirmer le mot de passe</label><input id="confirmation" name="confirm-password" type="password" minlength="8" maxlength="256" autocomplete="new-password" required></div>
+<p class="note" id="rules">8 caractères minimum, une majuscule, un chiffre et un symbole.</p>
+<p class="message" id="feedback" role="status"></p>
+<button class="primary" id="submit" type="submit">Enregistrer mon mot de passe</button>
+</form>
+<p class="message" id="status" role="status"></p>
+</section>
+</main>
+<div class="waves" aria-hidden="true"><svg viewBox="0 0 1440 220" preserveAspectRatio="none"><path d="M0,120 C180,40 360,60 560,130 C700,180 820,215 900,220 L0,220 Z" fill="#0A4FE0"/><path d="M1440,70 C1250,110 1130,190 960,215 C900,222 860,222 820,220 L1440,220 Z" fill="#FFD426"/></svg></div>
+<script>
+(function () {
+  "use strict";
+  const projectUrl = "https://rjorkshgehdjlshkmjci.supabase.co";
+  const publishableKey = "sb_publishable_3DKemnKmZHATKz0UwkTG2A_Dpi9pBZt";
+  const strings = {
+    fr: {title:"Réinitialiser le mot de passe",intro:"Choisissez un nouveau mot de passe pour votre compte MOVE CLUB.",pw:"Nouveau mot de passe",confirm:"Confirmer le mot de passe",rules:"8 caractères minimum, une majuscule, un chiffre et un symbole.",submit:"Enregistrer mon mot de passe",working:"Vérification du lien et enregistrement…",mismatch:"Les mots de passe ne correspondent pas.",weak:"Utilisez au moins 8 caractères, une majuscule, un chiffre et un symbole.",invalidTitle:"Lien expiré ou invalide",invalid:"Demandez un nouvel e-mail depuis « Mot de passe oublié » dans MOVE CLUB.",failure:"L'enregistrement a échoué. Vérifiez votre connexion et réessayez.",successTitle:"Mot de passe modifié",success:"Votre mot de passe a été changé. Ouvrez MOVE CLUB et connectez-vous avec le nouveau mot de passe."},
+    en: {title:"Reset your password",intro:"Choose a new password for your MOVE CLUB account.",pw:"New password",confirm:"Confirm password",rules:"At least 8 characters, one uppercase letter, one number and one symbol.",submit:"Save new password",working:"Verifying link and saving…",mismatch:"Passwords do not match.",weak:"Use at least 8 characters, one uppercase letter, one number and one symbol.",invalidTitle:"Expired or invalid link",invalid:"Request a new email using “Forgot password” in MOVE CLUB.",failure:"Could not save your password. Check your connection and try again.",successTitle:"Password changed",success:"Your password has been updated. Open MOVE CLUB and sign in with your new password."},
+    es: {title:"Restablecer contraseña",intro:"Elige una nueva contraseña para tu cuenta MOVE CLUB.",pw:"Nueva contraseña",confirm:"Confirmar contraseña",rules:"Mínimo 8 caracteres, una mayúscula, un número y un símbolo.",submit:"Guardar contraseña",working:"Verificando enlace y guardando…",mismatch:"Las contraseñas no coinciden.",weak:"Usa al menos 8 caracteres, una mayúscula, un número y un símbolo.",invalidTitle:"Enlace caducado o no válido",invalid:"Solicita otro correo desde « Olvidé mi contraseña » en MOVE CLUB.",failure:"No se pudo guardar. Comprueba tu conexión e inténtalo de nuevo.",successTitle:"Contraseña cambiada",success:"Contraseña actualizada. Abre MOVE CLUB e inicia sesión con la nueva contraseña."},
+    pt: {title:"Redefinir senha",intro:"Escolha uma nova senha para sua conta MOVE CLUB.",pw:"Nova senha",confirm:"Confirmar senha",rules:"Pelo menos 8 caracteres, uma maiúscula, um número e um símbolo.",submit:"Salvar nova senha",working:"Verificando link e salvando…",mismatch:"As senhas não coincidem.",weak:"Use pelo menos 8 caracteres, uma maiúscula, um número e um símbolo.",invalidTitle:"Link expirado ou inválido",invalid:"Peça um novo e-mail em « Esqueci minha senha » no MOVE CLUB.",failure:"Não foi possível salvar. Confira a conexão e tente novamente.",successTitle:"Senha alterada",success:"Senha atualizada. Abra o MOVE CLUB e entre com sua nova senha."}
+  };
+  const chosen = (navigator.language || "fr").slice(0, 2).toLowerCase();
+  const t = strings[chosen] || strings.fr;
+  document.documentElement.lang = strings[chosen] ? chosen : "fr";
+  const el = id => document.getElementById(id);
+  el("title").textContent = t.title;
+  el("intro").textContent = t.intro;
+  el("label-password").textContent = t.pw;
+  el("label-confirm").textContent = t.confirm;
+  el("rules").textContent = t.rules;
+  el("submit").textContent = t.submit;
+  document.title = "MOVE CLUB – " + t.title;
+
+  const fromHash = new URLSearchParams(location.hash.replace(/^#/, ""));
+  const fromQuery = new URLSearchParams(location.search);
+  const get = name => fromHash.get(name) || fromQuery.get(name);
+  let tokenHash = get("token_hash");
+  const recoveryType = get("type");
+  let accessToken = null;
+
+  // Tokens stay in memory only and are immediately removed from browser history.
+  try { history.replaceState(null, "", location.pathname); } catch (_) {}
+
+  function terminal(title, body, ok) {
+    el("reset-form").hidden = true;
+    el("status").textContent = body;
+    el("status").className = "message " + (ok ? "success" : "error");
+    el("title").textContent = title;
+    el("intro").hidden = true;
+    el("symbol").textContent = ok ? "✓" : "!";
+    el("symbol").style.background = ok ? "#087B42" : "#B72929";
+    document.title = "MOVE CLUB – " + title;
+  }
+  function feedback(message) {
+    el("feedback").textContent = message;
+    el("feedback").className = message ? "message error" : "message";
+  }
+  async function request(path, method, body, bearer) {
+    const headers = {"apikey":publishableKey,"Content-Type":"application/json"};
+    if (bearer) headers.Authorization = "Bearer " + bearer;
+    const response = await fetch(projectUrl + path, {
+      method, headers, body:JSON.stringify(body), cache:"no-store",
+      credentials:"omit", redirect:"error", referrerPolicy:"no-referrer"
+    });
+    const data = await response.json().catch(() => ({}));
+    return {ok:response.ok,data};
+  }
+  if (!tokenHash || recoveryType !== "recovery" || get("error") || get("error_code")) {
+    tokenHash = null;
+    terminal(t.invalidTitle, t.invalid, false);
+    return;
+  }
+  el("reset-form").hidden = false;
+  el("status").hidden = true;
+
+  el("reset-form").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const password = el("password").value;
+    const confirmation = el("confirmation").value;
+    feedback("");
+    if (password !== confirmation) { feedback(t.mismatch); return; }
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
+      feedback(t.weak); return;
+    }
+    el("submit").disabled = true;
+    el("submit").textContent = t.working;
+    try {
+      if (!accessToken) {
+        const verified = await request("/auth/v1/verify", "POST", {token_hash:tokenHash,type:"recovery"}, null);
+        if (!verified.ok || !verified.data.access_token) {
+          tokenHash = null;
+          terminal(t.invalidTitle, t.invalid, false);
+          return;
+        }
+        accessToken = verified.data.access_token;
+        tokenHash = null;
+      }
+      const updated = await request("/auth/v1/user", "PUT", {password}, accessToken);
+      if (!updated.ok) {
+        feedback(t.failure);
+        return;
+      }
+      accessToken = null;
+      el("password").value = "";
+      el("confirmation").value = "";
+      terminal(t.successTitle, t.success, true);
+    } catch (_) {
+      feedback(t.failure);
+    } finally {
+      el("submit").disabled = false;
+      el("submit").textContent = t.submit;
+    }
+  });
+})();
+</script>
+</body>
+</html>
